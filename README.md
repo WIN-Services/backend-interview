@@ -34,18 +34,18 @@ Service Records
 
 ```json
 [
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
+	{
+		"id": 123,
+		"name": "Inspection"
+	},
+	{
+		"id": 789,
+		"name": "Testing"
+	},
+	{
+		"id": 456,
+		"name": "Analysis"
+	}
 ]
 ```
 
@@ -53,36 +53,36 @@ Orders
 
 ```json
 [
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
+	{
+		"id": "223",
+		"datetime": "2022-11-01T11:11:11.111Z",
+		"totalfee": 100,
+		"services": [
+			{
+				"id": "123"
+			}
+		]
+	},
+	{
+		"id": "224",
+		"datetime": "2022-11-01T11:11:11.111Z",
+		"totalfee": 100,
+		"services": [
+			{
+				"id": "789"
+			}
+		]
+	},
+	{
+		"id": "225",
+		"datetime": "2022-11-01T11:11:11.111Z",
+		"totalfee": 100,
+		"services": [
+			{
+				"id": "456"
+			}
+		]
+	}
 ]
 ```
 
@@ -91,6 +91,7 @@ Orders
 Up to 2 hours.
 
 ## Submission
+
 1.  Clone this repo
 2.  Create Web Services and tests
 3.  Submit a Pull Request (PR)
@@ -103,8 +104,28 @@ Up to 2 hours.
       - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
 
 ## Evaluation
-We are looking for: 
+
+We are looking for:
+
 1. Communication
 2. Solution Design
 3. Completeness
 4. Code clarity / readability
+
+## Solution
+
+- Description
+  -> Create a order system with GET, POST, PUT, DELETE APIs. NodeJs along with ExpressJs is used to build the APIs For databse mongoDB is used with Atlas.
+  The endpoints can be triggered via postman.
+
+- What trade-offs you made
+  -> Assumption that the incomming request is authenticated before hand.
+
+- Any assumptions you made that affected your solution
+  -> Nothing
+
+- Brief instructions on how to setup the environment to run your project
+  -> Run npm install to install the dependencies. Furthe in the database connection url kindly replace the username and password of atlas mongodb to make this work.
+
+- What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+  -> Overall most time was spent in connecting with mongoDB as a new databse with security had to be created.
