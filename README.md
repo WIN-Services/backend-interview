@@ -1,110 +1,53 @@
-# WIN Backend Engineering Interview
 
-## Scenario
+    - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
+    
+      Framework used: NestJs
+      ORM - TypeOrm
+      Database: Postgres
+      Language Used: TypeScript
+    
+      The assignment contains the CRUD apis for Orders and Services. Postman can be used to hit the APIs. Swagger is also configured for the assignment.
 
-Your mission is to build a portion of a order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+      Assignment Setup Steps:
+      create a .env file in the root folder using .env.example
+      npm install
+      npm run start:dev
 
-## Deliverables
+      For running the test cases:
+      first populate .test.env file
+      npm run test
 
-There are two deliverables for this project:
+      Swagger Docs -> http://localhost:<PORT>/docs
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+    - What trade-offs you made
 
-### General
+      Will take more time to deploy as the code is in typescript hence some steps are increased in the DockerFile but will be advantagious as the size of the project increase.
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+      Assumed that request are already authenticated. 
 
-### Web Service
+    - Any assumptions you made that affected your solution
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+      no assumptions were taken.
 
-## Sample Data
+    - What you would change if you built this for production
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+        put ip restriction on RDS instance
+        Add logging to the application
+        Add monitoring
+        give access to limited authozied people
+        backup the last image that was deployed in production in case of rollback
+        create migration jobs for database.
+        
+    - Brief instructions on how to setup the environment to run your project
 
-Service Records
+        Assignment Setup Steps:
+          create a .env file in the root folder using .env.example
+          npm install
+          npm run start:dev
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
+    - What parts of the spec were completed, how much time you spent, and any particular problems you   ran into
 
-Orders
+        All parts of the spec were completed. I spent around 4 hrs on the assignment. 
+        Rds setup took time as I was doing it for the first time and my code was not able to connect to the db, after doing some research I found out that I have add my IP to the security group and I didn't know how to do that too.
+        
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability

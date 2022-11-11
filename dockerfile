@@ -1,4 +1,4 @@
-FROM node:12.18.1
+FROM node:16
 
 WORKDIR /app
 
@@ -8,4 +8,6 @@ RUN npm install
 
 COPY . .
 
-CMD [ "node", "server.js" ]
+RUN npm run build
+
+CMD [ "npm", "run", "start:prod" ]
