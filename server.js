@@ -1,1 +1,3 @@
-console.log("Start")
+const app = require("./app");
+// Run the app
+app();

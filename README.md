@@ -108,3 +108,114 @@ We are looking for:
 2. Solution Design
 3. Completeness
 4. Code clarity / readability
+
+### Run the migration
+```
+npm migrate
+```
+
+### Revert the migration
+```
+npm revert
+```
+
+### Start the server
+```
+npm start
+```
+
+### Run the tests
+```
+npm test
+```
+
+## API endpoints
+
+
+Valid Orderid - GET /order/223
+```
+{
+    "error": null,
+    "data": {
+      "id": "223",
+      "datetime": "2022-11-01T11:11:11.111Z",
+      "totalfee": 100,
+      "services": [
+          {
+          "id": "123",
+          }
+      ]
+    }
+}
+```
+
+Invalid Orderid - GET /order/500
+```
+{
+    "error": "Invalid orderId,
+    "data": null
+}
+```
+
+Get all orders - GET /orders
+
+```
+{
+    "error": null,
+    "data": [
+      {
+        "id": "223",
+        "datetime": "2022-11-01T11:11:11.111Z",
+        "totalfee": 100,
+        "services": [
+            {
+            "id": "123",
+            }
+        ]
+      },
+      {
+        "id": "225",
+        "datetime": "2022-11-01T12:12:12.111Z",
+        "totalfee": 150,
+        "services": [
+            {
+            "id": "456",
+            }
+        ]
+      }
+    ]
+}
+```
+
+Create an order - POST /order
+
+Request body
+
+```
+{
+                "totalfee": 500,
+                "datetime": "2022-11-01T11:11:11.111Z",
+                "services": [
+                    {
+                        "id": 123
+                    }
+                ]
+}
+
+Response body
+{
+  "error": null,
+  "data": {
+                "id": 224,
+                "totalfee": 500,
+                "datetime": "2022-11-01T11:11:11.111Z",
+                "services": [
+                    {
+                        "id": 123
+                    }
+                ]
+  }
+}
+```
+
+
