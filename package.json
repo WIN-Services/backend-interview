@@ -1,12 +1,24 @@
 {
-  "name": "win",
+  "name": "assingment",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon index.js"
   },
+  "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "moment": "^2.29.4",
+    "mongoose": "^6.1.5",
+    "mongoose-auto-increment": "^5.0.1",
+    "nodemon": "^2.0.15",
+    "util": "^0.12.5"
+  }
 }

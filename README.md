@@ -11,100 +11,76 @@ There are two deliverables for this project:
 1. An internal web service API for managing orders
 2. A test suite to validate the web service and library work as expected
 
-### General
+### Description
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+- Languages Used => Node.Js , JavaScript 
+- Database => Mongo DB
 
-### Web Service
+In this Created two table for the project one is order table for creating order and with that we are saving the particular service id with it and other is service table to store different services.
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
 
-## Sample Data
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+In this i have created below  requests =>
 
-Service Records
+1) Post Request (For creating the order) => /create_order 
+    In payload => {
+    "service_id":9,
+    "totalfee":10254
+     }
+	 
+	 the above order will be created if last created order is before 3 hours.
+	 
+2) Post Request (For creating the services) => /create_services 
+    In payload => {
+    
+    "name":"Testing"
+   }
+	 
+	 the requested service will be created.
+	 
+3) PUT Request (updating order) => /update_order
+   Payload => {
+    "_id":8,
+    "totalfee":10001
+    }
+	
+	The above order will be updated.
+	
+4) PUT Request (updating service) => /update_services
+   {
+    "name":"Testing1",
+    "_id":1
+   }
+	
+	The above service will be updated.
+	
+5) PUT Request (delete service) => /delete_services
+   Payload => {
+    "id":2
+}
+	
+	The above service  will be deleted.
+	
+6) PUT Request (deleting order) => /delete_order
+ Payload=>  {
+    "id":2
+   }
+	
+	The above order will be deleted.
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
+7) GET Request (get all services) => /get_all_services
+   will give all services in database.
+	
+8) GET Request (get all orders) => /get_all_orders
+ 	will give all orders in database.
+	
 
-Orders
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
+## Setup
+   1. I cloned the branch
+   2. run command npm i install
+   
 ## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+   1. Creation of API's hardly took 1.5 hour 
+   2. But Setup and Commiting changes took 1.5 hour.
+   3. All api's were not that much difficult.
