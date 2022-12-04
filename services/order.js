@@ -117,7 +117,7 @@ module.exports = {
             throw Error("Invalid data!! Please check your input");
         }
         try {
-            let order = await this.findOne({ id: Number(listingId) });
+            let order = await OrderModel.findOne({ id: Number(listingId) }).exec();
 
             if (order == null) {
                 throw Error("Order does not exist");
