@@ -108,3 +108,58 @@ We are looking for:
 2. Solution Design
 3. Completeness
 4. Code clarity / readability
+
+#Description of Changes
+
+I've built a system to place orders, update them(post 3 hours of order placement), cancel these orders, to getOrdersbyOrderId and getAllOrders Placed, request a service for these orders by order id and fetch all services availed by a particular orderId.
+
+TECH STACK-
+I've Used NodeJs(JavaScript framework) here along with MongoDB database.
+
+ENDPOINTS-
+
+=> CREATE ORDER - POST          http://localhost:3000/createOrder BODY- 
+      {
+        "orderName": "isha chandani",
+        "orderQuantity":4,
+        "orderType":"tv",
+        "address":"Bengaluru",
+        "pincode":560035
+        }
+=> UPDATE ORDER - POST          http://localhost:3000/updateOrder?id=bce202ba19a2edb0
+=> GET ORDER BY ID - GET        http://localhost:3000/getOrderById/c910e3c908881b19
+=> GET ALL ORDERS - GET         http://localhost:3000/getAllOrders
+=> CANCEL ORDER - DELETE        http://localhost:3000/cancelOrder/bce202ba19a2edb0
+=> REQUEST SERVICE BY ORDER- POST            http://localhost:3000/requestService/c910e3c908881b19
+=> GET ALL SERVICES BY ORDER ID - GET            http://localhost:3000/getAllServicesByOrderId/c910e3c908881b19
+
+
+HOW IT WORKS?
+
+Start with Placing an Order with CREATE ORDER endpoint, then try updating this order with UPDATE ORDER endpoint using the orderId generated in the response and GET ORDER BY ID to get details of every order placed, To fetch details of all orders hit the GET ALL ORDERS endpoint, you can cancel an order by hitting CANCEL ORDER endpoint, To place a service request on your order hit, and get all services requested for an order by hitting GET ALL SERVICES BY ORDER ID.
+
+
+IF THIS WAS TO GO FOR PRODUCTION?
+
+I'd add a cache to reduce the Database calls and would increase the number of services like cancelling requests, updating request details, would have more clarity of what each service is dedicated to and decouple the system more, would try to build a more optimisable code to handle more number of requests and increase code reusability.
+
+
+WHAT PARTS OF SPECS WERE COMPLETED AND HOW MUCH TIME I SPENT?
+
+I think I've completed majority endpoints that I could think of and have mentioned a few that could have been improvements in the future. I spent nearly 4-5 hours on this assignment.
+
+
+#ENV File-
+
+PORT=
+DB_USER=
+DB_PASS=
+DB_URL=
+
+
+SETUP INSTRUCTIONS-
+
+Run command - docker-compose up
+
+
+
