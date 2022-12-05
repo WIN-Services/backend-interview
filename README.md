@@ -1,110 +1,114 @@
-# WIN Backend Engineering Interview
+# backend Backend
 
-## Scenario
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+## asumption
+1. authentication is working file
+2. only order related stuff need to integrated here
+3. consider other microservices use this service
 
-## Deliverables
+## Points
+1. order management webservices is created(get, update, delete, create, get multiple order)
+2. Added description for project setup structure of project
+3. Used mySQL database with Typescript and TypeORM
+4. Used Joi library for reqest validation
+5. No authentication added yet, it will required more efforts
+6. Only consider user can pleace order, and update, get details
+7. Added testcase(pedning) on *.test.ts file
+8. API documentation added on *.doc.ts file, you can generate doc using ```npm run doc``` command. and it will appear in document/api folder
+9. Setup is added in this file 
+10. deployment scripting is pending for production
+11. total time spent around 4-5 hrs
 
-There are two deliverables for this project:
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+## Project Structure
 
-### General
+-----
+![Optional Text](./documents/ProjectStructure.svg)
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+### Requirements
 
-### Web Service
+-----
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+- npm `8.3.2`
+- node `16.x`
+- npm
 
-## Sample Data
+### Setup
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+-----
 
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+```bash
+npm install
 ```
 
-Orders
+#### Run
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
+-----
+You can run the development server by typing.
+
+```bash
+npm run start
 ```
 
-## Duration
+### Commands
 
-Up to 2 hours.
+-----
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+- Formating code
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+```bash
+npm run format
+```
+
+- Run testcases
+
+```bash
+npm run test
+```
+
+
+### Database access
+
+-----
+Ensure you have access to a SQL database when running locally.
+
+The database host, port, credentials, etc are configured in the `src/config/Config.ts` file.
+
+#### Database migrations
+
+-----
+The project is using [TypeORM](https://github.com/typeorm/typeorm) to generate automatic migration scripts based on the model changes.
+
+To generate a migration, please use:
+
+```bash
+npm run typeorm -- migration:generate src/database/migrations/migration-name
+```
+
+**And then, import the migration to the following file: `/src/database/instances/DatabaseConnection`**
+
+To migrate the changes you can use:
+
+```bash
+npm run typeorm -- migration:run
+```
+
+To migrate revert you can use:
+
+```bash
+npm run typeorm -- migration:revert
+```
+
+_You can find more information about how migrations work on TypeORM here: [https://github.com/typeorm/typeorm/blob/master/docs/migrations.md](https://github.com/typeorm/typeorm/blob/master/docs/migrations.md)_
+
+### Commit rules
+
+-----
+Rules - <https://dev.to/intrepid_ishan/git-commit-message-convention-that-you-can-follow-1709>
+
+commitlint - <https://www.npmjs.com/package/@commitlint/config-conventional>
+
+### API docs
+
+-----
+Rules - <https://apidocjs.com/#param-api-sample-request>

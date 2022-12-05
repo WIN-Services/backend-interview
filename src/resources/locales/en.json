@@ -1,0 +1,12 @@
+{
+    "SomthingWentWrong":"Something went wrong. Please try again.",
+    "FailToSendMail":"Failed to send the email, please try again.",
+    "CanNotAddSystemManager":"Authorization failed. Please try again.",
+    "NoAccessToken":"Authorization failed, please try again.",
+    "CannotConnectToTheDatabase":"An error occurred. Please try again.",
+    "RequestBodyValidationFailed":"Request cannot be processed at this time. Please try later.",
+    "CannotConnectToDatabaseInvalidCred":"Access denied for the user. Please try again.",
+    "CannotConnectToDatabaseConnectionAddress":"An error occurred. Please check your internet connection or try again later.",
+    "FailedToSendYourRequest": "Failed to send the email. Please try again.",
+    "NotFound": "Detail not found. Please try again."
+}

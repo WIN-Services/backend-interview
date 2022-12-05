@@ -1,0 +1,35 @@
+/* eslint-disable */
+{
+  "compilerOptions": {
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": false,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "target": "es2015",
+    "outDir": ".build",
+    "module": "commonjs",
+    "lib": ["dom", "es2017"],
+    "rootDir": "./",
+    "paths": {
+      "*": ["*", "src/*"]
+    },
+    "typeRoots": ["node_modules/@types", "src/types"],
+    "baseUrl": ".",
+    "plugins": [
+      {
+        "name": "typescript-tslint-plugin",
+        "alwaysShowRuleFailuresAsWarnings": false,
+        "ignoreDefinitionFiles": true,
+        "configFile": "./tslint.json",
+        "suppressWhileTypeErrorsPresent": false
+      }
+    ]
+  }
+}

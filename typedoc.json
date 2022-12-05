@@ -1,0 +1,6 @@
+{
+    "name": "backend project reference documentation",
+    "excludeExternals": true,
+    "entryPoints": ["./src"],
+    "out": "documents/docs"
+}
