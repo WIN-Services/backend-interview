@@ -1,0 +1,11 @@
+# virtualenv
+venv
+
+# python cache
+__pycache__
+
+# pycharm
+.idea
+
+# migrations
+migrations
