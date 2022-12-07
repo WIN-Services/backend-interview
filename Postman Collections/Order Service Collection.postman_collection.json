@@ -1,0 +1,359 @@
+{
+	"info": {
+		"_postman_id": "1e1596b8-a883-4fd8-bbf0-13cbebbb5959",
+		"name": "Order Service Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24516245"
+	},
+	"item": [
+		{
+			"name": "AddOrder",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"person\":\"rajat15\",\r\n    \"fee\":100,\r\n    \"service\":[{\r\n        \"name\":\"Dame\"\r\n}]}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/addOrder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"addOrder"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "AddOrder Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"person\":\"rajat15\",\r\n    \"fee\":100,\r\n    \"service\":[{\r\n        \"name\":\"Dame\"\r\n}]}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/addOrder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"addOrder"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "170"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"aa-8HZOPVAmt10urutV9ODU6GoAHe0\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 07 Dec 2022 08:14:25 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"person\": \"rajat15\",\n    \"datetime\": {\n        \"date\": 7,\n        \"time\": 13\n    },\n    \"totalFee\": 100,\n    \"services\": [\n        {\n            \"name\": \"Dame\",\n            \"_id\": \"63904b610e5f6e335192f510\"\n        }\n    ],\n    \"_id\": \"63904b600e5f6e335192f50f\",\n    \"__v\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "updateOrder",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"person\":\"rajat13\",\r\n    \"fee\":201\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/updateOrder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"updateOrder"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "updateOrder",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"person\":\"rajat13\",\r\n    \"fee\":201\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/updateOrder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"updateOrder"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "21"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"15-ga8EF/lp+ThIsc8w/OHbk4hPrME\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 07 Dec 2022 08:25:55 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"success\"\n}"
+				}
+			]
+		},
+		{
+			"name": "deleteOrder",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"person\":\"rajat13\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/deleteOrder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"deleteOrder"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "deleteOrder",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"person\":\"rajat13\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/deleteOrder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"deleteOrder"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "21"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"15-GzRE+F6trWvLp50un4cMGkpH50g\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 07 Dec 2022 08:28:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"massage\": \"Success\"\n}"
+				}
+			]
+		},
+		{
+			"name": "getAllOrder",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getAllOrder",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "842"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"34a-H4S3eErl3AyMHvIqTvOAVAEpJ8k\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 07 Dec 2022 08:06:07 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"datetime\": \"+012344-12-31T18:30:00.000Z\",\n        \"_id\": \"638f820895b311f3bc2051f7\",\n        \"totalFee\": 100,\n        \"services\": [\n            {\n                \"name\": \"Dame\",\n                \"_id\": \"638f820895b311f3bc2051f8\"\n            }\n        ],\n        \"__v\": 0\n    },\n    {\n        \"datetime\": {\n            \"date\": 7,\n            \"time\": 0\n        },\n        \"_id\": \"638f8f377383f8ab9f1b8768\",\n        \"person\": \"rajat1\",\n        \"totalFee\": 200,\n        \"services\": [\n            {\n                \"name\": \"Dame\",\n                \"_id\": \"638f8f377383f8ab9f1b8769\"\n            }\n        ],\n        \"__v\": 0\n    },\n    {\n        \"datetime\": {\n            \"date\": 7,\n            \"time\": 1\n        },\n        \"_id\": \"638f9c45078ec0e3e4c5570d\",\n        \"person\": \"rajat12\",\n        \"totalFee\": 100,\n        \"services\": [\n            {\n                \"name\": \"Dame\",\n                \"_id\": \"638f9c45078ec0e3e4c5570e\"\n            }\n        ],\n        \"__v\": 0\n    },\n    {\n        \"datetime\": {\n            \"date\": 7,\n            \"time\": 1\n        },\n        \"_id\": \"638f9cefbe21f51796cd2c5b\",\n        \"person\": \"rajat13\",\n        \"totalFee\": 100,\n        \"services\": [\n            {\n                \"name\": \"Dame\",\n                \"_id\": \"638f9cefbe21f51796cd2c5c\"\n            }\n        ],\n        \"__v\": 0\n    },\n    {\n        \"datetime\": {\n            \"date\": 7,\n            \"time\": 13\n        },\n        \"_id\": \"639043b888befd2431797281\",\n        \"person\": \"rajat14\",\n        \"totalFee\": 100,\n        \"services\": [\n            {\n                \"name\": \"Dame\",\n                \"_id\": \"639043b888befd2431797282\"\n            }\n        ],\n        \"__v\": 0\n    }\n]"
+				}
+			]
+		}
+	]
+}
