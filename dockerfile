@@ -1,10 +1,10 @@
-FROM node:12.18.1
+FROM node:16.16.0
 
-WORKDIR /app
+WORKDIR /
 
 COPY ["package.json", "./"]
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 
