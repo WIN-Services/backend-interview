@@ -1,5 +1,53 @@
 # WIN Backend Engineering Interview
 
+## High Level Solution
+To design an order management system, I have created two models named Service and Order to perform CRUD operations. This project is built using `Nodejs` and `Express` along with `mongoDB` as the database. For testing purposes, `jest` framework is used. 
+- A user can create, edit, get and delete an order and a service using the APIs.
+- There are validations in place with each request to avoid unnecessary database calls.
+- Furthermore, there are scenerios that are handled like an order cannot be created or updated from a service in case of an pre-existing order from past three hours.
+- There are default and optional limit and skip query parameters in place while calling the fetch all functions for pagination and to avoid memory crashes.
+
+## Changes for production
+- There will be a Role based authentication to all the APIs to improve security
+- There will be caching of all the static user data for faster I/O
+- There will be database indexes for all the queries
+
+## Instructions to Setup the project
+- clone the repository
+- change current working directory to the project's directory
+- run `npm install` on terminal to install node modules
+- create `process.env` file and add mongoDB connection string (sample file below)
+- run `npm run start` on terminal to start the server
+- run `npm run test` on terminal to start the test suits
+- Please change the static Order and Service Ids mentioned in tests according to the new Ids before running the test command to ensure proper run of test cases
+
+```
+MONGODB_URI=mongodb://localhost:27017/win
+PORT=3000
+```
+
+## API Endpoints
+
+Order - 
+- GET: /api/order
+- GET: /api/order/:id
+- POST: /api/order
+- PUT: /api/order/:id
+- DELETE: /api/order/:id
+
+Order - 
+- GET: /api/service
+- GET: /api/service/:id
+- POST: /api/service
+- PUT: /api/service/:id
+- DELETE: /api/service/:id
+
+## Total time spent 
+Around 2 to 3 hours
+
+## Problems Encountered
+While running the test suite using jest, the command to run the test cases was throwing a Syntax Error. After a lot of search online, I've found out that it is happening because of the node version 12.0. To fix this, I've switched the node version to 14.0 and it is working perfectly fine and all the test cases are running properly.
+
 ## Scenario
 
 Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
