@@ -1,0 +1,20 @@
+{
+  "$async": true,
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "total_fee",
+    "service_ids"
+  ],
+  "properties": {
+    "total_fee": {
+      "type": "number"
+    },
+    "service_ids": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    }
+  }
+}
