@@ -1,110 +1,77 @@
-# WIN Backend Engineering Interview
+# Order management
 
-## Scenario
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+A description of your solution at a high-level, including language used, framework used, roughly how it works?
+- Have used Typescript, MongoDB, Jest & Express, Mongoose to develop the application.
+- Created routes specific to each entity(orders here) and services for those entities.
+- Services will be called from respective routes to fetch required result.
+- Created models/interfaces to know typings of the objects.
 
-## Deliverables
+##### Language used: javascript, typescript
+##### Framework: Express
+##### Database: MongoDB
 
-There are two deliverables for this project:
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+### Time Taken:
+1.5hr - Setup (mongo, mongoose, typescript, jest)<br>
+1hr - Logic (api routes, logic, services)<br>
+0.5hr - Test (manual + jest test case)<br>
 
-### General
+### What you would change if you built this for production?
+- Would have added authentication
+- Centralized logging
+- Fetch all orders based on limit and offset, error handlings.
+- API documentator & Ajv validator e.g: swagger, ajv
+- Would use memoize function for processing queries faster
+- Would have made code config driven, e.g: generic error response object, db calls in helper/utility files.
+- Audit trail to track modification in orders and who is calling the orders api.
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+### Assumptions:
+- I have assumed we just have 2 collections (orders & services) to build logic on. Though Order management can need more tables.
+- Assumed no order is to be created/updated for 3 hrs irrespective of services.
 
-### Web Service
+## Problems Encountered
+- I was using node v12, jest supports v14. Took some time to get to the issue.
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
 
-## Sample Data
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+### Installation:
+- git clone repo
+- npm install
+- npm run build (to convert typescript files to js and dump them in dist)
+- npm run test (to run jest test cases)
+- npm run start (to start the server)
 
-Service Records
+### Endpoint
+- GET http://localhost:3000/api/v1/orders
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+- GET http://localhost:3000/api/v1/orders/:orderId
+
+- POST http://localhost:3000/api/v1/orders 
+```
+{
+    "datetime": "2022-12-15T11:11:11.111Z",
+    "totalfee": 100,
+    "services": [
+        {
+        "id": "639a1f7c0a4bab211234931e"
+        }
+    ]
+}
 ```
 
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
+- PUT http://localhost:3000/api/v1/orders
 ```
+{
+    "_id": "639a338a1b1ec7493fb0a165",
+    "datetime": "2022-12-15T11:11:11.111Z",
+    "totalfee": 1010,
+    "services": [
+        {
+            "id": "639a1f7c0a4bab211234931e"
+        }
+    ]
+}
+```
+- DELETE http://localhost:3000/api/v1/orders/:orderId
 
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
