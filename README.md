@@ -85,26 +85,35 @@ Orders
   }
 ]
 ```
+## Order management
+Order management system service which is meant to provide a public to have the required data around the orders.
+Applications as we see: Courier services
 
-## Duration
+## What you would change if you built this for production
+- One thing is that there should be login type of mechanism to call the apis and access level management to access the data
+- There should be sharding of the database to decrease the latency while fetching
+also we can use messaging services, in memory services to prepare the data in hand before querying so the latency is less.
 
-Up to 2 hours.
+## Setup Requirement
+We require below services/software on system for project setup.
+* Node v16.x
+* NPM 6.x and above
+* GIT
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+## Setup Guide
+* Install packages and dependencies
+- npm install
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+Create `.env` file  in server directory with following set of commands and configure according to environment. You can set the value of `PORT` and `mongourl` according to production or development as well
+
+$ touch .env
+SET the values according to your local setup
+PORT=<80 or any port>
+MONGO_URI=<your mongo url>
+
+run the server.js file:
+$ node server.js
+/**
+Use postman to test the apis with the http rest methods and
+check the route.js file to test the endpoints
+**/
