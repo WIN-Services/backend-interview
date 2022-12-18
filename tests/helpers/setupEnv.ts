@@ -1,0 +1,1 @@
+process.env.DB_URI = 'postgres://postgres:postgres@localhost:5432/postgres';
