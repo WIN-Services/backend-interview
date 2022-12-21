@@ -108,3 +108,29 @@ We are looking for:
 2. Solution Design
 3. Completeness
 4. Code clarity / readability
+
+
+## Solution
+### Tech Stack Used:
+1. Language: Node.js
+2. framework: Express
+3. Database: MongoDB
+4. Testing: JEST and Supertest.  
+ 
+## What trade-offs you made ?
+1. Duplicate orders are possible.
+
+## What you would change if you built this for production ?
+1. I will use PATCH instead of PUT method as PATCH support partial update.
+2. I will create middleware for validations of request.
+3. I will create middleware for API responses.
+
+## Brief instructions on how to setup the environment to run your project.
+1. Clone the repo and run npm init to get the necessary node_modules and run the command npm start then you can send GET, POST, PUT, DELETE requests to the rest end point.
+
+## What parts of the spec were completed ?
+1. I used JEST and Supertest for API testing and implemented testing for fetchAll order through id.
+
+
+## How much time you spent and any particular problems you ran into ?
+1. I have spent 3.5 hours on this project. Faced problem while setting up the date. The requirement was that app shouldn't allow order to be placed in 3 hours interval. It took me some time to implement this feature.
