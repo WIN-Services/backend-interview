@@ -108,3 +108,41 @@ We are looking for:
 2. Solution Design
 3. Completeness
 4. Code clarity / readability
+
+
+
+#Description of Changes
+
+I've built a system to place orders, update them(post 3 hours of order placement), cancel these orders, to getorder information byId and getAllOrders Placed, request a service for these orders by order id and fetch all services availed by a particular orderId.
+
+TECH STACK-
+I've Used NodeJs(JavaScript framework) here along with MongoDB database.
+
+ENDPOINTS-
+
+=> CREATE ORDER - POST          http://localhost:3000/api/v1/order BODY- 
+      {
+          "totalfee":"okdlkdm",
+          "services":["63a32fcd5ecd12b2196b9a7b"],
+          "address":"rohini 1"
+      }
+
+=> UPDATE ORDER - PUT          http://localhost:3000/api/v1/order/63a3303415a4669c4d053109
+=> GET ORDER BY ID - GET        http://localhost:3000/api/v1/order/63a3303415a4669c4d053109
+=> GET ALL ORDERS - GET         http://localhost:3000/api/v1/order/getAllOrders
+=> CANCEL ORDER - DELETE        http://localhost:3000/api/v1/order/cancelOrder/63a3303415a4669c4d053109
+=> GET ALL SERVICES AVALIABLE IN SYSTEM - GET   http://localhost:3000/api/v1/getAllservices
+
+=> CREATE SERVICE - POST          http://localhost:3000/api/v1/createservice BODY- 
+      {
+          "serviceName":"okdlkdm",
+          "serviceDescription":"rohini 1"
+      }
+
+HOW IT WORKS?
+
+1. Clone repo
+2. Npm i
+3. npm run dev
+4. npm run test -- to verif all test cases
+6. good to go with endpoints
