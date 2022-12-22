@@ -4,6 +4,8 @@
   "description": "assignment solution",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "development": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +17,16 @@
   "bugs": {
     "url": "https://github.com/RaviPabari/win-backend-assignment/issues"
   },
-  "homepage": "https://github.com/RaviPabari/win-backend-assignment#readme"
+  "homepage": "https://github.com/RaviPabari/win-backend-assignment#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "helmet": "^6.0.1",
+    "mongoose": "^6.8.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
