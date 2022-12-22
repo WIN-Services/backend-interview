@@ -4,9 +4,17 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "mocha 'test/tasks.js' ",
+    "start": "node server.js",
+    "dev":"nodemon server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "express": "^4.18.2",
+    "mocha": "^10.2.0",
+    "sqlite3": "^5.1.4"
+  }
 }

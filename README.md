@@ -1,38 +1,50 @@
-# WIN Backend Engineering Interview
+This project has been made using node.js as backend service and sqlite as database 
 
-## Scenario
+Assumptions:
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+1. I assumed that there can be many orders with same id.
 
-## Deliverables
 
-There are two deliverables for this project:
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+This project has been made with the below functionalities:
 
-### General
+1. on get request, all the data will be fetcted from orders table.
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+2. on passing the id in the get api, all the data with same id will be provided
 
-### Web Service
+3. on post request data will be inserted to the database
+    a.if data is inserted with same id within 3 hours then data cannot be inserted
+    b.if services array of order request contains id not present in service table,
+      then data will not be inserted
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+4. on put request, data will be updated
+  a. if the id not present data will not be updated 
 
-## Sample Data
+5. while deleting, updating, inserting any data, it will check for the latest row when it was added
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
 
-Service Records
 
-```json
+For production :
+
+1. I will created DB that will be created and tables will be added automatically
+2. More robust
+3. unwanted formatting for data will be added to handle them
+4. I will increase my code readablity
+
+Below data has been added to OMS.db explicityly and it's assumed that it's alread there
+
+
+To set up the environment use: 
+node server.js
+
+to test test suite:
+npm run test
+
+postman collection has been provided to do more tests
+
+
+Database containing the below data in services table:
+
 [
   {
     "id": 123,
@@ -47,11 +59,10 @@ Service Records
     "name": "Analysis"
   }
 ]
-```
 
-Orders
+Below data has been inserted in the orders table
 
-```json
+
 [
   {
     "id": "223",
@@ -86,25 +97,33 @@ Orders
 ]
 ```
 
-## Duration
+requests:
+1. get - http://localhost:5000/api/v1/orders
+2. get id - http://localhost:5000/api/v1/orders/223
+3.delete - http://localhost:5000/api/v1/orders/225
+4.put - http://localhost:5000/api/v1/orders
+    {
+        "id": 223,
+        "dateTime": "22222",
+        "totalfee": "9001",
+        "services": [
+            {
+                "id": 456
+            },{
+                "id": 789
+            },{
+                "id": 123
+            },{
+                "id":789
+            }
+        ]
+    }
 
-Up to 2 hours.
+5. post - http://localhost:5000/api/v1/orders
+    {
+    "id":225,
+     "dateTime":"2022-12-22T06:02:52.872Z",
+     "totalfee":900,
+     "services": [{"id":456}]
+}
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
