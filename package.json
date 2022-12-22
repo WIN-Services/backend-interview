@@ -1,12 +1,19 @@
 {
-  "name": "win",
+  "name": "win-backend-assignment",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "assignment solution",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaviPabari/win-backend-assignment.git"
+  },
+  "author": "ravi pabari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RaviPabari/win-backend-assignment/issues"
+  },
+  "homepage": "https://github.com/RaviPabari/win-backend-assignment#readme"
 }
