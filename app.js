@@ -14,6 +14,8 @@ const { tryCatchHandler } = require('./controllers/handlers/tryCatchHandler')
 
 //TODO Import all routes here...
 const { testInsertion } = require('./test/dbConnection')
+const { addUser } = require('./controllers/routes/users')
+const { getAllOrders, placeNewOrder, deleteExistingOrder, updateExistingOrder } = require('./controllers/routes/orders')
 
 // defining the Express app
 const app = express()
@@ -24,9 +26,6 @@ const corsParams = {
     origin: '*',
     optionsSuccessStatus: 200
 }
-
-// adding jwt auth
-// app.use(verifyJWT)
 
 app.use(cors(corsParams)) //add origin verification & pre-flight requests/response handling
 
@@ -48,6 +47,15 @@ app.get('/', (req, res) => {
 /** Registering routes */
 app.get('/test', tryCatchHandler(testInsertion))
 
+app.post('/createTestUsers', tryCatchHandler(addUser))
+
+app.get('/getOrders', tryCatchHandler(getAllOrders))
+
+app.post('/placeOrder', tryCatchHandler(placeNewOrder))
+
+app.delete('/deleteOrder', tryCatchHandler(deleteExistingOrder))
+
+app.patch('/updateOrder', tryCatchHandler(updateExistingOrder))
 
 
 
