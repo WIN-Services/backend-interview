@@ -13,8 +13,8 @@ const { sendResponse } = require('./controllers/handlers/responseHandler')
 const { tryCatchHandler } = require('./controllers/handlers/tryCatchHandler')
 
 //TODO Import all routes here...
-const { testInsertion } = require('./test/dbConnection')
-const { addUser } = require('./controllers/routes/users')
+const { testInsertion } = require('./controllers/routes/testInsertion')
+const { addUser, removeUser } = require('./controllers/routes/users')
 const { getAllOrders, placeNewOrder, deleteExistingOrder, updateExistingOrder } = require('./controllers/routes/orders')
 
 // defining the Express app
@@ -36,7 +36,7 @@ app.use(helmet())
 app.use(express.json())
 
 // adding morgan to log HTTP requests
-app.use(morgan('combined'))
+// app.use(morgan())
 
 // defining welcome endpoint
 app.get('/', (req, res) => {
@@ -48,6 +48,8 @@ app.get('/', (req, res) => {
 app.get('/test', tryCatchHandler(testInsertion))
 
 app.post('/createTestUsers', tryCatchHandler(addUser))
+
+app.post('/removeTestUser', tryCatchHandler(removeUser))
 
 app.get('/getOrders', tryCatchHandler(getAllOrders))
 

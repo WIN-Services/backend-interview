@@ -1,5 +1,5 @@
-const { sendResponse } = require('../controllers/handlers/responseHandler')
-const test = require('../models/sample')
+const { sendResponse } = require('../handlers/responseHandler')
+const test = require('../../models/sample')
 
 async function testInsertion(req, res) {
     const resp = await test.create({ string: "This is sample document" })

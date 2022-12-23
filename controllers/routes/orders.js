@@ -80,7 +80,9 @@ const placeNewOrder = async (req, res) => {
 }
 
 /**
- * Assumptions: orderId will be given in the request body
+ * Assumptions: orderId will be given in the request body,
+ * enhancement: in future instead of removing the order we can 
+ * simply add a flag to denote the order is cancelled/pending/completed.
  */
 /**
  * Updates existing order for a particular user based on itemId.
