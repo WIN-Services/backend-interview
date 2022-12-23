@@ -1,110 +1,183 @@
-# WIN Backend Engineering Interview
+## Description of solution + assumptions
+- Many assumptions are made here in order to make the system work. On many routes I've added comments that what could be improved and assuming this or that I've built this route's logic. 
+- One of the main assumption is that part of the system is developed and other part of order management is to be added, based on that I've implemented solution around 2 things - `Users & Orders`.
+> This backend service will help other teams to manage their users & manage orders created by those users.
+## Tech stack
+- Nodejs + Javascript
+- Express.js
+- MongoDB
+- Mocha + chai
 
-## Scenario
+## High level working overview
+- Team members who are outside of the system can access the order management system with the help of the REST Endpoints whose available operations are below:
+- Operations available for managing <b>Users</b>:
+    - add new users
+    - remove existing users
+- Operations availabe for managing <b>Orders</b>:
+    - users can place new orders
+    - users can update existing orders
+    - users can cancel/delete previous orders
+    - users can fetch all their existing orders
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+## Trade-offs
+- In order to make the system clean and simple I've kept minimalistic database models. If designing on large scale this much data won't be sufficient, there is much room for metadata that could've been collected.
+- caching mechanism
+- logging service
+- auth service
 
-## Deliverables
 
-There are two deliverables for this project:
+## Production configurations (future aspects)
+On this demo we can have basic CRUD functionalities regarding Users and Orders. Still on the backend many things remains before making this a live production ready app. Few of the configurations which I would make are:
+- Setup a proper error handling and logging on ELK
+- Setup Redis for caching orders
+- Use JWT for authorization
+- Add authentication methods to check if current user is allowed to use the service.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
 
-### General
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+## Project setup on local
 
-### Web Service
+Follow these steps to configure the project on local
+###### Pre-requisites
+- Up and running mongodb instance on local
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+###### configure .env file
+```
+sample:
 
-## Sample Data
+ENV=dev
+PORT=8080
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+## DB Creds
+CS_DB_URL=localhost
+CS_DB_PORT=27017
+CS_DB_USERNAME=
+CS_DB_PASSWORD=
+CS_DB_NAME=win-backend
 ```
 
-Orders
+###### Install npm dependencies
+- cd inside current repository where the package.json file lies.
+```
+$ npm install
+```
+###### Start server
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
+```
+$ npm start
+    OR
+$ npm development
 ```
 
-## Duration
 
-Up to 2 hours.
+###### Run tests
+```
+$ npm test
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+--- sample output ---
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+  USERS API Unit Tests:
+
+Database connection fine!
+    POST /createTestUsers
+      ✔ should add new user to db with valid status & data (40ms)
+    POST /removeUserTest
+      ✔ should remove newly created user from db
+
+
+  2 passing (66ms)
+```
+
+###### REST Endpoints
+
+- <b>Users</b>
+    - POST `/createTestUsers`
+    ```javascript
+    Creates entry for new user into DB.
+
+    sample request body: 
+    {
+        "name": "Ravi Pabari",
+        "email": "pabariravi12@gmail.com",
+        "contact": "9197979797",
+        "verificationStatus": true
+    }
+    ```
+
+    - POST `/removeTestUser`
+    ```javascript
+    Removes a existing user from DB.
+
+    sample request body:
+    {
+        "userId": "63a58063d3924778aa29a001"
+    }
+    ```
+- Orders
+    - GET `/getOrders`
+    ```javascript
+    Gets all the existing order for a particular user
+
+    sample request body:
+    {
+        "userId": "63a58063d3924778aa29a001"
+    }
+    ```
+
+    - POST `/placeOrder`
+    ```javascript
+    Creates entry for an order placed by user
+    Gives 405 response on duplicate order if same order
+    placed in last 3 hours. On successful creation we get 
+    new order ID
+
+    sample request body: {
+        "userId": "63a58063d3924778aa29a0123",
+        "itemId": "63a58063d3924778aa29aabc",
+        "quantity": "30",
+        "currency": "INR",
+        "modeOfTransaction": "UPI",
+        "transactionId": "63a58063d3924778aa29xyz"
+    }
+    ```
+
+    - DELETE `/deleteOrder`
+    ```javascript
+    Cancels/deletes order from the database
+    
+    sample request body: {
+        "orderId": "63a58063d3924778aa29xyz"
+    }
+    ```
+
+    - PATCH `/updateOrder`
+    ```javascript
+    Updates existing order based on the orderId, itemId, item quantity.
+    Gives 405 response on duplicate order if same order placed in
+    last 3 hours. Updated doc will be returned on successful update.
+
+    sample request body: {
+        "orderId": "63a58063d3924778aa29a0123",
+        "itemId": "63a58063d3924778aa29aabc",
+        "quantity": "30",
+        "currency": "INR",
+        "modeOfTransaction": "UPI",
+    }
+    ```
+
+
+## Solution readiness | What was implemented vs What remains
+Solution is working as per the current implementation.
+- Implemented
+    - Route error handling
+    - Users and Orders models
+    - CRUD operations around Users and Orders
+    - Unit test cases for Users
+- Remains
+    - sanitaization and proper error handling
+    - Unit test cases for Orders
+- Problems faced
+    - I have't properly done unit testing for APIs so there I took some time in learning them first before implementation.
+    - I haven't setup a project from this scratch before so took some time over there as well.
+- Time taken
+    - Around 8-9 hours including the documentation.
