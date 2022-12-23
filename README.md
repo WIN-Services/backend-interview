@@ -1,110 +1,68 @@
-# WIN Backend Engineering Interview
+# Varun's Backend Engineering Interview
 
-## Scenario
+## How to run
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+1. Clone the repository and in the same folder use `npm i` to install the packages
+2. Set up an environment variable with name `AdminEmail` for a specific email that can be used as an admin or super user.
+3. In the terminal, type `nodemon start` to run the code.
 
-## Deliverables
+## Assumptions
+ - I assumed that there has to be an order management system to be made where Admin can add Services which are then ordered by customers.
+ - Customer/user will add services they choose to buy in a cart where they see their total amount and service selected names.
+ - Admin can see all orders and add new services that are to be offered.
+ - For testing i have used to Postman on my local system to validate the working.
+ 
+ ## Technologies used
+ 1. Nodejs
+ 2. Expressjs
+ 3. MongoDB
+ 
+ ## Routes
+ ### Login/Register
+ 1. `localhost:2000/register` with `POST` Request
+      - Use this to register new users.
+      - Takes two fields `email` and `password`
+ 2. `localhost:2000/login` with `POST` Request 
+      - Use this to login a user
+      - Take two fields `email` and `password`
+ ### Services
+ 1. `localhost:2000/service/addservice` with `POST` Request
+      - Use this to add new services
+      - Takes three fields `name`, `cost` and `index`
+      - This is Admin specific feature. Use the same email for login as AdminEmail
+ 2. `localhost:2000/service/all` with `GET` Request
+      - Use this to view all the services currently present
+ 
+ ### Orders
+ 1. `localhost:2000/order/currentorder` with `POST` Request
+      - Use this to make new order
+      - Takes one field `serviceIndices` as an array eg:`[1,2,3]` where elements of this array are the service index for a specific service.
+      - Returns order object
+ 2. `localhost:2000/order/update/:id` with `POST` Request
+      - Use this to remove one service at a time from the current order
+      - Takes one field `serviceToRemove` with the service index to be removed.
+      - Takes order id as paramater
+ 3. `localhost:2000/order/delete/:id` with `DELETE` Request
+      - Use this to remove the whole order
+      - Takes order id as paramater
+ 4. `localhost:2000/order/userOrders` with `GET` Request
+      - Returns the logged in user's orders
+ 5. `localhost:2000/order/all` with `GET` Request
+      - Returns orders from all users
+      - Can only be used by Admin with AdminEmail
+ 
+## Basic Working
+- New user registers and logins which set a `user_id` in the cookie.
+- `user_id` is used to authenticate user implemented using middleware
+- User can see all services, create new order, see all of their orders, update order, and delete order.
+- Admin can add new services and see all orders.
 
-There are two deliverables for this project:
+## Future Scope
+There are alot of impprovements that can be made and are necesarry as well. Here are a few:
+- Login/register should have password authentication, email verification, password encryption.
+- Instead of having just one Admin user we can have multiple role based users having access to specific data and routes.
+- More CRUD operations in the Order section can be added that will be more useful
+- Error handling can be more precise and easy
+- User validation through middleware should be added to be fool proof
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
 
-### General
-
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
-
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
