@@ -1,110 +1,88 @@
 # WIN Backend Engineering Interview
 
-## Scenario
+## General Info
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+1. language used: JS
+2. Runtime: NodeJs
+2. framework used: Express
+3. database: MongoDb 
 
-## Deliverables
+## Setup
+- clone the repo
+- create .env file and paste all constants from dotenv-example file
+- run "npm i" to install packages
+- run "npm start" to start server
+- run "npm test" to run test cases
 
-There are two deliverables for this project:
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+## How it works
 
-### General
+REST Endpoints 
+server: localhost:3000
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+## Service
 
-### Web Service
+1. To Add the new service : http://localhost:3000/service/create
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+2. To List All the service: http://localhost:3000/service/all
+    
+3. To Update the service : http://localhost:3000/service/update/:id
 
-## Sample Data
+  
+4. To Delete the service with : http://localhost:3000/service/delete/:id
+    
+5. To Get the service with id : http://localhost:3000/service/:id
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+## Orders
 
-Service Records
+1. To Add the Order : http://localhost:3000/order/create
+
+2. To List All the Orders: http://localhost:3000/order/all
+    
+3. To Update the Order : http://localhost:3000/order/update/:id
+
+  
+4. To Delete the Order with : http://localhost:3000/order/delete/:id
+    
+5. To Get the Order with id : http://localhost:3000/order/:id
+
+## Postman example
+- http://localhost:5000/order/create
+```json
+{
+    "id": "5",
+    "totalfee": "200",
+    "services": [
+        {
+            "id": "12"
+        }
+    ]
+}
+```
+## Scripts
+start: npm start
+test: npm test
+
+## Structure
 
 ```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+service: {
+	id: int,
+	name: string
+}
 ```
-
-Orders
-
 ```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
+order: {
+	id: int,
+        datetime: timestamp,
+        totalfee: int,
+        services: [
+        	{
+                    id: int (linked to service)
+                }
+        ]
+}
 ```
 
-## Duration
 
-Up to 2 hours.
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability

@@ -1,12 +1,26 @@
 {
   "name": "win",
   "version": "1.0.0",
-  "description": "",
+  "description": "Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olive-green/backend-interview.git"
+  },
+  "bugs": {
+    "url": "https://github.com/olive-green/backend-interview/issues"
+  },
+  "homepage": "https://github.com/olive-green/backend-interview#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.1"
+  }
 }
