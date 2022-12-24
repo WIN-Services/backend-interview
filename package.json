@@ -4,9 +4,38 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "export ENV=test && jest --coverage",
+    "seed": "ts-node-dev --respawn --pretty --transpile-only seed/index",
+    "format": "npm run format:write && npm run lint:fix",
+    "check": "npm run format:check && npm run lint:check",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "start": "export ENV=local && node app",
+    "dev": "export ENV=local && ts-node-dev --pretty --transpile-only server.ts",
+    "build": "rimraf build && tsc -p tsconfig.json"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.11.17",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jest": "^29.3.1",
+    "mongoose": "^6.8.1",
+    "morgan": "^1.10.0",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.0.3",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.4"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.15",
+    "@types/jest": "^29.2.4",
+    "@types/morgan": "^1.9.3",
+    "@types/supertest": "^2.0.12"
+  }
 }

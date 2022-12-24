@@ -108,3 +108,52 @@ We are looking for:
 2. Solution Design
 3. Completeness
 4. Code clarity / readability
+
+
+
+
+## ANSWER
+
+### introduction 
+
+- Technology  - node js express js
+- Language    - typescript
+- Database     - Mongodb
+  
+### description 
+
+- Added postman collection for all API 
+- `Service` - 4 API for (CRUD operation)
+- `Order` - 2 API for getting all orders and adding order
+- archive 84.12% test coverage
+- time takes 1.55 hr
+  
+### make sure you have MongoDB installed locally and working fine I also added .env because we don't have any secret so.
+### for running this project 
+``` bash
+nvm use 
+```
+``` bash
+yarn
+```
+```bash
+yarn dev
+```
+### for running test cases
+``` bash
+yarn test
+```
+### production level changes
+
+- Take add static string value from constant folder 
+- Take all static status codes from the constant folder 
+- Use auth token to verify the user 
+- Store the user`s ref in DB to identify items by the user 
+- Add type guarding for error
+- Write perfect error code for different error 
+- Handle errors on a global level
+- Write test cases for DB  connection and other function
+- Create 100% test coverage
+
+
+## Thank you
