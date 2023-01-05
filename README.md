@@ -1,110 +1,71 @@
 # WIN Backend Engineering Interview
 
-## Scenario
+# Language Used - Javascript
+# Framework Used - Express
+# Runtime - NodeJs
+# Database - MongoDB
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+# setup the environment to run your project
 
-## Deliverables
+- clone the repo
+- run "npm i" to install packages
+- run "npm start" to start server
 
-There are two deliverables for this project:
+# Solution
+- created schema using mongodb with relevant fields
+- Used environment variables to store the database link with password and port
+- Used find, findOne, findById, etc to manipulate and access the document stored in the database
+- used HTTP method GET, POST, PUT, Delete 
+- used async and await for non-blocking code
+- used proper response code for Result
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+# URL FOR REQUEST
 
-### General
+- Get all orders - http://localhost:3000/orders (With HTTP Method Set to GET)
+- Get particular order - http://localhost:3000/orders/63b6f1b6326c50ca68106bf9 (With HTTP Method Set to GET)
+- Update Order - http://localhost:3000/orders/63b6f1b6326c50ca68106bf9 (With HTTP Method Set to PUT)
+- Delete Order - http://localhost:3000/orders/63b6f1b6326c50ca68106bf9 (With HTTP Method Set to DELETE)
+- create a Order - http://localhost:3000/orders (With HTTP Method Set to POST)
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+# PostMan Sample - 
+ "status": "Success",
+    "data": {
+        "orders": [
+            {
+                "_id": "63b6eb4cf21bc6ff96352f07",
+                "customer": "Aman",
+                "item": "Veg burger",
+                "quantity": 4,
+                "fulfillmentStatus": "pending",
+                "OrderedAt": "2023-01-05T15:22:11.323Z",
+                "UpdatedAt": "2023-01-05T15:22:11.323Z",
+                "__v": 0
+            },
+            {
+                "_id": "63b6eb8ff21bc6ff96352f09",
+                "customer": "Abhishek",
+                "item": "Veg maggie",
+                "quantity": 1,
+                "fulfillmentStatus": "pending",
+                "OrderedAt": "2023-01-05T15:22:11.323Z",
+                "UpdatedAt": "2023-01-05T15:49:24.863Z",
+                "__v": 0
+            },
+            {
+                "_id": "63b6f1b6326c50ca68106bf9",
+                "customer": "Utkarsh",
+                "item": "Veg pizza",
+                "quantity": 4,
+                "fulfillmentStatus": "pending",
+                "OrderedAt": "2023-01-05T15:49:20.256Z",
+                "UpdatedAt": "2023-01-05T15:49:20.256Z",
+                "__v": 0
+            }
+        ]
+    }
+}
 
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+# What I will change if i built this for production
+- add more filters to get the specific detail of order
+- use middlewares
+- sanitize the data
