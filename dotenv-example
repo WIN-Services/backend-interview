@@ -1,0 +1,2 @@
+DB_link=mongodb+srv://pankaj:pankaj123@cluster0.82akh.mongodb.net/winHome?retryWrites=true&w=majority
+PORT=3000
