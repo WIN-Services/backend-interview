@@ -1,110 +1,33 @@
-# WIN Backend Engineering Interview
 
-## Scenario
+###### POSTMAN COLLECTION IS INCLUDED IN THE REPO. ######
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+### requirement to run this project
+1. Node.js
+2. postgreSQL
 
-## Deliverables
+all other necesaary packages like express.js and required OEM will be installed via package.json
 
-There are two deliverables for this project:
+### steps to run this project
+1. open integrated terminal in root directory of project.
+2. npm i
+3. CREATE a pg database.
+4. fill .env with required pg database creds
+5. npm start
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+### A description of your solution at a high-level:-
+the project is pretty straight forward. it includes crud operations for services and orders.
+while updating or creating and order, we check for existing orders created in past three hours. if found, we restrict the creation or updations.
+All controllers and models extend a base class containing the common crud logic to prevent repetitive code.
 
-### General
+### language used, framework used
+node.js, postgresql, express.js
+ORM - bookshelf
+query builder - knex.js
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+### assumptions made that affected the solution 
+a order can be associated with multiple services. 
+every service has a different fee.
+totalFee of a order will be the total of those services.
 
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+### What would change i if i built this for production
+will add a jwt based authentication for users and allow user-scoped orders.
