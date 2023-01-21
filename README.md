@@ -30,18 +30,22 @@ user can update order after 3 hours of creating.
 ##Endpoints:
 POST: {{URL}}/api/orders/createOrder
 
-```{
+```
+{
     "services": [1,3, 2]
-}```
+}
+```
 
 GET: {{URL}}/api/orders/getOrder/113
 GET: {{URL}}/api/orders/getOrder
 
 PUT :{{URL}}/api/orders/updateOrder/110
 
-```{
+```
+{
     "services": [1,3]
-}```
+}
+```
 
 DELETE {{URL}}/api/orders/110
 
@@ -56,7 +60,8 @@ DELETE {{URL}}/api/orders/110
 
 1. Installing all package by running npm install
 2. creating env file with below fileds.
-```USERNAME
+```
+USERNAME
 PASSWORD
 DATABASE
 HOST
