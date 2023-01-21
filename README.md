@@ -1,110 +1,72 @@
-# WIN Backend Engineering Interview
+#WIN Assesment Solution
 
-## Scenario
+##Description:
+Created a order management system for services.
+Include:
+1. Creating order.
+2. Getting all orders.
+3. Getting order by order id.
+4. Updating Existing Order.
+5. Deleting Existing order.
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+All the api have implemented with proper error handling with proper status codes.
 
-## Deliverables
+I have Assumed with existing services as 
+1. Inspection
+2. Testing
+3. Analysis
+These are hardcoded means in datbase added these values manually.
 
-There are two deliverables for this project:
+I have two tables.
+1. Orders
+Column: id(Integer), totalfee(integer), services(array), datetime.
+2. services.
+Column: id(Integer), name, fee(integer).
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+the total amount is calculated as per fee in services table.
 
-### General
+user can update order after 3 hours of creating.
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+##Endpoints:
+POST: {{URL}}/api/orders/createOrder
 
-### Web Service
+```{
+    "services": [1,3, 2]
+}```
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+GET: {{URL}}/api/orders/getOrder/113
+GET: {{URL}}/api/orders/getOrder
 
-## Sample Data
+PUT :{{URL}}/api/orders/updateOrder/110
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+```{
+    "services": [1,3]
+}```
 
-Service Records
+DELETE {{URL}}/api/orders/110
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+##Changes in production.
+1. Changing pooling database to ORM.
+2. Adding another column in both orders and service as status.
+3. Instead of deleting data directly in database will change the status like active and inactive. (Important)
+4. Adding authentication.
+5. Improving code by making common functions for each operation.
+
+##SETUP
+
+1. Installing all package by running npm install
+2. creating env file with below fileds.
+```USERNAME
+PASSWORD
+DATABASE
+HOST
+DBPORT
+PORT
 ```
+npm run start to run the server.
+npm test to make functional testing.
 
-Orders
+Completed all the parts except sending error if creating order within 3 hours.(Implemented for updating within 3 hours)
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+After making setup spent aroung 2 hours to 2 hours 30 min.
+writing query which can be run on node made problamatic.
