@@ -18,4 +18,4 @@ One need to install Sql workbench for setting up the DB
 
 --> All specs are completed 
     I spent close to 3 hours
-    not problem but one thing was challenging out of 3 hours , more than half of the time is being spend on creating the middleware which validates weather the last updated order time is passed more than 3 hours or not, this was a bit challenging and I enjoy implementing this feature.
+    not problem but one thing was challenging out of 3 hours , more than half of the time is being spend on creating the middleware which validates weather the last updated order time is passed more than 3 hours or not, this was a bit challenging and I enjoyed implementing this feature.
