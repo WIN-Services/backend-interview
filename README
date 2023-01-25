@@ -1,0 +1,21 @@
+-->I created resorces based on the requirement of the assignment, there is an orders API which has several endpoints like for creating a new Order , getting order by ID , getting all order , deleting the order and updating a order.
+
+-->language used : JS
+
+-->framework used : Expres.js
+
+-->DB used : mySQL2
+
+-->It works very simply , just create a bunch of new orders using postman(sending JSON) and we can do all the operations mentioned above.
+
+-->I have created all the Services mentined in the assignments , No trafe-offs are made.
+
+-->Creating Github Actions workflow 
+
+--> Clone the code into VS code and Run npm install for getting all the dependencies , after installing type npm start to run the node application.
+
+One need to install Sql workbench for setting up the DB
+
+--> All specs are completed 
+    I spent close to 3 hours
+    not problem but one thing was challenging out of 3 hours , more than half of the time is being spend on creating the middleware which validates weather the last updated order time is passed more than 3 hours or not, this was a bit challenging and I enjoyed implementing this feature.
