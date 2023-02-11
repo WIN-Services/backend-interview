@@ -15,7 +15,7 @@ Tech stack used:-
 
 [Typeorm]() Orm
 
-The reson of using a combination of typescript and nestjs is that it provides us to write code in a structural way. It gives us the advantage of using classes, Dtos, interfaces, modules etc. to reduces inconsistencies in the code. It allows us to keep our code well structured and maintainable.
+The reason of using a combination of typescript and nestjs is that it provides us to write code in a structural way. It gives us the advantage of using classes, Dtos, interfaces, modules etc. to reduces inconsistencies in the code. It allows us to keep our code well structured and maintainable.
 
 ## Installation
 
@@ -40,10 +40,10 @@ $ npm run start:dev
 $ npm run test
 ```
 ## Problem statement assumption
-The basic assumption behind the problem statement  is that there are orders of a product which belong to a unque service type. And other teams should be able to see the order information 
+The basic assumption behind the problem statement  is that there are orders of a product which belong to a unique service type. And other teams should be able to see the order information 
 
 ## Goal
-After completion of the project there will be a fully functional internal webservice(restful architecture) available to the the teams which the can use to access and edit information
+After completion of the project there will be a fully functional internal webservice(restful architecture) available to the teams which the can use to access and edit information
 
 ## Webservice overview
 
@@ -113,19 +113,21 @@ it is necessary to pass `internal-api-key` inside headers to access the apis.
     ``` 
 3.  `getAllOrders` 
    -  endpoint -> `localhost:3000/order` method Get
-    ```
-    curl --location --request GET 'localhost:3000/order' \--header 'internal-api-key: abcd' \--header 'Content-Type: application/json
-    ``` 
+
+
+   ```ruby
+   curl --location --request GET 'localhost:3000/order' \--header 'internal-api-key: abcd' \--header 'Content-Type: application/json'
+   ``` 
 4. `getOrderById` 
    -  endpoint -> `localhost:3000/order/:id` method Get
-   ```
+   ```ruby
    curl --location --request GET 'localhost:3000/order/1' \--header 'internal-api-key: abcd' \--header 'Content-Type: application/json'
    ```
 5.  `deleteService` 
    -  endpoint -> `localhost:3000/order/:id` method Delete
-    ```
-    curl --location --request DELETE 'localhost:3000/order/1' \--header 'internal-api-key: abcd' \--header 'Content-Type: application/json'
-    ``` 
+      ```ruby
+      curl --location --request DELETE 'localhost:3000/order/1' \--header 'internal-api-key: abcd' \--header 'Content-Type: application/json'
+      ``` 
 6.  `addService`
     - endpoint -> `localhost:3000/service` method POST
     ```ruby
@@ -142,19 +144,19 @@ it is necessary to pass `internal-api-key` inside headers to access the apis.
     ``` 
 8.  `getAllServices` 
    -  endpoint -> `localhost:3000/service` method Get
-    ```ruby
-    curl --location --request GET 'localhost:3000/service' \--header 'internal-api-key: abcd' \--header 'Content-Type: application/json
-    ``` 
+        ```ruby
+        curl --location --request GET 'localhost:3000/service' \--header 'internal-api-key: abcd' \--header 'Content-Type: application/json
+        ``` 
 9. `getServiceById` 
    -  endpoint -> `localhost:3000/service/:id` method Get
-    ```ruby
-    curl --location --request GET 'localhost:3000/service/1' \--header 'internal-api-key: abcd' \--header 'Content-Type: application/json'
-    ``` 
+        ```ruby
+        curl --location --request GET 'localhost:3000/service/1' \--header 'internal-api-key: abcd' \--header 'Content-Type: application/json'
+        ``` 
 10.  `deleteService` 
-    -  endpoint -> `localhost:3000/service/:id` method Delete
-```
-curl --location --request DELETE 'localhost:3000/service/1' \--header 'internal-api-key: abcd' \--header 'Content-Type: application/json'
-```
+     -  endpoint -> `localhost:3000/service/:id` method Delete
+        ```ruby
+        curl --location --request DELETE 'localhost:3000/service/1' \--header 'internal-api-key: abcd' \--header 'Content-Type: application/json'
+        ```
 ## Important points for setup
 
 1. Env file has been added in the project.
