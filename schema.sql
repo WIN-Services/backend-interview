@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS orders (
+  id SERIAL PRIMARY KEY,
+  datetime TIMESTAMP NOT NULL,
+  totalfee NUMERIC(10,2) NOT NULL,
+  services TEXT[] NOT NULL
+);
