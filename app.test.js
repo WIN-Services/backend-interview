@@ -33,7 +33,7 @@ describe("POST /order", () => {
                             id: 1,
                             total: 100,
                             services: "test",
-                            datetime: "2022-03-11T05:00:50.000Z"
+                            datetime: "2022-03-11T10:30:50.000Z"
                         }
                     }
                 },
@@ -50,7 +50,7 @@ describe("POST /order", () => {
                             id: 2,
                             total: 102,
                             services: "test2",
-                            datetime: "2023-03-11T05:00:50.000Z"
+                            datetime: "2023-03-11T10:30:50.000Z"
                         }
                     }
                 }

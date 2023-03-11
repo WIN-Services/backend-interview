@@ -20,13 +20,6 @@ module.exports = async function(sequelize) {
         console.log('GET / homepage request')
         res.status(200).send('Hello World!')
     })
-   
-    // .then((result) => {
-    //     console.log('connection established to postgres');
-    // })
-    // .catch((err) => {
-    //     console.log('Error in connecting to Postgres db', err);
-    // });
     
     return app;
 }
@@ -38,5 +31,6 @@ async function startDB(sequelize){
         return true;
     } catch (err) {
         console.log('Error in connecting to Postgres db', err);
+        throw "unable to connect postgres db";
     }
 }

@@ -1,11 +1,9 @@
-FROM node:12.18.1
+FROM node:latest
 
 WORKDIR /app
 
-COPY ["package.json", "./"]
+COPY . .
 
 RUN npm install
 
-COPY . .
-
-CMD [ "node", "server.js" ]
+CMD ["npm", "start"]
