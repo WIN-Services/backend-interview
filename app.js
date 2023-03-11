@@ -5,8 +5,10 @@ const express = require('express')
 const orderRoutes = require('./routes/order')
 
 //sequelize db dependecy injected at runtime to make it loose coupled. helps to provide testing or even mock db as well.
-module.exports = function(sequelize, startServer) {
+module.exports = async function(sequelize) {
     console.log("initialising...")
+    await startDB(sequelize);
+
     const app = express()
     
     app.use(express.json())
@@ -16,22 +18,25 @@ module.exports = function(sequelize, startServer) {
     
     app.get('/', (req, res) => {
         console.log('GET / homepage request')
-        res.send('Hello World!')
+        res.status(200).send('Hello World!')
     })
-
-    sequelize
-    .sync({force: true})
-    // .sync()
-    .then((result) => {
-        console.log('connection established to postgres');
-        startServer(app);
-        // return Order.create({total: 1200021})
-    })
-    //   .then(orders => {
-        //     console.log("order created : ", orders.dataValues );
-    //   })
-    .catch((err) => {
-        console.log('Error in connecting to Postgres db', err);
-    });
+   
+    // .then((result) => {
+    //     console.log('connection established to postgres');
+    // })
+    // .catch((err) => {
+    //     console.log('Error in connecting to Postgres db', err);
+    // });
     
+    return app;
+}
+
+async function startDB(sequelize){
+    try {
+        await sequelize.sync({force: true})
+        console.log('connection established to postgres');
+        return true;
+    } catch (err) {
+        console.log('Error in connecting to Postgres db', err);
+    }
 }
