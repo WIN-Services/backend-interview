@@ -1,110 +1,17 @@
 # WIN Backend Engineering Interview
 
-## Scenario
+It is a complete project includes all CRUD APIs with their corressponding test cases.
+It is complete dockerize using Dockerfile and docker-compose.yml file.
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+#A demo video is attached that gives a brief walkthrough from very beginning to end.
+https://user-images.githubusercontent.com/82873133/224509676-f6c373c7-fca2-4ba4-9926-75981ec199a7.mp4
 
-## Deliverables
+#what changes require to make it production ready.
+There are various steps that needs to be taken care to make it live.
+1. it currently has only one postgre connection. in production, we must use connection pool with finetune params like idle timeout of conn. , core pool size, max pool size, etc..
+2. it is running on sigle thread here. in production, cluster mode is a must to utilise all cpu resources. usually, pm2 is being used to run node in cluster mode. although, one can directly use cluster native module of nodejs.
+3. in production it is better to use some standard design patterns to make code more extendable as app scale in future. ex-> instead of directly fetching db.js there must be factory method that will take db name and fetch the respective db client.
+4. separate env. variable in some global registry is preferable as it may scale and distribute to different services in future then a global config file is better than each has their own local config file.
+5. to implement business logic that creation/updation must not allow if there is an existing order in last three hours. here, we are calling db everytime to see whwether there is a order or not in last three hours. in production, there should be a cache that would store the last creation/updation datetime, then we can directly query redis which is blaziingly fast than doing postgress call.
 
-There are two deliverables for this project:
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
-
-### General
-
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
-
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
