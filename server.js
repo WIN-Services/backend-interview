@@ -1,1 +1,3 @@
-console.log("assignment started by Harsh Rajput")
+require('./app')
+
+console.log("server.js file")
