@@ -1,4 +1,4 @@
-
+const orders = require('../models/order')
 
 function getOrderById(req, res){
     console.log('GET /order/:id request');
@@ -9,9 +9,24 @@ function getAllOrders(req, res){
     console.log('GET /orders request');
     res.send('GET all orders.')
 }
-function createOrder(req, res){
+async function createOrder(req, res){
     console.log('POST /order request');
-    res.send('POST create order request')
+
+    const {total, datetime, services} = req.body ;
+
+    await orders.create({ total, datetime, services })
+    .then((response) => {
+        return res.status(201).send({
+            success : true,
+            data : response
+        })
+    }).catch((err) => {
+        console.log(err)
+        return res.status(400).send({
+            success : false,
+            data : 'Someting went wrong!'
+        })
+    })
 }
 
 function updateOrder(req, res){

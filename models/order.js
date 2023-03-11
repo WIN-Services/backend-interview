@@ -18,7 +18,7 @@ const Order = sequelize.define("order", {
     allowNull : false
   },
   services: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
   }
 });
