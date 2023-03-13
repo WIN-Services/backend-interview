@@ -6,7 +6,6 @@ const getAllOrdersDB = async () => {
     let data = await db.query(query);
     if (!data || !data.length) throw " failed to fetch orders";
     data = data[0];
-    console.log(data);
     return data || [];
   } catch (err) {
     if(err.message) err = err.message;
@@ -33,7 +32,6 @@ const createOrderDB = async (totalfee, services, createdAt) => {
   try {
     console.log("createOrderDB called");
     const query = `INSERT INTO orders (totalfee, services, createdat, updatedat) VALUES (${totalfee}, '${services}', '${createdAt}', '${createdAt}') RETURNING *`;
-    console.log(query);
     let data = await db.query(query);
     if (!data) throw "failed to insert data";
     data = data[0];
@@ -71,11 +69,25 @@ const deleteOrderDB = async (id) => {
   }
 }
 
+const existingOrderCheckDB = async (currentTime, acceptedTime) => {
+  try{
+    console.log("existingOrderCheckDB called");
+  const query = `SELECT * FROM orders WHERE updatedAt >= '${acceptedTime}' AND updatedAt <= '${currentTime}'`;
+  const data = await db.query(query);
+  if(!data.length) throw "No data found";
+  return true;
+}catch(err){
+  console.log("existingOrderCheckDB error",err);
+  return false;
+}
+}
+
 module.exports = {
   createOrderDB,
   updateOrderDB,
   deleteOrderDB,
   getAllOrdersDB,
-  getOrderByIdDB
+  getOrderByIdDB,
+  existingOrderCheckDB
 }
 
