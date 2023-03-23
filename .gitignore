@@ -1,0 +1,6 @@
+# Keep environment variables out of version control
+.env
+data
+node_modules
+package-lock.json
+dist

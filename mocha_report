@@ -1,0 +1,13 @@
+Server started at http://localhost:3000
+
+
+  Order APIs
+    GET API order
+      /GET all order
+        ✔ Should fetch all the order in the DB (151ms)
+      /GET all orders for user
+        ✔ Should fetch all the orders of users in the DB (103ms)
+
+
+  2 passing (258ms)
+
