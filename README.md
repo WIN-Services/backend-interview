@@ -46,3 +46,4 @@
 5. Add Logger to the server
 6. Better and stricter test cases
 7. Strict typescripting
+8. Add request verification and user verification using JWT
