@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:postgres@localhost:5432/oms?schema=public"
+}
+
+model Services {
+  id    Int     @id @default(autoincrement())
+  name  String
+  description String
+  fee Int
+  orders Orders[] @relation("ServiceOrderRelation")
+  isDeleted Boolean @default(false)
+  createdOn DateTime  @default(now())
+  updatedOn DateTime  @default(now()) @updatedAt
+}
+
+model Users {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  orders Orders[] @relation("OrderUserRelation")
+  isDeleted Boolean @default(false)
+  createdOn DateTime  @default(now())
+  updatedOn DateTime  @default(now()) @updatedAt
+}
+
+model Orders {
+  id        Int     @id @default(autoincrement())
+  totalFee  Int
+  users    Users    @relation("OrderUserRelation",fields: [userId], references: [id])
+  services    Services[]    @relation("ServiceOrderRelation")
+  userId  Int
+  isDeleted Boolean @default(false)
+  orderedOn DateTime @default(now())
+  updatedOn DateTime @default(now()) @updatedAt
+}

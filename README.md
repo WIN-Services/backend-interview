@@ -1,110 +1,48 @@
 # WIN Backend Engineering Interview
 
-## Scenario
+## Installation process
+1. Start Postgres server and create a database "oms"
+2. Run npm install
+3. Run npm run prisma:migrate:deploy
+4. Run npm run prisma:generate
+4. Run npm run prisma:seed
+5. Run npm run build
+6. Run npm run start
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+## Technologies used
 
-## Deliverables
+### Nodejs/Express
+- Node Js is a javascript runtime coupled with ExpressJs framework it allows and helps in creating higly scalable servers easily.
 
-There are two deliverables for this project:
+### Postgres DB
+- Postgres is a RDBMS this will act as database for the application.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+### Prisma
+- Prisma is an ORM which can be used for multiple SQLs and NoSQLs. Here it's used for database management.
 
-### General
+### TypeScript
+- Typescript is strongly typed programming language build over javascript. Here it's used to provide typechecks.
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+### Docker
+- Docker is only used for postgres here.
 
-### Web Service
+## Solution
+1. The solution is a very simple Express Js server
+2. Provides CRUD operations over a specific table design
+3. A high level API documentation can be found on https://documenter.getpostman.com/view/11574963/2s93RMVFmh
+4. Provides scope for version controle for APIs created
+5. Routes and Controller segregation allows for highly scalable application if needed
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+## Assumptions
+1. Postgres SQL is used
+2. SQL running on 5432 Port
+3. SQL user pass are postgres
 
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+## Chnages for production
+1. Will implement microservice architecture
+2. Seperate server for each route
+3. Better DB management
+4. Seperate file for any constants needed in the code
+5. Add Logger to the server
+6. Better and stricter test cases
+7. Strict typescripting
