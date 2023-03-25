@@ -1,3 +1,79 @@
+# WIN Interview
+
+## Installation
+
+```bash
+$ npm install
+```
+
+## Running the app
+
+```bash
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
+
+## Test
+
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+```
+
+## Technologies used
+
+## Nest Js Framework
+
+- A progressive Node.js framework for building efficient, reliable and scalable server-side applications.
+- Gives you true flexibility by allowing use of any other libraries.
+- Provides Modular Architecture.
+- It is helpful in implelmenting design patterns in javascript easily.
+
+### Nodejs/Express
+
+- Node Js is a javascript runtime coupled with ExpressJs framework it allows and helps in creating higly scalable servers easily.
+
+### PostgreSQL
+
+- PostgreSQL is designed to handle large amounts of data and complex workloads. 
+- It supports a wide range of features including ACID compliance, transactions, foreign keys, triggers, and stored procedures. PostgreSQL also supports a variety of data types including text, numeric, date and time, geometric, and JSON.
+
+### TypeScript
+
+- Typescript is strongly typed programming language build over javascript.
+- It's used to provide typecheck and type errors.
+
+### Docker
+
+- Docker is used for deployment in production.
+
+## Key Points
+
+1. Design a modular based architecture.
+2. Provides CRUD operations of everytable design.
+3. Design a simple efficinet schema in PostgreSQL
+4. Version Control of Api is handled properly
+5. Guards are used for auhentication and authorization of API's.
+6. Common Response Interceptor
+7. Global Error Handler Middleware
+8. Winston logger has been integrated for logging purpose.
+9. Clean code architecture.
+
+Time Spent: 5 Hours
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
