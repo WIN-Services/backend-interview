@@ -108,3 +108,34 @@ We are looking for:
 2. Solution Design
 3. Completeness
 4. Code clarity / readability
+
+
+
+
+
+
+------------------------------------------------------------------------------------
+
+
+
+Description:
+
+# Assignment-WIN
+--------------------
+
+Step 1 : npm i // installing node modules
+Step 2 : create database WIN // creating database
+Step 3 : CREATE TABLE order_details ( id int NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL, price varchar(64) NOT NULL ); // Creating table.
+Step 4 : node server // to run the app server
+Step 5 : npm test // to run test cases
+
+Note : Add DB username and password in Controller/orderController file
+-----------------------------------------------------------------------
+
+TECH STACK
+Language : Node.js
+Framework : Express
+Database : MySql
+Testing frameworks : Jest
+-------------------------
+
