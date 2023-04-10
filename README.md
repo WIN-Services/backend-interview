@@ -1,8 +1,4 @@
-
 # Win Backend Assesment
-
-
-
 
 ## Run Locally
 
@@ -18,7 +14,6 @@ Start the server
   npm run dev
 ```
 
-
 ## API Reference
 
 #### Get all Orders
@@ -33,8 +28,8 @@ Start the server
   GET /api/orders/${id}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter | Type     | Description                        |
+| :-------- | :------- | :--------------------------------- |
 | `id`      | `string` | **Required**. Id of order to fetch |
 
 #### Create Order
@@ -43,9 +38,9 @@ Start the server
   POST /api/orders/create
 ```
 
-| Body (urlencoded) | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `totalFee`| `Number` | **Required**. totalFee to create |
+| Body (urlencoded) | Type     | Description                      |
+| :---------------- | :------- | :------------------------------- |
+| `totalFee`        | `Number` | **Required**. totalFee to create |
 
 #### Delete Order
 
@@ -53,9 +48,9 @@ Start the server
   DELETE /api/orders/delete/${id}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`| `string` | **Required**. Id of order to delete|
+| Parameter | Type     | Description                         |
+| :-------- | :------- | :---------------------------------- |
+| `id`      | `string` | **Required**. Id of order to delete |
 
 #### Add Service To Order
 
@@ -63,11 +58,10 @@ Start the server
   PUT /api/orders/add-service/orderId/${id}/serviceId/${id}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `orderId`| `string` | **Required**. Id of order to fetch|
-| `serviceId`| `string` | **Required**. Id of service to fetch|
-
+| Parameter   | Type     | Description                          |
+| :---------- | :------- | :----------------------------------- |
+| `orderId`   | `string` | **Required**. Id of order to fetch   |
+| `serviceId` | `string` | **Required**. Id of service to fetch |
 
 #### Get all Services
 
@@ -81,8 +75,8 @@ Start the server
   GET /api/services/${id}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter | Type     | Description                          |
+| :-------- | :------- | :----------------------------------- |
 | `id`      | `string` | **Required**. Id of service to fetch |
 
 #### Create Service
@@ -91,9 +85,9 @@ Start the server
   POST /api/services/create
 ```
 
-| Body (urlencoded) | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `name`| `String` | **Required**. name to create |
+| Body (urlencoded) | Type     | Description                  |
+| :---------------- | :------- | :--------------------------- |
+| `name`            | `String` | **Required**. name to create |
 
 #### Delete Service
 
@@ -101,13 +95,9 @@ Start the server
   DELETE /api/services/delete/${id}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`| `string` | **Required**. Id of order to delete|
-
-
-
-
+| Parameter | Type     | Description                         |
+| :-------- | :------- | :---------------------------------- |
+| `id`      | `string` | **Required**. Id of order to delete |
 
 ## Environment Variables
 
@@ -119,7 +109,6 @@ To run this project, you will need to add the following environment variables to
 
 `MONGO_PROD_URL`
 
-
 ## Running Tests
 
 To run tests, run the following command
@@ -128,19 +117,19 @@ To run tests, run the following command
   npm run test
 ```
 
-
 ## Features
 
 - CRUD operations on orders
 - CRUD operations on services
 
-
 ## Support
 
 For support, email hisham.professionals@gmail.com .
-
 
 ## Room of enhancement
 
 on destrying service or order ., remove ids of indivisual from both documents key of array.
 
+## Screenshots
+
+![App Screenshot](./screenshots/postman.jpg)
