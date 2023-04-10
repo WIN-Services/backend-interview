@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema(
   {
@@ -7,7 +7,7 @@ const orderSchema = new mongoose.Schema(
     },
     services: [
       {
-        type: Mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Order",
       },
     ],

@@ -1,20 +1,17 @@
 import { Router } from "express";
+import OrderController from "../../controllers/orderController.js";
 
 const router = Router();
 
+const orderController = new OrderController();
+
 /** READ */
-router.get("/", (req, res) => {
-  return res.status(200).json({ message: "asd" });
-});
+router.get("/", orderController.fetchAllOrders);
 
-router.get("/:id", (req, res) => {
-  const { id: orderId } = req.params;
-  return res.status(200).json({ message: "asd" });
-});
+router.get("/:id", orderController.getOrder);
 
-router.post("/", (req, res) => {
-  console.log(req.body);
-  return res.status(200).json({ message: "asd" });
-});
+router.post("/create", orderController.createOrder);
+
+router.delete("/delete/:id", orderController.destroyOrder);
 
 export default router;

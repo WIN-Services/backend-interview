@@ -1,12 +1,12 @@
-import Order from "../models/order";
+import Order from "../models/order.js";
 
 class OrderDao {
   async createOrder(data) {
-    try {
-      new Order(data).save();
-    } catch (err) {
-      console.log("Error in createOrder-->", err);
-    }
+    return new Promise((resolve, reject) => {
+      Order.create(data)
+        .then((result) => resolve(result))
+        .catch((err) => reject(err));
+    });
   }
 
   async fetchOrder(orderId) {
@@ -34,15 +34,9 @@ class OrderDao {
 
   async destroyOrder(orderId) {
     return new Promise((resolve, reject) => {
-      Order.findOneAndDelete(
-        {
-          _id: orderId,
-        },
-        (err, res) => {
-          if (err) return reject(err);
-          return resolve(res);
-        }
-      );
+      Order.findOneAndDelete({ _id: orderId })
+        .then((result) => resolve(result))
+        .catch((err) => reject(err));
     });
   }
 }
