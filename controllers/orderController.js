@@ -1,4 +1,7 @@
 import OrderDao from "../DBServices/orderDao.js";
+import CommonController from "./commonController.js";
+
+const commonController = new CommonController();
 
 const orderDao = new OrderDao();
 
@@ -62,8 +65,21 @@ class OrderController {
         .json({ message: "success", status: "deleted", data: order });
     } catch (err) {
       return res.status(500).json({
-        message: "failure",
+        message: "success",
         status: "not deleted",
+        data: { error: err },
+      });
+    }
+  }
+
+  async addServiceToOrder(req, res) {
+    try {
+      const result = await commonController.addServiceInOrder(req.params);
+      return res.status(202).json(result);
+    } catch (err) {
+      return res.status(406).json({
+        message: "failure",
+        status: "not updated",
         data: { error: err },
       });
     }

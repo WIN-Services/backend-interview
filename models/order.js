@@ -4,11 +4,12 @@ const orderSchema = new mongoose.Schema(
   {
     totalFee: {
       type: Number,
+      required: true,
     },
     services: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Order",
+        ref: "Service",
       },
     ],
   },

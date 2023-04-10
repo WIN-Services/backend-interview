@@ -1,52 +1,52 @@
-import Order from "../models/order.js";
+import Service from "../models/service.js";
 
-class OrderDao {
-  async createOrder(data) {
+class ServiceDao {
+  async createService(data) {
     return new Promise((resolve, reject) => {
-      Order.create(data)
+      Service.create(data)
         .then((result) => resolve(result))
         .catch((err) => reject(err));
     });
   }
 
-  async fetchOrder(orderId) {
+  async fetchService(serviceId) {
     return new Promise((resolve, reject) => {
-      Order.findOne({ _id: orderId })
+      Service.findOne({ _id: serviceId })
         .then((result) => resolve(result))
         .catch((err) => reject(err));
     });
   }
 
-  async fetchAllOrders(filter = {}, skip = 0, limit = 0) {
+  async fetchAllServices(filter = {}, skip = 0, limit = 0) {
     return new Promise(async (resolve, reject) => {
       try {
-        const allOrders = await Order.find(filter)
+        const allServices = await Service.find(filter)
           .sort({ createdAt: -1 })
           .skip(skip)
           .limit(limit);
 
-        resolve(allOrders);
+        resolve(allServices);
       } catch (error) {
         reject(error);
       }
     });
   }
 
-  async destroyOrder(orderId) {
+  async destroyService(serviceId) {
     return new Promise((resolve, reject) => {
-      Order.findOneAndDelete({ _id: orderId })
+      Service.findOneAndDelete({ _id: serviceId })
         .then((result) => resolve(result))
         .catch((err) => reject(err));
     });
   }
 
-  async updateOrder(orderId, data) {
+  async updateService(serviceId, data) {
     return new Promise((resolve, reject) => {
-      Order.findOneAndUpdate({ _id: orderId }, { $set: data })
+      Service.findOneAndUpdate({ _id: serviceId }, { $set: data })
         .then((result) => resolve(result))
         .catch((err) => reject(err));
     });
   }
 }
 
-export default OrderDao;
+export default ServiceDao;

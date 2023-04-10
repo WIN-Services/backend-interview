@@ -4,7 +4,14 @@ const serviceSchema = new mongoose.Schema(
   {
     name: {
       type: String,
+      required: true,
     },
+    orders: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Order",
+      },
+    ],
   },
   { timestamps: true }
 );
