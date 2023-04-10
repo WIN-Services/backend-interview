@@ -1,110 +1,135 @@
-# WIN Backend Engineering Interview
+# Win Backend Assesment
 
-## Scenario
+## Run Locally
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+Install dependencies
 
-## Deliverables
-
-There are two deliverables for this project:
-
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
-
-### General
-
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
-
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+```bash
+  npm install
 ```
 
-Orders
+Start the server
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
+```bash
+  npm run dev
 ```
 
-## Duration
+## API Reference
 
-Up to 2 hours.
+#### Get all Orders
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+```http
+  GET /api/orders
+```
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+#### Get Order By Id
+
+```http
+  GET /api/orders/${id}
+```
+
+| Parameter | Type     | Description                        |
+| :-------- | :------- | :--------------------------------- |
+| `id`      | `string` | **Required**. Id of order to fetch |
+
+#### Create Order
+
+```http
+  POST /api/orders/create
+```
+
+| Body (urlencoded) | Type     | Description                      |
+| :---------------- | :------- | :------------------------------- |
+| `totalFee`        | `Number` | **Required**. totalFee to create |
+
+#### Delete Order
+
+```http
+  DELETE /api/orders/delete/${id}
+```
+
+| Parameter | Type     | Description                         |
+| :-------- | :------- | :---------------------------------- |
+| `id`      | `string` | **Required**. Id of order to delete |
+
+#### Add Service To Order
+
+```http
+  PUT /api/orders/add-service/orderId/${id}/serviceId/${id}
+```
+
+| Parameter   | Type     | Description                          |
+| :---------- | :------- | :----------------------------------- |
+| `orderId`   | `string` | **Required**. Id of order to fetch   |
+| `serviceId` | `string` | **Required**. Id of service to fetch |
+
+#### Get all Services
+
+```http
+  GET /api/services
+```
+
+#### Get Service By Id
+
+```http
+  GET /api/services/${id}
+```
+
+| Parameter | Type     | Description                          |
+| :-------- | :------- | :----------------------------------- |
+| `id`      | `string` | **Required**. Id of service to fetch |
+
+#### Create Service
+
+```http
+  POST /api/services/create
+```
+
+| Body (urlencoded) | Type     | Description                  |
+| :---------------- | :------- | :--------------------------- |
+| `name`            | `String` | **Required**. name to create |
+
+#### Delete Service
+
+```http
+  DELETE /api/services/delete/${id}
+```
+
+| Parameter | Type     | Description                         |
+| :-------- | :------- | :---------------------------------- |
+| `id`      | `string` | **Required**. Id of order to delete |
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+- note : any mongo url will with the same name
+
+`MONGO_DEV_URL`
+
+`MONGO_PROD_URL`
+
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  npm run test
+```
+
+## Features
+
+- CRUD operations on orders
+- CRUD operations on services
+
+## Support
+
+For support, email hisham.professionals@gmail.com .
+
+## Room of enhancement
+
+on destrying service or order ., remove ids of indivisual from both documents key of array.
+
+## Screenshots
+
+![App Screenshot](./screenshots/postman.jpg)
