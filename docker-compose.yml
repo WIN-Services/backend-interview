@@ -1,23 +1,26 @@
 version: '3.8'
 services:
-  db:
-    image: postgres:14.1-alpine
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+  postgres:
+    container_name: postgres_win
+    image: postgres:latest
     ports:
-      - '5432:5432'
-    volumes: 
-      - ./data:/var/lib/postgresql/data
-  api:
-    image: node:slim
-    build: .
+      - 5432:5432
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: users
+  short-link-app:
+    container_name: backend-win
+    build:
+      context: .
+      args:
+        NODE_VERSION: "16"
+    ports:
+      - "3002:3002"
     depends_on:
-      - db
-    ports: 
-      - "3000:3000"
-    command: "npm run start"
-
-
-      
+      - postgres
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=users

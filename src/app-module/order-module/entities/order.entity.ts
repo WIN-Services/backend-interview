@@ -15,7 +15,7 @@ export class OrderEntity {
   id: string;
 
   @Column({ nullable: false, name: 'services' })
-  services: string[];
+  services: string;
 
   @Column({ default: 0, nullable: false, name: 'total_fee' })
   public totalFee: number;

@@ -45,15 +45,6 @@ export const env = {
     response: toBool(getOsEnvOptional('LOG_RESPONSE') || 'false'),
     error: toBool(getOsEnvOptional('LOG_ERROR') || 'false'),
   },
-  mongoDb: {
-    type: getOsEnv('MONGO_TYPE'),
-    host: getOsEnv('MONGO_HOST'),
-    username: getOsEnv('MONGO_USERNAME'),
-    password: getOsEnv('MONGO_PASSWORD'),
-    port: toNumber(getOsEnv('MONGO_PORT')),
-    database: getOsEnv('MONGO_DATABASE'),
-    synchronize: toBool(getOsEnv('MONGO_SYNCHRONIZE')),
-  },
   jwt: {
     accessKey: getOsEnv('JWT_SECRET'),
     refreshKey: getOsEnv('JWT_REFRESH'),
