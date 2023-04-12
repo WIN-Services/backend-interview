@@ -58,6 +58,7 @@ $ npm run test:cov
 ### Docker
 
 - Docker is used for deployment in production.
+- The PostGres image is used to connect to the database
 
 ## Key Points
 
@@ -71,7 +72,14 @@ $ npm run test:cov
 8. Winston logger has been integrated for logging purpose.
 9. Clean code architecture.
 
-Time Spent: 5 Hours
+## Take Aways
+
+1. Made 3 Modules in App, Order Module, Service Module, User Module.
+2. The Order module has functionalities to Add Order, Update Order, Remove and Get All orders by pagination.
+3. The Service Module has functionalities to Add a service, Update a service, Delete Service and Get all services available.
+4. The Users module can sign up a new user, Update the users profile, Get all users present and Delete User.
+5. Jwt Stategy is used for Authentication and Authorization purposes.
+6. DTO's are used for validation.
 
 
 <p align="center">
