@@ -7,7 +7,9 @@ import {
   Post,
   Query,
   Version,
-  Headers, Delete, Put,
+  Headers,
+  Delete,
+  Put,
 } from '@nestjs/common';
 import {
   ApiOperation,
@@ -26,9 +28,12 @@ import {
   CreateOrderRequestDtoValidation,
 } from './dto/create-order.dto';
 import { OrderService } from './oms.service';
-import {OrderEntity} from "./entity/order.entity";
-import {UpdateOrderRequestDto, UpdateOrderRequestDtoValidation} from "./dto/update-order.dto";
-import {PaginationValidation} from "../utils/page-validations";
+import { OrderEntity } from './entity/order.entity';
+import {
+  UpdateOrderRequestDto,
+  UpdateOrderRequestDtoValidation,
+} from './dto/update-order.dto';
+import { PaginationValidation } from '../utils/page-validations';
 
 @Controller(Controllers.Operation)
 @ApiTags(ApiTag.Order)
@@ -53,7 +58,10 @@ export class OrderController {
     status: HttpStatus.BAD_REQUEST,
     description: 'Invalid request object.',
   })
-  @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: 'Internal server error.' })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Internal server error.',
+  })
   @ApiHeader({
     name: 'Authorization',
     description: 'Authorization to access api.',
@@ -76,14 +84,14 @@ export class OrderController {
     return await this.orderService.createOrder(headers, createOrderRequestDto);
   }
 
-
   // POST API
   @Version('1')
   @Put()
   @Roles(Role.PLATFORM_USER)
   @ApiOperation({
     summary: 'Update Order',
-    description: 'Update Order API: Responsible for Updating order items and order details.',
+    description:
+      'Update Order API: Responsible for Updating order items and order details.',
   })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -94,24 +102,27 @@ export class OrderController {
     status: HttpStatus.BAD_REQUEST,
     description: 'Invalid request object.',
   })
-  @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: 'Internal server error.' })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Internal server error.',
+  })
   @ApiHeader({
     name: 'Authorization',
     description: 'Authorization to access api.',
   })
   async updateOrder(
-      @Headers() headers,
-      @Body() updateOrderRequestDto: UpdateOrderRequestDto,
+    @Headers() headers,
+    @Body() updateOrderRequestDto: UpdateOrderRequestDto,
   ): Promise<OrderEntity> {
     // Dto validation
     try {
       await UpdateOrderRequestDtoValidation.validateAsync(
-          updateOrderRequestDto,
+        updateOrderRequestDto,
       );
     } catch (e) {
       throw HttpError(
-          HttpStatus.BAD_REQUEST,
-          `Invalid request object: ${e.message}`,
+        HttpStatus.BAD_REQUEST,
+        `Invalid request object: ${e.message}`,
       );
     }
     return await this.orderService.updateOrder(headers, updateOrderRequestDto);
@@ -143,18 +154,17 @@ export class OrderController {
     description: 'Authorization for access API.',
   })
   async getOrder(
-      @Headers() headers,
-      @Query('id') id: string,
+    @Headers() headers,
+    @Query('id') id: string,
   ): Promise<OrderEntity> {
     if (!id) {
       this.logger.error(
-          `Inside ${this.getOrder.name}: query params is invalid`,
+        `Inside ${this.getOrder.name}: query params is invalid`,
       );
       throw HttpError(HttpStatus.BAD_REQUEST, `Invalid query params`);
     }
     return await this.orderService.getOrderById(headers, id);
   }
-
 
   @Version('1')
   @Get('orders')
@@ -168,7 +178,10 @@ export class OrderController {
     description: 'Successfully Executed.',
   })
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
-  @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: 'Internal Server error.' })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Internal Server error.',
+  })
   @ApiQuery({
     type: Number,
     name: 'page',
@@ -179,11 +192,14 @@ export class OrderController {
     name: 'page_size',
     description: 'page_size: An integer value representing the page size.',
   })
-  @ApiHeader({name: 'Authorization', description: 'Authorization to access api.',})
+  @ApiHeader({
+    name: 'Authorization',
+    description: 'Authorization to access api.',
+  })
   async getOrders(
-      @Headers() headers,
-      @Query('page') page: number,
-      @Query('page_size') page_size: number,
+    @Headers() headers,
+    @Query('page') page: number,
+    @Query('page_size') page_size: number,
   ): Promise<OrderEntity[]> {
     this.logger.log(`inside get Orders.`);
     const pagination = {
@@ -191,13 +207,10 @@ export class OrderController {
       page_size: page_size,
     };
     try {
-      await PaginationValidation.validateAsync(pagination)
+      await PaginationValidation.validateAsync(pagination);
     } catch (e) {
       this.logger.error(`Inside ${this.getOrders.name}:${e}`);
-      throw HttpError(
-          HttpStatus.BAD_REQUEST,
-          `Invalid Pagination values`,
-      );
+      throw HttpError(HttpStatus.BAD_REQUEST, `Invalid Pagination values`);
     }
     return await this.orderService.getAllOrders(headers, pagination);
   }
@@ -227,17 +240,13 @@ export class OrderController {
     name: 'Authorization',
     description: 'Authorization for access API.',
   })
-  async deleteOrder(
-      @Headers() headers,
-      @Query('id') id: string,
-  ) {
+  async deleteOrder(@Headers() headers, @Query('id') id: string) {
     if (!id) {
       this.logger.error(
-          `Inside ${this.deleteOrder.name}: query params is invalid`,
+        `Inside ${this.deleteOrder.name}: query params is invalid`,
       );
       throw HttpError(HttpStatus.BAD_REQUEST, `Invalid query params`);
     }
     await this.orderService.deleteOrder(headers, id);
   }
-
 }
