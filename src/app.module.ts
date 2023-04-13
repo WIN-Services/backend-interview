@@ -5,7 +5,7 @@ import { Configs } from './config/config';
 import { HealthModule } from './health/health.module';
 import { RolesGuard } from './role/role-guard';
 import { OmsModule } from './oms/oms.module';
-import {ThrottlerModule} from "@nestjs/throttler";
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [

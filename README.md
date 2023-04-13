@@ -41,6 +41,7 @@
 - [X] Health Check 
 - [X] Request validation
 - [X] Cors Whitelisting
+- [X] Logger.
 - [X] Rate Limiting/Throttling : 100000 request per min is current limit.
 - [ ] Request Size Limit : Before moving to prod we need to add request size limit.
 - [X] Linter
@@ -51,6 +52,11 @@
 - [X] Code Cleaning
 - [ ] Multi Core Deployment :  Before moving to prod we can deploy our code to multicore system so that it can accept maximum amount of request.
 - [ ] Add Authentication and Authorization
+- [ ] Perform load testing and creating benchmarking.
+
+
+
+
 
 ## API's
 
@@ -121,6 +127,22 @@ curl --location --request GET 'http://localhost:3000/oms/v1/order-management/ord
 
 ***
 
+
+## How to run Test Case
+ 
+- stop the docker using command `docker-compose down`
+- Again start the docker using command `docker-compose up mongodb_container`
+- Run command `npm run test:e2e` 
+- Hurray yor test will successfully executed.
+
+###  What extra we can do in future?
+
+- Payment information in order document.
+- Currency information in order document.
+- Order Status: Started , Refunded etc
+- Country information in document.
+- Device information.(mobile , ios , web)
+- Built in cart managment service and many more.
 
 
 

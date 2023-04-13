@@ -112,7 +112,9 @@ export class OrderService {
         { returnOriginal: false },
       )) as OrderEntity;
     } catch (e) {
-      this.logger.error(`${this.updateOrder.name} : Error Occurred ${e.message}`);
+      this.logger.error(
+        `${this.updateOrder.name} : Error Occurred ${e.message}`,
+      );
       throw HttpError(
         HttpStatus.INTERNAL_SERVER_ERROR,
         'Unable to update order. Something went wrong',
@@ -128,7 +130,9 @@ export class OrderService {
         is_deleted: false,
       })) as OrderEntity;
     } catch (e) {
-      this.logger.error(`${this.getOrderById.name} : Error Occurred ${e.message}`,);
+      this.logger.error(
+        `${this.getOrderById.name} : Error Occurred ${e.message}`,
+      );
       throw HttpError(
         HttpStatus.INTERNAL_SERVER_ERROR,
         'Unable to get order. Something went wrong.',
@@ -175,7 +179,9 @@ export class OrderService {
         },
       );
     } catch (e) {
-      this.logger.error(`${this.deleteOrder.name}: Unable to delete order. Error  occurred ${e}`);
+      this.logger.error(
+        `${this.deleteOrder.name}: Unable to delete order. Error  occurred ${e}`,
+      );
       throw HttpError(
         HttpStatus.INTERNAL_SERVER_ERROR,
         'Unable to delete order. Something went wrong',

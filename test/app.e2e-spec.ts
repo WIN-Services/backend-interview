@@ -1,15 +1,31 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import {HttpStatus, INestApplication} from '@nestjs/common';
+import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
-import {uuid} from "uuidv4";
+import { AppModule } from '../src/app.module';
+import { CreateOrderRequestDto } from '../src/oms/dto/create-order.dto';
+import { uuid } from 'uuidv4';
+jest.useRealTimers();
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
-  let userId = uuid()
-  let createOrderRequest
-
+  let createOrderDto: CreateOrderRequestDto;
+  const userId = uuid();
+  let authKeyValid;
   beforeEach(async () => {
+    authKeyValid = '1510480e-d9f2-11ed-afa1-0242ac120002';
+    createOrderDto = {
+      user_id: userId,
+      order_items: [
+        {
+          name: 'Pencil',
+          amount: 12,
+        },
+        {
+          name: 'Pen',
+          amount: 13,
+        },
+      ],
+    };
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -17,30 +33,26 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (POST- CREATE ORDER)', () => {
-    return request(app.getHttpServer())
-        .post('')
-        .expect(HttpStatus.CREATED)
+  // Test case covering create order.
+  it('/ (POST- CREATE ORDER) - 1', async () => {
+    // User is unauthorised
+    const resp = await request(app.getHttpServer())
+      .post('/order-management')
+      .send(createOrderDto);
+    expect(resp.status).toBe(HttpStatus.UNAUTHORIZED);
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-        .get('/')
-        .expect(200)
-        .expect('Hello World!');
-  });
-
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-        .get('/')
-        .expect(200)
-        .expect('Hello World!');
-  });
-
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  it('/ (POST- CREATE ORDER) - 2', async () => {
+    // authorised user
+    const resp = await request(app.getHttpServer())
+      .post('/order-management')
+      .set('Authorization', authKeyValid)
+      .send(createOrderDto);
+    expect(resp.status).toBe(HttpStatus.CREATED);
+    expect(resp.body['user_id']).toBe(userId);
+    expect(resp.body['order_items'][0]['name']).toBe('Pencil');
+    expect(resp.body['order_items'][0]['amount']).toBe(12);
+    expect(resp.body['order_items'][1]['amount']).toBe(13);
+    expect(resp.body['order_items'][1]['name']).toBe('Pen');
   });
 });
