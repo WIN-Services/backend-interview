@@ -62,8 +62,8 @@ export class OrderService {
     // Business Logic
     const requestTime = new Date();
     let amount = 0;
-    // This logic can be changed according to business usecase.
-    if(createOrderRequestDto?.order_items === null || createOrderRequestDto?.order_items?.length == 0){
+    // This logic can be changed according to business use case.
+    if(updaterOrderRequestDto?.order_items === null || updaterOrderRequestDto?.order_items?.length == 0){
       throw HttpError(
           HttpStatus.BAD_REQUEST,
           'Unable to create empty order.',
