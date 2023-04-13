@@ -25,11 +25,11 @@ export class OrderService {
     // Business Logic
     let amount = 0;
     // This logic can be changed according to business usecase.
-    if(createOrderRequestDto?.order_items === null || createOrderRequestDto?.order_items?.length == 0){
-      throw HttpError(
-          HttpStatus.BAD_REQUEST,
-          'Unable to create empty order.',
-      );
+    if (
+      createOrderRequestDto?.order_items === null ||
+      createOrderRequestDto?.order_items?.length == 0
+    ) {
+      throw HttpError(HttpStatus.BAD_REQUEST, 'Unable to create empty order.');
     }
 
     for (let i = 0; i < createOrderRequestDto.order_items.length; i++) {
@@ -37,14 +37,13 @@ export class OrderService {
       amount = amount + createOrderRequestDto.order_items[i].amount;
     }
 
-
     // save order
     try {
       return (await new this.orderModel({
         user_id: createOrderRequestDto.user_id,
         total_fee: amount,
         order_items: createOrderRequestDto.order_items,
-        is_deleted: false
+        is_deleted: false,
       }).save()) as OrderEntity;
     } catch (e) {
       this.logger.error(`Unable to create Order. Error  occurred ${e}`);
@@ -63,11 +62,11 @@ export class OrderService {
     const requestTime = new Date();
     let amount = 0;
     // This logic can be changed according to business use case.
-    if(updaterOrderRequestDto?.order_items === null || updaterOrderRequestDto?.order_items?.length == 0){
-      throw HttpError(
-          HttpStatus.BAD_REQUEST,
-          'Unable to create empty order.',
-      );
+    if (
+      updaterOrderRequestDto?.order_items === null ||
+      updaterOrderRequestDto?.order_items?.length == 0
+    ) {
+      throw HttpError(HttpStatus.BAD_REQUEST, 'Unable to create empty order.');
     }
 
     for (let i = 0; i < updaterOrderRequestDto.order_items.length; i++) {
@@ -88,11 +87,8 @@ export class OrderService {
       );
     }
 
-    if(pastOrder == null){
-      throw HttpError(
-          HttpStatus.NOT_FOUND,
-          'Order not found.',
-      );
+    if (pastOrder == null) {
+      throw HttpError(HttpStatus.NOT_FOUND, 'Order not found.');
     }
     // calculate time gap
     const seconds =
@@ -105,7 +101,7 @@ export class OrderService {
     }
     // update order and return
     try {
-      return await this.orderModel.findOneAndUpdate(
+      return (await this.orderModel.findOneAndUpdate(
         {
           _id: updaterOrderRequestDto.id,
           is_deleted: false,
@@ -114,10 +110,10 @@ export class OrderService {
           total_fee: amount,
           order_items: updaterOrderRequestDto.order_items,
         },
-          { returnOriginal: false }
-      ) as OrderEntity;
+        { returnOriginal: false },
+      )) as OrderEntity;
     } catch (e) {
-      this.logger.error(`Unable to update order. Error  occurred ${e}`);
+      this.logger.error(`${this.updateOrder.name} : Error Occurred ${e.message}`);
       throw HttpError(
         HttpStatus.INTERNAL_SERVER_ERROR,
         'Unable to update order. Something went wrong',
@@ -133,18 +129,15 @@ export class OrderService {
         is_deleted: false,
       })) as OrderEntity;
     } catch (e) {
-      this.logger.error(`Unable to get order.Error occurred ${e}`);
+      this.logger.error(`${this.getOrderById.name} : Error Occurred ${e.message}`,);
       throw HttpError(
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          'Unable to get order. Something went wrong.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        'Unable to get order. Something went wrong.',
       );
     }
 
-    if(pastOrder == null){
-      throw HttpError(
-          HttpStatus.NOT_FOUND,
-          'Order not found.',
-      );
+    if (pastOrder == null) {
+      throw HttpError(HttpStatus.NOT_FOUND, 'Order not found.');
     }
     return null;
   }
@@ -152,20 +145,20 @@ export class OrderService {
   async getAllOrders(header, pagination: Pagination): Promise<OrderEntity[]> {
     try {
       return await this.orderModel
-          .find({
-            is_deleted: false,
-          })
-          .sort({ created_at: -1 })
-          .limit(pagination.page_size)
-          .skip(pagination.page_size * pagination.page)
-          .lean();
-    } catch(e) {
+        .find({
+          is_deleted: false,
+        })
+        .sort({ created_at: -1 })
+        .limit(pagination.page_size)
+        .skip(pagination.page_size * pagination.page)
+        .lean();
+    } catch (e) {
       this.logger.error(
-          `Error occurred : ${this.getAllOrders.name}:${e.message}`,
+        `${this.getAllOrders.name} : Error Occurred ${e.message}`,
       );
       throw HttpError(
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          'something went wrong while getting order.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        'something went wrong while getting order.',
       );
     }
   }
@@ -174,20 +167,19 @@ export class OrderService {
     // update order and return
     try {
       await this.orderModel.updateOne(
-          {
-            _id: id,
-            is_deleted: false,
-          },
-          {
-            is_deleted: true
-          },
-
-      )
+        {
+          _id: id,
+          is_deleted: false,
+        },
+        {
+          is_deleted: true,
+        },
+      );
     } catch (e) {
-      this.logger.error(`Unable to delete order. Error  occurred ${e}`);
+      this.logger.error(`${this.deleteOrder.name}: Unable to delete order. Error  occurred ${e}`);
       throw HttpError(
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          'Unable to delete order. Something went wrong',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        'Unable to delete order. Something went wrong',
       );
     }
   }
