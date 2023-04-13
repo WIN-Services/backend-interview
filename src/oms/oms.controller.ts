@@ -28,6 +28,7 @@ import {
 import { OrderService } from './oms.service';
 import {OrderEntity} from "./entity/order.entity";
 import {UpdateOrderRequestDto, UpdateOrderRequestDtoValidation} from "./dto/update-order.dto";
+import {PaginationValidation} from "../utils/page-validations";
 
 @Controller(Controllers.Operation)
 @ApiTags(ApiTag.Order)
@@ -154,6 +155,52 @@ export class OrderController {
     return await this.orderService.getOrderById(headers, id);
   }
 
+
+  @Version('1')
+  @Get('orders')
+  @Roles(Role.PLATFORM_USER)
+  @ApiOperation({
+    summary: 'Get All Orders with pagination.',
+    description: 'Orders API: Will give the list of orders with pagination.',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Successfully Executed.',
+  })
+  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
+  @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: 'Internal Server error.' })
+  @ApiQuery({
+    type: Number,
+    name: 'page',
+    description: 'An integer value representing the page number.',
+  })
+  @ApiQuery({
+    type: Number,
+    name: 'page_size',
+    description: 'page_size: An integer value representing the page size.',
+  })
+  @ApiHeader({name: 'Authorization', description: 'Authorization to access api.',})
+  async getOrders(
+      @Headers() headers,
+      @Query('page') page: number,
+      @Query('page_size') page_size: number,
+  ): Promise<OrderEntity[]> {
+    this.logger.log(`inside get Orders.`);
+    const pagination = {
+      page: page,
+      page_size: page_size,
+    };
+    try {
+      await PaginationValidation.validateAsync(pagination)
+    } catch (e) {
+      this.logger.error(`Inside ${this.getOrders.name}:${e}`);
+      throw HttpError(
+          HttpStatus.BAD_REQUEST,
+          `Invalid Pagination values`,
+      );
+    }
+    return await this.orderService.getAllOrders(headers, pagination);
+  }
 
   @Version('1')
   @Delete()
