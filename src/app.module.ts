@@ -8,7 +8,7 @@ import { RolesGuard } from './role/role-guard';
 @Module({
   imports: [
     MongooseModule.forRoot(Configs().databases.mongo_db.url, {
-      dbName: 'network',
+      dbName: 'win_oms',
     }),
     HealthModule
   ],

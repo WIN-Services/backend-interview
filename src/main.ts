@@ -44,7 +44,7 @@ async function bootstrap() {
   app.enableCors();
   app.useGlobalFilters(new GlobalExceptionFilter());
   app.useGlobalInterceptors(new GlobalResponseInterceptor());
-  await app.listen(3000, '0.0.0.0');
+  await app.listen(Configs().port, '0.0.0.0');
 }
 
 bootstrap();
