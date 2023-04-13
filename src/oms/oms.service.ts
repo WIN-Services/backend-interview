@@ -1,7 +1,6 @@
 import { HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectModel, Prop } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-
 import { OrderDocument, OrderEntity } from './entity/order.entity';
 import { CreateOrderRequestDto } from './dto/create-order.dto';
 import { UpdateOrderRequestDto } from './dto/update-order.dto';
@@ -139,7 +138,7 @@ export class OrderService {
     if (pastOrder == null) {
       throw HttpError(HttpStatus.NOT_FOUND, 'Order not found.');
     }
-    return null;
+    return pastOrder;
   }
 
   async getAllOrders(header, pagination: Pagination): Promise<OrderEntity[]> {

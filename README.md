@@ -1,110 +1,126 @@
-# WIN Backend Engineering Interview
+# Order Management System
 
-## Scenario
+## Tech Stack Used:
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+- **Nest JS :** => A progressive Node.js framework for building efficient, reliable and scalable server-side applications.
+- **MongoDB:** => MongoDB is a source-available cross-platform document-oriented database.
+- **Docker**  => Docker is an open platform for developing, shipping, and running applications.
+- **Docker Compose** => Docker Compose is a tool that was developed to help define and share multi-container applications.
 
-## Deliverables
+## Folder Structure
 
-There are two deliverables for this project:
+- [X] src
+    - [X] **common** : Include request interceptor.
+    - [X] **config** : Manage the configuration of the service. ie: port , app name , db url , app key etc.
+    - [X] **enums**: Constant value used in project.
+    - [X] **errors**: A api for making generic error in whole project.
+    - [X] **health**: For health check of system which include db health check and etc.
+    - [X] **oms** : Order Management Module
+        - [X] **dto** : Data transfer object for api
+        - [X] **entity** : Database schema.
+        - [X] **controller** : Routing
+        - [X] **provider**: Business logic for the application.
+    - [X] **role**: Role Based Access: public api , platform api, admin api
+    - [X] **utils**: Common maths.
+  
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+## Steps to start application:
+ - `docker-compose up` : This command will spin up the server.
+ - After spinning up the server. Visit `http://localhost:3000/api/` for swagger document of an api.
+![alt text](images/win.png)
 
-### General
+## Assumption while developing
+- I believe that price of order will be dependent on services. So i have added amount field to service/orderitem.
+- The summation of item price will be the order price.
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
 
-### Web Service
+## Changes While Moving to prod.
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+### Before Moving to prod we need to complete unticked item. 
 
-## Sample Data
+- [X] Health Check 
+- [X] Request validation
+- [X] Cors Whitelisting
+- [X] Rate Limiting/Throttling : 100000 request per min is current limit.
+- [ ] Request Size Limit : Before moving to prod we need to add request size limit.
+- [X] Linter
+- [ ] Open Tracing and Telemetry: before moving to prod we need to add tracing and telemetry.
+- [X] ContentSecurityPolicy
+- [X] CrossOriginEmbedderPolicy
+- [ ] Test Covergae > 95 : Before moving to prod we need to reach maximum of coverage
+- [X] Code Cleaning
+- [ ] Multi Core Deployment :  Before moving to prod we can deploy our code to multicore system so that it can accept maximum amount of request.
+- [ ] Add Authentication and Authorization
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+## API's
 
-Service Records
+- **POST: Create Order** `/oms/v1/order-management`
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+```curl
+   curl --location --request POST 'http://localhost:3000/oms/v1/order-management' \
+--header 'Authorization: 1510480e-d9f2-11ed-afa1-0242ac120002' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "user_id": "Atul",
+    "order_items": [
+        {
+            "name": "Pencil",
+            "amount": 12
+        },
+       {
+            "name": "Pen",
+            "amount": 13
+        }
+    ]
+}'
+
 ```
 
-Orders
+- **PUT: Update Order** `/oms/v1/order-management`
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
+```curl
+
+curl --location --request PUT 'http://localhost:3000/oms/v1/order-management' \
+--header 'Authorization: 1510480e-d9f2-11ed-afa1-0242ac120002' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "id": "db664fd7-a000-4f01-a72e-1993d4a91c06",
+    "order_items": [
         {
-        "id": "123",
+            "name": "Pen",
+            "amount": 12
+        },
+        {
+            "name": "Pencil",
+            "amount": 13
         }
     ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
+}'
+
 ```
 
-## Duration
 
-Up to 2 hours.
+- **Get: Get Order** `/oms/v1/order-management`
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+```curl
+curl --location --request GET 'http://localhost:3000/oms/v1/order-management?id=115db568-a7b5-4c1d-854d-075b598d0566' \
+--header 'Authorization: 1510480e-d9f2-11ed-afa1-0242ac120002' \
+--data-raw ''
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+```
+
+- **Get: Get All Orders** `/oms/v1/order-management/orders`
+
+```curl
+curl --location --request GET 'http://localhost:3000/oms/v1/order-management/orders?page=0&page_size=10' \
+--header 'Authorization: 115db568-a7b5-4c1d-854d-075b598d0566'
+```
+
+
+
+
+***
+
+
+
+

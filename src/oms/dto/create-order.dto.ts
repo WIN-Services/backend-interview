@@ -9,7 +9,7 @@ export class OrderServiceRequestDto {
   name: string;
   @ApiProperty({
     description: 'Item price which included in the order.',
-    type: String,
+    type: Number,
   })
   amount: number;
 }
@@ -22,15 +22,17 @@ export class CreateOrderRequestDto {
   user_id: string;
   @ApiProperty({
     description: 'Order Items included in order.',
-    type: OrderServiceRequestDto,
+    type: [OrderServiceRequestDto],
   })
   order_items: OrderServiceRequestDto[];
 }
 
 export const CreateOrderRequestDtoValidation = JOI.object({
   user_id: JOI.string().max(100).required().strict(),
-  order_items: JOI.object({
-    name: JOI.string().max(100).min(3).trim().required().strict(),
-    amount: JOI.number().positive().required().strict(),
-  }),
+  order_items: JOI.array().items(
+      JOI.object({
+        name: JOI.string().max(100).min(3).trim().required().strict(),
+        amount: JOI.number().positive().required().strict(),
+      })
+  ).strict(),
 });

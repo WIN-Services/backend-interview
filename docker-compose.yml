@@ -19,10 +19,14 @@ services:
       OMS_SECRET_KEY: 1510480e-d9f2-11ed-afa1-0242ac120002
       APP_ENVIROMENT: dev
       APP_PORT: 3000
-      DATABASE_MONGO_URL: mongodb://root:root@localhost:27017/?authMechanism=DEFAULT
+      DATABASE_MONGO_URL: mongodb://root:root@mongodb_container:27017
     ports: 
       - "3000:3000"
-    command: "npm run start"
+
+
+volumes:
+  mongodb_data_container:
+
 
 
       
