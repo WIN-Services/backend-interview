@@ -2,7 +2,8 @@ import {
   Injectable,
   NestInterceptor,
   ExecutionContext,
-  CallHandler, HttpStatus,
+  CallHandler,
+  HttpStatus,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -27,7 +28,10 @@ export class GlobalResponseInterceptor<T>
     if (response['statusCode'] === HttpStatus.CREATED) {
       message = 'Request succeeded and resource has been created.';
     }
-    if (response['statusCode'] > HttpStatus.CREATED && response['statusCode'] <= 299) {
+    if (
+      response['statusCode'] > HttpStatus.CREATED &&
+      response['statusCode'] <= 299
+    ) {
       message = 'Request succeeded.';
     }
     return next.handle().pipe(

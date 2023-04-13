@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { HttpStatus, VersioningType } from '@nestjs/common';
 import { Configs } from './config/config';
-import { GlobalExceptionFilter} from './errors/custom.errors';
+import { GlobalExceptionFilter } from './errors/custom.errors';
 import helmet from 'helmet';
 import { GlobalResponseInterceptor } from './common/response-interceptors';
 import { checkCors } from './utils/cors';

@@ -56,10 +56,7 @@ export class RolesGuard implements CanActivate {
         return true;
       case Role.ADMIN:
         if (!Configs().oms_secret_key) {
-          throw HttpError(
-            HttpStatus.UNAUTHORIZED,
-              "Unauthorised user.",
-          );
+          throw HttpError(HttpStatus.UNAUTHORIZED, 'Unauthorised user.');
         }
         return Configs().oms_secret_key?.toString() === auth_token;
       default:

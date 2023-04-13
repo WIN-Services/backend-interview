@@ -8,7 +8,6 @@ export interface Config {
   };
 }
 
-
 export interface MongoDb {
   url: string;
 }
