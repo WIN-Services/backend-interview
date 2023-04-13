@@ -1,3 +1,3 @@
 export enum ApiTag {
-  Order = 'order',
+  Order = 'Order Management',
 }

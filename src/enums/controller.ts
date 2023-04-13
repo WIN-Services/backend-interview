@@ -1,3 +1,3 @@
 export enum Controllers {
-  Operation = 'order',
+  Operation = 'order-management',
 }
