@@ -1,110 +1,42 @@
 # WIN Backend Engineering Interview
 
-## Scenario
+## Description
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+Used Node.js for solving the problem statement, along with express framework, for the database I have used AWS DynamoDB.
 
-## Deliverables
+## High Level Design
 
-There are two deliverables for this project:
+Server.js takes a prefix '/dev' indicating that the file is in development phase. In case needed, a production prefix can be created.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+All the requests with to '/dev' as prefix will be routed to ordersRouter, which handles the received requests.
 
-### General
+ordersRouter(/routes/index.js) contains route handler, which decides where the request will be received based on the path. It takes controller function as argument and will redirect the request to that function. We can add middleware here if we so wish.
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+The controller takes care of all the database queries for CRUD.
 
-### Web Service
+## Tradeoffs
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+No tradeoff as such. Choice of Database can be one, as I had the freedom to choose one.
+My choice may not aligh with the assessment.
 
-## Sample Data
+## Run the project
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+1. Clone the repository.
+2. run 'npm install' in the cloned directory.
+3. You need to start the server.js file using 'node server.js' through terminal/cmd in the project folder.
 
-Service Records
+## Time spent
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
+2-3 hrs
 
-Orders
+## Parts completed
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
+1. Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
+2. Your service should handle edge cases appropriately and return appropriate HTTP status codes.
+3. Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
+4. Your service should return JSON results.
+5. Your service should have at least one test.
 
-## Duration
+## Problems faced
 
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+Testing is not my best skill, I learnt as much as I could and made the test script.
