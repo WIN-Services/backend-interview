@@ -8,12 +8,12 @@ Created an express server in nodejs for the use case, utilizing mongoDb as the d
 
 * The service starts at sever.js file. 
 * Routes, models and controllers are seggregated into their directories. Middlwares can be added for uee cases like validation or other things so as to separate them from the actual logic.
-* Utils directory contains the logger and an error implementation to thorw errors in the controller.
+* Utils directory contains the logger and an error implementation to throw errors in the controller.
 * setup directory contains a small script to initalize the DB's when running for the first time post connecting to a new mongo instance.
 
 ## Tradeoffs
 
-* None as such, the database I have used in MongoDb.
+* None as such, the database I have used is MongoDb.
 
 ## Assumptions
 
@@ -47,6 +47,3 @@ Created an express server in nodejs for the use case, utilizing mongoDb as the d
 
 * 2-3 Hours
 
-## Problems faced
-
-* Not so much
