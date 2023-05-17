@@ -2,7 +2,8 @@ const { Services, Orders } = require("../models");
 
 const getAllOrderService = async () => {
   try {
-    return "verygood";
+    let orders = await Orders.findAll();
+    return orders;
   } catch (err) {
     throw err;
   }

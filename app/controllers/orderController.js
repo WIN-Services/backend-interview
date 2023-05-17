@@ -7,8 +7,7 @@ const getAllOrders = async (req, res, next) => {
     const response = await getAllOrderService();
     res.status(HttpStatusCode.SUCCESS).json({
       success: true,
-      message:
-        "Error in getting priority user updates. Please try again later!`",
+      message: "All Orders Fetched Successfully",
       data: response,
     });
   } catch (err) {
