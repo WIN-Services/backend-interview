@@ -5,7 +5,11 @@ const orderController = require("../controllers/orderController");
 
 router.get("/orders/getall", middleware.auth, orderController.getAllOrders);
 
-router.get("/orders/get", middleware.auth, orderController.getOneOrder);
+router.get(
+  "/orders/get/:orderId",
+  middleware.auth,
+  orderController.getOneOrder
+);
 
 router.post("/orders/post", middleware.auth, orderController.getAllOrders);
 
