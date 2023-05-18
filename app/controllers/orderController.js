@@ -1,6 +1,5 @@
 const { getAllOrderService } = require("../services/orderServices");
 const { HttpStatusCode } = require("../enums/httpStatus");
-const logger = require("../utils/logger");
 
 const getAllOrders = async (req, res, next) => {
   try {

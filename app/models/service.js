@@ -3,6 +3,10 @@ mongoose.Promise = global.Promise;
 
 const ServiceSchema = new mongoose.Schema(
   {
+    sv_id: {
+      type: Number,
+      required: true,
+    },
     name: {
       type: String,
       required: true,

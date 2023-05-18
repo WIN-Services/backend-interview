@@ -3,15 +3,15 @@ mongoose.Promise = global.Promise;
 
 const OrderSchema = new mongoose.Schema(
   {
-    datetime: {
+    order_datetime: {
       type: Date,
       required: true,
     },
     services: {
-      type: mongoose.Types.ObjectId,
+      type: Array,
       ref: "service",
     },
-    fees: {
+    totalfee: {
       type: Number,
       required: true,
     },
