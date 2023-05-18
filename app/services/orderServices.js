@@ -9,6 +9,16 @@ const getAllOrderService = async () => {
   }
 };
 
+const getOneOrderService = async (orderId) => {
+  try {
+    let foundOrder = await Orders.findById(orderId);
+    return foundOrder;
+  } catch (err) {
+    throw err;
+  }
+};
+
 module.exports = {
   getAllOrderService,
+  getOneOrderService,
 };
