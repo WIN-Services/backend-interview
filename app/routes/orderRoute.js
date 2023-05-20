@@ -11,7 +11,7 @@ router.get(
   orderController.getOneOrder
 );
 
-router.post("/orders/post", middleware.auth, orderController.getAllOrders);
+router.post("/orders/post", middleware.auth, orderController.postOrders);
 
 router.put("/orders/update", middleware.auth, orderController.getAllOrders);
 

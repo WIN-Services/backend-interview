@@ -6,6 +6,8 @@ const logger = require("./app/utils/logger");
 //connecting to mongodb
 dbConnection();
 
+app.use(express.json());
+
 // CORS Headers
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
