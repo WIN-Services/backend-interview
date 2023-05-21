@@ -1,7 +1,9 @@
 const {
   getAllOrderService,
   getOneOrderService,
-  PostOrderService,
+  postOrderService,
+  updateOrderService,
+  deleteOrderService,
 } = require("../services/orderServices");
 const { HttpStatusCode } = require("../enums/httpStatus");
 
@@ -37,15 +39,71 @@ const getOneOrder = async (req, res) => {
   }
 };
 
-const postOrders = async (req, res) => {
+const postOrder = async (req, res) => {
   try {
     const { services, totalfee } = req.body;
-    const response = await PostOrderService(services, totalfee);
-    res.status(HttpStatusCode.SUCCESS).json({
-      success: true,
-      message: "Order posted Successfully!`",
-      data: response,
+    const response = await postOrderService(services, totalfee);
+    if (response == "order_exists") {
+      res.status(HttpStatusCode.SUCCESS).json({
+        success: true,
+        message: "Order Request already exists, Please try after sometime!",
+        data: "NA",
+      });
+    } else {
+      res.status(HttpStatusCode.SUCCESS).json({
+        success: true,
+        message: "Order posted Successfully!`",
+        data: response,
+      });
+    }
+  } catch (err) {
+    res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "Error in posting order!. Please try again later!",
     });
+  }
+};
+const updateOrder = async (req, res) => {
+  try {
+    const { services, orderId } = req.body;
+    const response = await updateOrderService(services, orderId);
+    if (response == "order_exists") {
+      res.status(HttpStatusCode.SUCCESS).json({
+        success: true,
+        message: "Order Request already exists, Please try after sometime!",
+        data: "NA",
+      });
+    } else {
+      res.status(HttpStatusCode.SUCCESS).json({
+        success: true,
+        message: "Order posted Successfully!`",
+        data: response,
+      });
+    }
+  } catch (err) {
+    res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "Error in posting order!. Please try again later!",
+    });
+  }
+};
+const deleteOrder = async (req, res) => {
+  try {
+    const { orderId } = req.body;
+    const response = await deleteOrderService(orderId);
+    if (response == "order_exists") {
+      res.status(HttpStatusCode.SUCCESS).json({
+        success: true,
+        message: "Order Request already exists, Please try after sometime!",
+        data: "NA",
+      });
+    } else {
+      res.status(HttpStatusCode.SUCCESS).json({
+        success: true,
+        message: "Order posted Successfully!`",
+        data: response,
+      });
+    }
   } catch (err) {
     res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
       success: false,
@@ -56,5 +114,7 @@ const postOrders = async (req, res) => {
 module.exports = {
   getAllOrders,
   getOneOrder,
-  postOrders,
+  postOrder,
+  updateOrder,
+  deleteOrder,
 };

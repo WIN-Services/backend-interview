@@ -11,10 +11,10 @@ router.get(
   orderController.getOneOrder
 );
 
-router.post("/orders/post", middleware.auth, orderController.postOrders);
+router.post("/orders/post", middleware.auth, orderController.postOrder);
 
-router.put("/orders/update", middleware.auth, orderController.getAllOrders);
+router.put("/orders/update", middleware.auth, orderController.updateOrder);
 
-router.delete("/orders/delete", middleware.auth, orderController.getAllOrders);
+router.delete("/orders/delete", middleware.auth, orderController.deleteOrder);
 
 module.exports = router;

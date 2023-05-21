@@ -1,5 +1,7 @@
 const { Services, Orders } = require("../models");
-
+const timeDifference = (date1, date2) => {
+  return Math.abs((date1.getTime() - date2.getTime()) / 3600000);
+};
 const getAllOrderService = async () => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -21,26 +23,82 @@ const getOneOrderService = async (orderId) => {
     }
   });
 };
-const PostOrderService = async (services, totalfee) => {
+const postOrderService = async (services, totalfee) => {
   return new Promise(async (resolve, reject) => {
     try {
-      console.log(new Date().getTime());
       if (!services || !totalfee) {
-        reject("Missing values");
+        return reject("Missing values");
       }
       const serviceIds = services.map((s) => s.id);
 
-      const findServices = await Orders.find({
+      const findExisitingOrder = await Orders.findOne({
         $and: [
           { "services.id": serviceIds[0] },
           {
-            order_datetime: {
-              $lte: new Date(),
-            },
+            status: "INCOMPLETE",
           },
         ],
-      });
-      resolve(findServices);
+      }).sort({ updatedAt: -1 });
+      const timeDiff = timeDifference(
+        new Date(),
+        findExisitingOrder?.updatedAt
+      );
+      if (timeDiff <= 3) {
+        resolve("order_exists");
+      } else {
+        let createObj = {
+          order_datetime: new Date(),
+          services: services,
+          totalfee: totalfee,
+          status: "INCOMPLETE",
+        };
+        resolve(await Orders.create(createObj));
+      }
+    } catch (err) {
+      return reject(err);
+    }
+  });
+};
+const updateOrderService = async (services, orderId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      console.log(services, orderId);
+      if (!services || !orderId) {
+        return reject("Missing values");
+      }
+      const findExisitingOrder = await Orders.findOne({
+        $and: [
+          {
+            _id: orderId,
+          },
+          {
+            status: "INCOMPLETE",
+          },
+        ],
+      }).sort({ updatedAt: -1 });
+      const timeDiff = timeDifference(
+        new Date(),
+        findExisitingOrder?.updatedAt
+      );
+      if (timeDiff <= 3) {
+        resolve("order_exists");
+      } else {
+        let updateObj = {
+          services: services,
+        };
+        let filter = { _id: orderId };
+        resolve(await Orders.findOneAndUpdate(filter, updateObj));
+      }
+    } catch (err) {
+      return reject(err);
+    }
+  });
+};
+const deleteOrderService = async (orderId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      await Orders.deleteOne({ _id: orderId });
+      resolve("order deleted");
     } catch (err) {
       return reject(err);
     }
@@ -50,5 +108,7 @@ const PostOrderService = async (services, totalfee) => {
 module.exports = {
   getAllOrderService,
   getOneOrderService,
-  PostOrderService,
+  postOrderService,
+  updateOrderService,
+  deleteOrderService,
 };
