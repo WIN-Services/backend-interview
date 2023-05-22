@@ -39,6 +39,9 @@ const postOrderService = async (services, totalfee) => {
           },
         ],
       }).sort({ updatedAt: -1 });
+      if(!findExisitingOrder){
+        resolve("No order found")
+      }
       const timeDiff = timeDifference(
         new Date(),
         findExisitingOrder?.updatedAt
@@ -59,11 +62,10 @@ const postOrderService = async (services, totalfee) => {
     }
   });
 };
-const updateOrderService = async (services, orderId) => {
+const updateOrderService = async (services, orderId,status) => {
   return new Promise(async (resolve, reject) => {
     try {
-      console.log(services, orderId);
-      if (!services || !orderId) {
+      if (!orderId) {
         return reject("Missing values");
       }
       const findExisitingOrder = await Orders.findOne({
@@ -76,6 +78,9 @@ const updateOrderService = async (services, orderId) => {
           },
         ],
       }).sort({ updatedAt: -1 });
+      if(!findExisitingOrder){
+        resolve("No order found")
+      }
       const timeDiff = timeDifference(
         new Date(),
         findExisitingOrder?.updatedAt
@@ -83,7 +88,10 @@ const updateOrderService = async (services, orderId) => {
       if (timeDiff <= 3) {
         resolve("order_exists");
       } else {
-        let updateObj = {
+
+        let updateObj = status ? {
+          status: status,
+        }: {
           services: services,
         };
         let filter = { _id: orderId };

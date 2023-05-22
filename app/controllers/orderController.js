@@ -65,8 +65,8 @@ const postOrder = async (req, res) => {
 };
 const updateOrder = async (req, res) => {
   try {
-    const { services, orderId } = req.body;
-    const response = await updateOrderService(services, orderId);
+    const { services, orderId, status } = req.body;
+    const response = await updateOrderService(services, orderId,status);
     if (response == "order_exists") {
       res.status(HttpStatusCode.SUCCESS).json({
         success: true,
