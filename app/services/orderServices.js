@@ -44,7 +44,7 @@ const postOrderService = async (services, totalfee) => {
       }
       const timeDiff = timeDifference(
         new Date(),
-        findExisitingOrder?.updatedAt
+        findExisitingOrder?.order_datetime
       );
       if (timeDiff <= 3) {
         resolve("order_exists");
@@ -83,7 +83,7 @@ const updateOrderService = async (services, orderId,status) => {
       }
       const timeDiff = timeDifference(
         new Date(),
-        findExisitingOrder?.updatedAt
+        findExisitingOrder?.order_datetime
       );
       if (timeDiff <= 3) {
         resolve("order_exists");
