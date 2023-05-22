@@ -3,9 +3,7 @@ const app = express();
 const config = require("./config/index");
 const { dbConnection } = require("./config/db");
 const logger = require("./app/utils/logger");
-//connecting to mongodb
-dbConnection();
-
+const orderRoutes = require("./app/routes/orderRoute");
 app.use(express.json());
 
 // CORS Headers
@@ -27,10 +25,12 @@ app.get("/", (req, res) => {
   });
 });
 
-const orderRoutes = require("./app/routes/orderRoute");
-app.use("api", orderRoutes);
+app.use( orderRoutes);
 
 const PORT = config["port"] || 7001;
-app.listen(PORT, () => {
-  console.log(`Server listening on port: ${PORT}`);
+app.listen(PORT, async() => {
+  logger.info(`Server listening on port: ${PORT}`);
+  await dbConnection();
 });
+
+module.exports =app
