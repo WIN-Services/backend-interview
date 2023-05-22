@@ -28,9 +28,9 @@ app.get("/", (req, res) => {
 });
 
 const orderRoutes = require("./app/routes/orderRoute");
-app.use(orderRoutes);
+app.use("api", orderRoutes);
 
-const PORT = config["port"] || 70001;
+const PORT = config["port"] || 7001;
 app.listen(PORT, () => {
-  logger.info(`Server listening on port: ${PORT}`);
+  console.log(`Server listening on port: ${PORT}`);
 });

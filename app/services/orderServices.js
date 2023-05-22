@@ -6,7 +6,7 @@ const getAllOrderService = async () => {
   return new Promise(async (resolve, reject) => {
     try {
       let orders = await Orders.find({});
-      return orders;
+      resolve(orders);
     } catch (err) {
       return reject(err);
     }
