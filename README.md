@@ -1,110 +1,36 @@
-# WIN Backend Engineering Interview
+## Code Flow
 
-## Scenario
+1. I have used ```MongoDB``` as the database, ```Express``` framework for server, and ```Jest``` for testing.   
+2. I have used the central object to pass on my dependencies and not initialising them multiple times.   
+3. In My CRUD Application, for the:   
+   
+  a. **Create order**:   
+    i. I have created the order and filled the ```created_at``` field with current time and ```updated_at``` field with current time - 3 hours, I did this so that when the user for first time tries to update I don't have to do any additional checks, I can directly do a query in less than format.   
+    ii. I have used a central variable in which I am keeping the last created at order time so that when next request comes up, we can compare the time and if the request comes up within 3 hours then we won't create the order.
+   
+  b. **Update order**:   
+    i. I have made a filter query where I am checking the field ```updated_at``` should be less than less than 3 hours then only it will update the record else we will show user message that record has been updated within 3 hours.   
+   
+  c. **Get order**:
+    i. Get order works simply taking a ID and if record exists then give the record to user else present him that no record found.   
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+  d. **Get All Orders**:
+    i. Here also, if records exist then we display them else show user that no records found.   
 
-## Deliverables
+  e. **Delete Order**:
+    i. Get order works simply taking a ID and if record exists then delete the record to user else present him that no record found.  
+   
+## Running application:
+   
+The application can be run by - ```docker-compose up -d --build``` and I have attached a sample postman collection which can be imported and APIs can be tested out.
+   
+## Testing
+   
+I have created a dummy DB with dummy implementations for functions which helps me in testing my code.
 
-There are two deliverables for this project:
+## Considerations which can be made better if this code was in production:
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
-
-### General
-
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
-
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+  1. Instead of currently keeping a last created at in a central variable, I would keep it in a Redis key to fetch it quick and also write it in DB for when the value doesn't get in Redis, we can fetch it from DB. This way the last created at will not be lost.
+  2. Concurrent requests can create a issue on last created at so some lock can also be created to avoid it.
+  3. Proper authentication would be implemented for order fetch.
+  4. Error handling related to more custom business logics will be implemented.
