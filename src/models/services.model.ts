@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { Order } from "./order.model";
 import {CreateServiceInput} from "../interfaces/services.interface"
 @Entity()
@@ -8,6 +8,13 @@ export class Service {
 
   @Column()
   name!: string;
+
+  @CreateDateColumn({ type: "datetime" })
+  createdAt: Date | undefined;
+
+  @UpdateDateColumn({ type: "datetime" })
+  updatedAt: Date | undefined;
+
 
   @ManyToMany(() => Order)
   @JoinTable()

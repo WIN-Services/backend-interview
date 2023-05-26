@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Services from "../services/servive.service"
 
-const serviceDao = new Services();
+const services = new Services();
 
 class ServiceController {
   constructor() {}
@@ -16,7 +16,7 @@ class ServiceController {
         name: req.body.name,
       };
 
-      const newService = await serviceDao.createService(data);
+      const newService = await services.createService(data);
 
       return res.status(201).json({
         message: "success",
@@ -34,11 +34,11 @@ class ServiceController {
 
   async fetchAllServices(req: Request, res: Response) {
     try {
-      const services = await serviceDao.fetchAllServices();
+      const servicesfetched = await services.fetchAllServices();
       return res.status(200).json({
         message: "success",
         status: "ok",
-        data: services,
+        data: servicesfetched,
       });
     } catch (err) {
       return res.status(500).json({
@@ -52,11 +52,11 @@ class ServiceController {
   async getService(req: Request, res: Response) {
     try {
       const serviceId = parseInt(req.params.id);
-      const service = await serviceDao.fetchService(serviceId);
+      const servicefetched = await services.fetchService(serviceId);
       return res.status(200).json({
         message: "success",
         status: "ok",
-        data: service,
+        data: servicefetched,
       });
     } catch (err) {
       return res.status(500).json({
@@ -70,16 +70,16 @@ class ServiceController {
   async destroyService(req: Request, res: Response) {
     try {
         const serviceId = parseInt(req.params.id);
-      const service = await serviceDao.fetchService(serviceId);
+      const servicedestroyed = await services.fetchService(serviceId);
 
-      if (!service) {
+      if (!servicedestroyed) {
         throw "service does not exist";
       }
 
       return res.status(200).json({
         message: "success",
         status: "deleted",
-        data: service,
+        data: servicedestroyed,
       });
     } catch (err) {
       return res.status(500).json({

@@ -21,7 +21,6 @@ export class Order {
   services!: Service[];
 
 
-
   public prepareToCreate(input: CreateOrderInput): void {
     this.totalFee = input.totalFee;
     this.services = input.serviceIds.map(serviceId => {

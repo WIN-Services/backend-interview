@@ -12,7 +12,7 @@ class Services {
 
     async fetchService(serviceId: number): Promise<Service | undefined> {
         const serviceRepository = getRepository(Service);
-        return serviceRepository.findOne(serviceId);
+        return serviceRepository.findOne(serviceId, { relations: ["orders"]});
     }
 
     async fetchAllServices(filter: any = {}, skip: number = 0, limit: number = 0): Promise<Service[]> {
@@ -21,6 +21,7 @@ class Services {
             createdAt: "DESC",
         };
         return serviceRepository.find({
+            relations: ["orders"],
             where: filter,
             order: orderBy,
             skip,

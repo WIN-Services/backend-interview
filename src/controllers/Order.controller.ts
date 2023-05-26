@@ -16,8 +16,8 @@ class OrderController {
       }
 
       const data= {
-        totalFee: req.body.totalFee,
-      };
+        totalFee: req.body.totalFee
+            };
 
       const newOrder = await order.createOrder(data);
 

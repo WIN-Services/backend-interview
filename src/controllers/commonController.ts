@@ -1,8 +1,10 @@
 import OrderService  from "../services/order.services";
-import {Service} from "../models/services.model"
 import { getRepository } from "typeorm";
+import Services from "../services/servive.service";
+import { Service } from "../models/services.model";
 
 const orderService = new OrderService();
+const serviceService = new Services();
 
 class CommonController {
 
@@ -16,30 +18,29 @@ class CommonController {
       }
 
       const { services } = order;
-      console.log("services in the order--->",services)
-    //   if (services.includes(serviceId)) {
-    //     throw new Error("service already added to this order");
-    //   }
-      const service = await serviceRepository.findOne(serviceId); // Fetch the service entity using TypeORM
 
+      if(services.filter((service)=>{
+        service.id===serviceId
+      })){
+        return { message: "success", status: "Already updated" };
+      }
+
+      const service = await serviceService.fetchService(serviceId) // Fetch the service entity using TypeORM
       if (!service) {
         throw new Error("service does not exist");
       }
-
       const orderDataToUpdate = {
         ...order,
         services: [service, ...services], // Store the service entity in the services array
       };
-
       const serviceDataToUpdate = {
         ...service,
         orders: [order, ...service.orders], // Store the order entity in the orders array
       };
-
       await orderService.updateOrder(orderId, orderDataToUpdate);
       await serviceRepository.save(serviceDataToUpdate); // Save the updated service entity
 
-      return { message: "success", status: "updated", data: [] };
+      return { message: "success", status: "updated" };
     } catch (err) {
       throw err;
     }
