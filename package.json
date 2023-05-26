@@ -1,23 +1,12 @@
 {
   "name": "win",
   "version": "1.0.0",
-  "description": "## Scenario",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "author": "",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/WIN-Services/backend-interview.git"
-  },
-  "bugs": {
-    "url": "https://github.com/WIN-Services/backend-interview/issues"
-  },
-  "homepage": "https://github.com/WIN-Services/backend-interview#readme",
-  "dependencies": {
-    "nodemon": "^2.0.22"
-  }
+  "license": "ISC"
 }
