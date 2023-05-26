@@ -1,110 +1,60 @@
-# WIN Backend Engineering Interview
+# Backend Engineering Interview
 
-## Scenario
+Implemented CRUD operation for a simplistic Order Management Service.
+It insert data (sample data provided in the main branch readme file) into DB, updates it, deletes it and fetches it using APIs.
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+The language, framework and libraries used to create the project are
+1.  Javascript
+2.  node.Js
+3.  express.js
+4.  mongoDB
+5.  mongoose
+6.  dotenv
+7.  jest
+8.  body-parser
+9.  cors
 
-## Deliverables
 
-There are two deliverables for this project:
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+## High Level Go Through
+Create 2 models out of which 1 store the order details and the other one should store the service records. Also the order records should store the reference of service in the order record.
 
-### General
+create APIS for CRUD operation for both orders and service, make restriction upon the creation and updation of order records based on the assumptions made below
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
 
-### Web Service
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+## ASSUMPTION
 
-## Sample Data
+1. I have assumed that is a single user application and all the operation are done by the same user.
+2. Form the line "Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order".
+    *   User Cannot make and order if he/she has made an order in the last 3 hours.
+    *   User cannout update the order (specific) if the value datetime present in the order is less than 3 hours of current datetime  
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+## REQUIREMENTS
 
-Service Records
+* Node v16.15.1
+* Express v4.17.3
+* Mongoose v6.2.9
+* Jest v29.5.0
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
+## SETUP 
 
-Orders
+1. Clone the git repository to local.
+2. Install the required dependencies using npm along with MongoDB or deploy MongoDB on a docker Image.
+3. Create a .env file and set values for PORT And CONNECTION_STRING .
+4. Run the application using npm start.
+5. Make sure the database connection is made
+6. Insert some sample data
+7. Run the test suites
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
+## Changs to be made for production
 
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+For production build, there is a lot of room for improvement like, 
+1. proper validations , 
+2. error handling, (unhandeled rejections and uncaught exceptions)
+3. logging, 
+4. handling cors, 
+5. input sanitization.
+6. Proper comments
+7. graceful exits
+and more.

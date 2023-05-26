@@ -1,0 +1,24 @@
+{
+    "verbose": true,
+    "testMatch": [
+        "**/test/**/*.test.js"
+    ],
+    "testEnvironment": "node",
+    "coverageThreshold": {
+        "global": {
+            "branch": 90,
+            "function": 90,
+            "lines": 90,
+            "statements": 90
+        }
+    },
+    "testTimeout": 10000,
+    "collectCoverage": true,
+    "collectcoverageFrom":[],
+    "coverageDirectory": "./coverage",
+    "coverageReporters": [
+        "html",
+        "json",
+        "text"
+    ]
+}

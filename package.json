@@ -4,9 +4,19 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --config ./jest.config.json",
     "start": "node server.js"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Anshul Srivastava",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.9"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
 }
