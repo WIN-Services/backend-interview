@@ -2,7 +2,6 @@ import OrderService  from "../services/order.services";
 import { getRepository } from "typeorm";
 import Services from "../services/servive.service";
 import { Service } from "../models/services.model";
-
 const orderService = new OrderService();
 const serviceService = new Services();
 
@@ -25,21 +24,20 @@ class CommonController {
         return { message: "success", status: "Already updated" };
       }
 
-      const service = await serviceService.fetchService(serviceId) // Fetch the service entity using TypeORM
+      const service = await serviceService.fetchService(serviceId)
       if (!service) {
         throw new Error("service does not exist");
       }
       const orderDataToUpdate = {
         ...order,
-        services: [service, ...services], // Store the service entity in the services array
+        services: [service, ...services],
       };
       const serviceDataToUpdate = {
         ...service,
-        orders: [order, ...service.orders], // Store the order entity in the orders array
+        orders: [order, ...service.orders],
       };
       await orderService.updateOrder(orderId, orderDataToUpdate);
-      await serviceRepository.save(serviceDataToUpdate); // Save the updated service entity
-
+      await serviceRepository.save(serviceDataToUpdate);
       return { message: "success", status: "updated" };
     } catch (err) {
       throw err;

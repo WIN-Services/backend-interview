@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { CreateOrderInput } from "../interfaces/order.interface";
 import OrderService from "../services/order.services";
 import CommonController from "./commonController";
+import {HttpStatus} from "../utils/enums"
 
 const commonController = new CommonController();
 const order = new OrderService();
@@ -21,13 +22,13 @@ class OrderController {
 
       const newOrder = await order.createOrder(data);
 
-      return res.status(201).json({
+      return res.status(HttpStatus.CREATED).json({
         message: "success",
         status: "created",
         data: newOrder,
       });
     } catch (err) {
-      return res.status(500).json({
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
         message: "failure",
         status: "not created",
         data: { error: err },
@@ -38,15 +39,14 @@ class OrderController {
   async fetchAllOrders(req: Request, res: Response) {
     try {
       const orders = await order.fetchAllOrders();
-      return res.status(200).json({
+      return res.status(HttpStatus.SUCCESS).json({
         message: "success",
         status: "ok",
         data: orders,
       });
     } catch (err) {
-      return res.status(500).json({
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
         message: "failure",
-        status: "not ok",
         data: { error: err },
       });
     }
@@ -56,13 +56,13 @@ class OrderController {
     try {
       const orderId = parseInt(req.params.id);
       const orderfetched = await order.fetchOrder(orderId);
-      return res.status(200).json({
+      return res.status(HttpStatus.SUCCESS).json({
         message: "success",
         status: "ok",
         data: orderfetched,
       });
     } catch (err) {
-      return res.status(500).json({
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
         message: "failure",
         status: "not ok",
         data: { error: err },
@@ -74,13 +74,13 @@ class OrderController {
     try {
       const orderId = parseInt(req.params.id);
       const orderfetched = await order.destroyOrder(orderId);
-      return res.status(200).json({
+      return res.status(HttpStatus.SUCCESS).json({
         message: "success",
         status: "deleted",
         data: orderfetched,
       });
     } catch (err) {
-      return res.status(500).json({
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
         message: "success",
         status: "not deleted",
         data: { error: err },
@@ -92,7 +92,7 @@ class OrderController {
     try {
       const { serviceId, orderId } = req.params;
       const result = await commonController.addServiceInOrder({ serviceId: +serviceId, orderId: +orderId });
-      return res.status(202).json(result);
+      return res.status(HttpStatus.ACCEPTED).json(result);
     } catch (err) {
       return res.status(406).json({
         message: "failure",
