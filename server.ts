@@ -6,10 +6,12 @@ import cors from "cors";
 import { Request, Response } from "express"
 import router from "./src/routes";
 
+export const app = express()
+
 createConnection()
   .then(async (connection) => {
     // create express app
-    const app = express()
+
     app.use(cors())
     app.use(bodyParser.json())
     app.use(express.urlencoded({ extended: true }));
@@ -21,4 +23,3 @@ createConnection()
     console.log("Express server has started on port 4001.")
 })
 .catch((error) => console.log(error))
-
