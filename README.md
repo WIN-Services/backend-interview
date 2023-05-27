@@ -64,7 +64,7 @@ d) tests for all the functions need to be added
     npm init
 3) Install the necessary dependencies in package.json:
     npm install
-To run project:
+4) To run project:
     npm start
 
 I am adding a postman collection, just import it in your postman and you will be able to hit the endpoints.
