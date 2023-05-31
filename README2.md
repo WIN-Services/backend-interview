@@ -64,3 +64,10 @@ I have completed the following parts of the specification:
 - Connected to MongoDB Atlas for data storage.
 - Developed the API using JavaScript with the Express framework.
 - Create unit tests for some API endpoints.
+
+I spent approximately one and a half hour on the project, including setting up the project structure, implementing the endpoints, writing tests, and preparing the README.
+
+## Challenges Faced
+I did not face any significant challenges while developing the order management system. The main challenge was to ensure the correct handling of time validation and returning appropriate error responses.
+
+Overall, the project was a good exercise in designing and implementing a web service API for order management.
