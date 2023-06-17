@@ -18,7 +18,15 @@ The API returns JSON results and handles edge cases appropriately by returning a
 
 While developing the API, I made the following trade-offs:
 
-1. **Simplicity**: I focused on a proper architecture using ExpressJs, TypeScript, Sequelize and Inversify.Js. This architecture purpose is to minimise boilerplate code. This project architecture it to provide better code quility using best practices.
+1. **Simplicity**: I focused on a proper architecture using ExpressJs, TypeScript, Sequelize and Inversify.Js. This architecture purpose is to minimise boilerplate code. This project architecture it to provide better code quility using best practices. 
+Added API layers including Applicatiin -> Route(Entity) -> Controller -> Service -> Respostory -> Model -> Database
+Route is reponsible for handler route and that denotes Entity
+Controller is responsible for pasring requested data and exceute service function using requestion data
+Service is responsible for Bussines layer that take of each and every logic for operations
+Repository is responsible for data model wrapper. Each data table have respective repository
+Data model and ORM is responsible for communication with database and pasring queries
+This followes proper SOLID principle
+This generic implementation can help developing NodeJS mico-service
 2. **Error Handling**: I added basic error handling by returning appropriate HTTP status codes and error messages. However, in a production environment, more robust error handling and logging would be necessary.
 3. **Data Validation**: I assumed that the request body for creating and updating orders will be properly formatted and validated by the client system. In a production environment, I have added validator middleware to check input data before it go to create.
 4. **Authentication and Authorization**: The API does not include authentication and authorization mechanisms. In a production environment, it would be essential to implement authentication and authorization to secure the endpoints and control access to the system.
