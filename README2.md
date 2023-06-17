@@ -25,6 +25,8 @@ Controller is responsible for pasring requested data and exceute service functio
 Service is responsible for Bussines layer that take of each and every logic for operations
 Repository is responsible for data model wrapper. Each data table have respective repository
 Data model and ORM is responsible for communication with database and pasring queries
+Added Validator as middleware to validation incomming data
+Managing database transaction.Transactions are essential for maintaining database integrity. They are used to preserve integrity when multiple related operations are executed concurrently, or when multiple users interact with a database concurrently
 This followes proper SOLID principle
 This generic implementation can help developing NodeJS mico-service
 2. **Error Handling**: I added basic error handling by returning appropriate HTTP status codes and error messages. However, in a production environment, more robust error handling and logging would be necessary.

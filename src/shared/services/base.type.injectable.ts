@@ -63,7 +63,6 @@ export class BaseTypeInjectable {
 
     protected getInstance<T extends BaseTypeInjectable>(container: Container, type: any) {
         if (!this.transactionOption) {
-            // TODO: Need thoughts.
             throw new Error("Transaction option null");
         }
         const obj = container.get<T>(type);

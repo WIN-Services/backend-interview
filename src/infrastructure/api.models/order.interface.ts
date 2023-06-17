@@ -7,7 +7,7 @@ export interface IOrderCreationModel {
 }
 
 export interface IOrderDetails {
-    id?: number;
+    id: number;
     datetime: Date;
     totalfee: number;
     services: number[];

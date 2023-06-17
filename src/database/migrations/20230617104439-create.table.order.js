@@ -17,12 +17,7 @@ module.exports = {
       totalfee: {
         type: new Sequelize.DataTypes.FLOAT,
         allowNull: false
-      },
-      // services: {
-      //   type: Sequelize.DataTypes.ARRAY({ type: Sequelize.DataTypes.BIGINT }),
-      //   references: { model: 'Service', key: 'id' },
-      //   allowNull: false
-      // }
+      }
     });
   },
   down: (queryInterface, Sequelize) => {
