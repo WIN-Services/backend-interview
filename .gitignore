@@ -1,0 +1,12 @@
+.idea
+node_modules
+npm-debug.log
+node_modules
+.migration_config.json
+*.js
+*.js.map
+dist
+!src/database/migrations/**/*.js
+!src/database/seeders/**/*.js
+.env
+.vscode/

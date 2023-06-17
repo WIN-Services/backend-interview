@@ -1,11 +1,11 @@
-FROM node:12.18.1
+FROM --platform=linux/amd64 node:18-alpine
 
-WORKDIR /app
+WORKDIR /home/node/app
 
-COPY ["package.json", "./"]
+COPY package*.json ./
 
-RUN npm install
+RUN npm i
 
 COPY . .
 
-CMD [ "node", "server.js" ]
+CMD [ "npm", "run" "start" ]
