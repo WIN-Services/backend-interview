@@ -1,4 +1,4 @@
-import { Container, injectable, unmanaged as _unmanaged } from "inversify";
+import { injectable, unmanaged as _unmanaged } from "inversify";
 import { DecoratorTarget } from "inversify/lib/annotation/decorator_utils";
 import { Model, ModelOptions, ModelStatic, Sequelize, Transaction, TransactionOptions } from "sequelize";
 
@@ -25,7 +25,7 @@ export enum BaseImplementationType {
 }
 
 @injectable()
-export class BaseTypeInjectable {
+export class BaseTypeMeta {
     public artifactIdentifier: string;
     public transactionOption: ICustomTransactionModel | null;
     protected dbConn: IDBConnection | null;
@@ -59,28 +59,6 @@ export class BaseTypeInjectable {
                 }
             }
         }
-    }
-
-    protected getInstance<T extends BaseTypeInjectable>(container: Container, type: any) {
-        if (!this.transactionOption) {
-            throw new Error("Transaction option null");
-        }
-        const obj = container.get<T>(type);
-        if (obj.attachProperties) {
-            obj.attachProperties(this.transactionOption, this.dbConn);
-        }
-        return obj;
-    }
-
-    protected getNamedInstance<T extends BaseTypeInjectable>(container: Container, type: any, name: string) {
-        if (!this.transactionOption) {
-            throw new Error("Transaction option null")
-        }
-        const object = container.getNamed<T>(type, name);
-        if (object.attachProperties) {
-            object.attachProperties(this.transactionOption, this.dbConn);
-        }
-        return object;
     }
 
     private isService(property: any): boolean {

@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { injectable, unmanaged as _unmanaged } from "inversify";
-import { BaseImplementationType, BaseTypeInjectable, IDBConnection } from "../services/base.type.injectable";
+import { BaseImplementationType, BaseTypeMeta, IDBConnection } from "../services/base.type.injectable";
 
 import { Model, FindOptions, FindAndCountOptions, UpdateOptions, WhereOptions, ModelStatic, CreationOptional, InferAttributes, InferCreationAttributes, BulkCreateOptions } from "sequelize";
 import { DatabaseError } from "../errors/database.error";
@@ -31,7 +31,7 @@ export interface IBaseModel {
 
 @injectable()
 export abstract class BaseRepository<T extends Model<InferAttributes<T>>>
-    extends BaseTypeInjectable
+    extends BaseTypeMeta
     implements IBaseRepository<T> {
 
         private dbModels: { [key: string]:ModelStatic<Model<InferAttributes<T>, InferCreationAttributes<T>>> } | undefined;
