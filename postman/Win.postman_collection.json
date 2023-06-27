@@ -1,0 +1,116 @@
+{
+	"info": {
+		"_postman_id": "f76f3e5b-f89a-49d3-8f61-8844ac723ad4",
+		"name": "Win",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateOrder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"totalFee\":20,\n    \"serviceIds\": [{\"id\":\"649970053ff37d61f1c5c0aa\"},{\"id\":\"649970053ff37d61f1c5c0ac\"}],\n    \"userId\":1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateOrder",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\":2,\n    \"serviceIds\": [{\"id\":\"649970053ff37d61f1c5c0aa\"}]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/order/649975a7f01f346887ae3206",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"order",
+						"649975a7f01f346887ae3206"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOrder",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/api/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"order"
+					],
+					"query": [
+						{
+							"key": "orderId",
+							"value": "649970053ff37d61f1c5c0aa",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteRequest",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/api/order/6499a0fe0025660b3f451888",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"order",
+						"6499a0fe0025660b3f451888"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
