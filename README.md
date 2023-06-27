@@ -1,110 +1,81 @@
-# WIN Backend Engineering Interview
+# Wallet-management API using NODEJS
 
-## Scenario
+## Getting started
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+This projects includes basic CRUD operation on orders. This project is running on **NodeJs** and **MongoDB** as database.
 
-## Deliverables
+## Features
 
-There are two deliverables for this project:
+- Creation of new order.
+- Updation on existing order.
+- Fetch of order by id
+- Fetch on all recent order.
+- Deleting the order.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+- Doing CRUD operation on orders.
 
-### General
+## Software and framework Requirements
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+- Express.js
+- cors
+- dotenv
+- mongoose
+- express-validator
+- Node.js
+- MongoDB
 
-### Web Service
+## How to setup the project
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+- Clone the project from github.
+- Create .env file in root folder and copy value from infra/development.env into .env file.
+- Run npm install.
+- Run seeder command to update db with services with command npm seed
+- Finally run npm run start.
 
-## Sample Data
+## Project structure
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+## Postman collection
 
-Service Records
+Postman collection can be find under the postman folder
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
+## Changes required before deploying it to production:
 
-Orders
+- Instead of using express.js we can use Nest.js to implement the more robust system.
+- Authentication system must be implemented.
+- Implementation of logging system.
+- User management system should also be implemented.
+- More test case should be implemented.
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
+## Test case
 
-## Duration
+We can find test case in the tests folder.
+To run the test case, run command : npm test
 
-Up to 2 hours.
+## Seeder
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+We need to run the seeder file to seed service data into db.
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+## Running API server locally
+
+npm run start
+
+## Running API server locally
+
+After following all the step from 'how to install'.
+npm run start
+
+## Database
+
+We are using mongodb as a database.We have 2 collections whose schema can be found in /models folder.
+
+### Creating new models
+
+We can create new file in `/models/` and use them in the services.
+
+### Creating new routes
+
+If we need to create more routes then just create a new file in `/routes/` and add it in `/routes/routes.js` with its base path.
+
+### Creating new controllers
+
+If we need to create more controllers then just create a new file in `/controllers/` and use them in the routes.
