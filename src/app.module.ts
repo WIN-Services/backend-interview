@@ -1,8 +1,14 @@
 import { Module } from '@nestjs/common';
-import { OrdersModule } from './orders/orders.module';
+
+import { MongooseModule } from '@nestjs/mongoose';
+import { Configs } from './config/config';
 
 @Module({
-  imports: [OrdersModule],
+  imports: [
+    MongooseModule.forRoot(Configs().databases.mongo_db.url, {
+      dbName: 'oms',
+    }),
+  ],
   controllers: [],
   providers: [],
 })
