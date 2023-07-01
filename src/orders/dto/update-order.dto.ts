@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsUUID, ValidateNested } from 'class-validator';
-import { UUID_VERSION } from 'src/constants';
+import { UUID_VERSION } from '../../constants';
 import { Service } from './create-order.dto';
 import { Type } from 'class-transformer';
 

@@ -12,8 +12,8 @@ import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { Roles } from 'src/role/role-decorators';
-import { Role } from 'src/role/role-guard';
+import { Roles } from '../role/role-decorators';
+import { Role } from '../role/role-guard';
 
 @ApiTags('oms')
 @Controller('order')

@@ -7,7 +7,7 @@ import {
   IsUUID,
   ValidateNested,
 } from 'class-validator';
-import { UUID_VERSION } from 'src/constants';
+import { UUID_VERSION } from '../../constants';
 
 export class Service {
   @ApiProperty({
