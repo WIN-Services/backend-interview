@@ -42,6 +42,8 @@
 - Add a open telemetry system like aspecto
 - Rate limiting 
 
+<img src="./swaggerAPI.png"  alt="Nest Logo" /></a>
+
 ## Installation
 
 ```bash
