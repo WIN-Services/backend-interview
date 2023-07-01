@@ -6,37 +6,41 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 
-@Controller('orders')
+@Controller('order')
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
   @Post()
-  create(@Body() createOrderDto: CreateOrderDto) {
-    return this.ordersService.create(createOrderDto);
+  async create(@Body() createOrderDto: CreateOrderDto) {
+    return await this.ordersService.create(createOrderDto);
   }
 
-  @Get()
-  findAll() {
-    return this.ordersService.findAll();
+  @Get('all')
+  async findAll(
+    @Query('page') page: number,
+    @Query('page_size') page_size: number,
+  ) {
+    return await this.ordersService.findAll(page, page_size);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.ordersService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return this.ordersService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
-    return this.ordersService.update(+id, updateOrderDto);
+  async update(@Body() updateOrderDto: UpdateOrderDto) {
+    return await this.ordersService.update(updateOrderDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.ordersService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.ordersService.remove(id);
   }
 }
