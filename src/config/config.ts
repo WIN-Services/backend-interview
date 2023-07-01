@@ -26,7 +26,7 @@ export const Configs = (): Config => {
       },
     },
     jwt: {
-      secret: 'deff1952d59f883ece260e8683fed21ab0ad9a53323eca4f',
+      secret: '9748-439d',
     },
   };
 };

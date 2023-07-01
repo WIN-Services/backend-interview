@@ -5,7 +5,6 @@ import { Configs } from './config/config';
 import { OrdersModule } from './orders/orders.module';
 import { RolesGuard } from './role/role-guard';
 import { APP_GUARD } from '@nestjs/core';
-import { TestModule } from './test/test.module';
 
 @Module({
   imports: [
@@ -13,7 +12,6 @@ import { TestModule } from './test/test.module';
       dbName: 'oms',
     }),
     OrdersModule,
-    TestModule,
   ],
   controllers: [],
   providers: [

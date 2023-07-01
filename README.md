@@ -11,16 +11,70 @@
 ## API Information - 
 
 - Create Order - Users can create new orders by providing required services
-
+```
+Method: POST
+Path: /oms/order
+Parameters: None
+Header : Authorization : '9748-439d'
+Request Body:{
+  "services": [
+    {
+      "id": "e225266d-9748-439d-8e2d-5be5f313cb44",
+      "amount": 10
+    }
+  ],
+  "user_id": "e225266d-9748-439d-8e2d-5be5f313cb44"
+}
+``` 
 - Update Order - Users can update previously placed orders after 3 hours of creation/updation
-
+```
+Method: PATCH
+Path: /oms/order/{id}
+Parameters: None
+Header : Authorization : '9748-439d'
+Request Body: {
+  "services": [
+    {
+      "id": "e225266d-9748-439d-8e2d-5be5f313cb44",
+      "amount": 100
+    }
+  ],
+  "order_id": "e225266d-9748-439d-8e2d-5be5f313cb44"
+}
+```
 - Fetch Order: User can retrive order details with the help of order id
-
+```
+Method: GET
+Header : Authorization : '9748-439d'
+Path: /oms/order/{id}
+Parameters:
+id (required, string)
+```
 - Delete Order : User can delete order with the help of order id
-
+```
+Method: DELETE
+Header : Authorization : '9748-439d'
+Path: /oms/order/{id}
+Parameters:
+id (required, string)
+```
 - Get All Orders : User can retrive orders by passing in user_id and pagination information
+```
+Method: GET
+Header : Authorization : '9748-439d'
+Path: /oms/order/all
+Parameters:
+page (required, number)
+page_size (required, number)
 
+```
 - Health : Health check to make sure our service is up and running
+```
+Method: GET
+Header : Authorization : '9748-439d'
+Path: /oms/health
+Parameters: None
+```
 
 ## Description
   OMS is a service implemented using Nestjs with Express and MongoDB.It uses Mongoose typeORM for connection and any modification related to Data.It contains a total of 6 APIs out of 5 are responsible for Order Management and one API for health check.
