@@ -1,23 +1,32 @@
 version: '3.8'
 services:
-  db:
-    image: postgres:14.1-alpine
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+  mongodb_container:
+    image: mongo:latest
     ports:
-      - '5432:5432'
-    volumes: 
-      - ./data:/var/lib/postgresql/data
+      - '27017:27017'
+    volumes:
+      - mongodb_data_container:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+
+
   api:
-    image: node:slim
     build: .
     depends_on:
-      - db
+      - mongodb_container
+    environment:
+      OMS_SECRET_KEY: 1510480e-d9f2-11ed-afa1-0242ac120002
+      APP_ENVIROMENT: dev
+      APP_PORT: 3000
+      DATABASE_MONGO_URL: mongodb://root:root@mongodb_container:27017
     ports: 
       - "3000:3000"
-    command: "npm run start"
+
+
+volumes:
+  mongodb_data_container:
+
 
 
       
