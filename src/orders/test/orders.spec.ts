@@ -1,5 +1,4 @@
 import { Test } from '@nestjs/testing';
-import { CreateOrderDto } from '../dto/create-order.dto';
 import { OrdersController } from '../orders.controller';
 import { OrdersService } from '../orders.service';
 import { Order } from '../entities/order.entity';
@@ -88,7 +87,6 @@ describe('OrderModule', () => {
       ],
     }).compile();
 
-    orderService = moduleRef.get<OrdersService>(OrdersService);
     orderController = moduleRef.get<OrdersController>(OrdersController);
   });
 

@@ -1,18 +1,10 @@
 FROM node:lts-alpine3.16 as build
-
-# RUN apk add --no-cache openssh-client git && mkdir -p /root/.ssh
-# #RUN npm i @aspecto/opentelemetry
-# COPY ssh_key /root/.ssh/id_ed25519
-# RUN chmod 400 /root/.ssh/id_ed25519
 RUN mkdir -p /app
 
 WORKDIR /app
 
 COPY . .
-#ARG NPM_TOKEN_ARG 
-#ENV NPM_TOKEN $NPM_TOKEN_ARG
-#RUN npm config set @homingos:registry https://npm.pkg.github.com/
-#RUN npm config set //npm.pkg.github.com/:_authToken ${NPM_TOKEN}
+
 RUN npm install --force
 RUN npm run build
 
