@@ -137,6 +137,7 @@ The service does not require authentication or authorization for accessing the e
 
 Changes for Production
 
+Changes to the .env file according to the Production values
 3 hour check will fail in case this app is deployed to multiple servers (horizontal scaling). So, you will need to store lastUpdatedTime in some common location like cache server or database.
 Implementing authentication and authorization mechanisms to secure the endpoints and restrict access to authorized users only.
 Enhancing error handling and validation to provide more detailed and informative error messages, making it easier to troubleshoot issues.

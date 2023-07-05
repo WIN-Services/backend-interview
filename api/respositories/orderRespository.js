@@ -10,7 +10,7 @@ module.exports.getAllOrders = async () => {
     let serviceResult = await serviceModel.findAll({
         where: {}
     })
-    return orderResult + serviceResult;
+    return [...orderResult, ...serviceResult]
 }
 
 module.exports.getOrdersById = async (orderId) => {
@@ -28,19 +28,18 @@ module.exports.createOrder = async (body) => {
     return orderResult
 }
 
-module.exports.updateOrder = async (id, fees) => {
-    let orderResult = await orderModel.update(id, fees, {
+module.exports.updateOrder = async (id, orderFees) => {
+    let updateResult = await orderModel.update(orderFees, {
         where: {
-            id: id,
-            totalFees: fees
+            id
         }
     })
-    return orderResult
+    return updateResult
 }
 
 module.exports.deleteOrders = async (id) => {
     let orderResult = await orderModel.destroy({
-        where: { id: id }
+        where: { id }
     })
     return orderResult
 }

@@ -17,20 +17,12 @@ module.exports.updateOrder = async (id, fees) => {
 
     let order = await orderRepository.getOrdersById(id);
     if (!order) {
-        throw new EError('No such order id found to be updated', 500);
+        return { message: 'No such order id found to be updated', statusCode: 500 };
     }
-
-    let response = {};
-    response = await orderRepository.updateOrder(id, fees)
-
-    return response;
+    return await orderRepository.updateOrder(id, fees)
 };
 
 module.exports.createOrder = async (body) => {
 
-
-    let response = {};
-    response = await orderRepository.createOrder(body)
-
-    return response;
+    return await orderRepository.createOrder(body)
 };
