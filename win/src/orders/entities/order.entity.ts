@@ -1,10 +1,16 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { OrderedServices } from './ordered-services.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
+import { Service } from '../../services/entities/service.entity';
 
 @Entity()
 export class Order {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   datetime: Date;
@@ -12,9 +18,7 @@ export class Order {
   @Column()
   totalfee: number;
 
-  @OneToMany(
-    () => OrderedServices,
-    (orderedService) => orderedService.serviceId,
-  )
-  services: OrderedServices[];
+  @ManyToMany(() => Service)
+  @JoinTable()
+  services: Service[];
 }
