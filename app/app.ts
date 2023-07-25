@@ -2,10 +2,9 @@ import express from 'express';
 import { registerRoutes } from './modules/routes/routes.register';
 import { connectToPostgres } from './common/connections/connect.postgres';
 
+export const app = express();
 export const startServer = async () => {
   try {
-    const app = express();
-
     await connectToPostgres();
     registerRoutes(app);
 
