@@ -1,110 +1,65 @@
-# WIN Backend Engineering Interview
+**High-Level Description of Solution:**
 
-## Scenario
+For this project, I built a web application using the Express.js framework with a PostgreSQL database. It supports CRUD operations (Create, Read, Update, Delete) for managing data in the database.
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+Express.js serves as the backend framework, handling incoming HTTP requests and routing them to appropriate controller functions. The controller interacts with the database through a data access layer and returns responses to the client.
 
-## Deliverables
+**Trade-Offs Made:**
 
-There are two deliverables for this project:
+1. **Simplicity vs. Scalability:** I prioritized simplicity for this project, which is suitable for a small-scale application. For production, I might consider a more scalable architecture with additional layers, caching mechanisms, and load balancing to handle a larger user base.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+2. **Security vs. Development Speed:** Security concerns were addressed to some extent, but for production, I would spend more time on security measures such as input validation, authentication, and authorization.
 
-### General
+3. **Testing Depth:** While I used Jest for testing, I focused more on unit testing the core functionalities. In a production-ready project, I would expand testing to include integration tests and end-to-end tests.
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+**Assumptions Made:**
 
-### Web Service
+1. The PostgreSQL database is already set up and running with the provided credentials.
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+2. The users of the application have a basic understanding of HTTP methods (GET, POST, PUT, DELETE) and how RESTful APIs work.
 
-## Sample Data
+**Changes for Production:**
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+To make this project production-ready, I would:
 
-Service Records
+1. Implement input validation and sanitization to prevent security vulnerabilities.
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
+2. Add authentication and authorization mechanisms to ensure that only authorized users can access certain routes and perform specific actions.
 
-Orders
+3. Implement logging to keep track of errors and monitor application performance.
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
+4. Set up a proper error handling mechanism to return appropriate error responses to the client.
 
-## Duration
+5. Deploy the application on a production server (e.g., AWS, Heroku) and use environment variables for sensitive data like database credentials.
 
-Up to 2 hours.
+6. Add more extensive tests, including integration and end-to-end tests, to ensure the application's stability and reliability.
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+**Environment Setup:**
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+To set up the environment to run the project:
+
+1. Ensure you have Node.js and npm (Node Package Manager) installed.
+
+2. Clone the project repository.
+
+3. Install dependencies by running `npm install` in the project root directory.
+
+4. Create a `.env` file with the provided content and update the database credentials if needed.
+
+5. Start the server by running `npm start`.
+
+**Parts of the Spec Completed:**
+
+The completed parts of the spec include:
+
+1. Setting up the Express.js server.
+
+2. Connecting to the PostgreSQL database.
+
+3. Implementing basic CRUD operations for managing data in the database.
+
+4. Using Jest for unit testing.
+
+**Time Spent and Problems Encountered:**
+
+I spent approximately 2 hours on this project. The majority of the time was dedicated to setting up the server, database connection, and implementing the basic CRUD operations.
