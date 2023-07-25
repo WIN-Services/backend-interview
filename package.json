@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "tsc --project tsconfig.json",
-    "start": "node ./dist/index.js",
-    "start:dev": "tsc --project tsconfig.json && node ./dist/index.js"
+    "start": "tsc --project tsconfig.json && node ./dist/index.js"
   },
   "author": "",
   "license": "ISC",
