@@ -1,11 +1,29 @@
 const request = require("supertest");
 const mongoose = require("mongoose");
-const app = require("../src/app");
-const Order = require("../src/models/order");
+const app = require("../server");
+const Order = require("../models/order");
+
+before(async () => {
+  // Connect to the test database before running the tests
+  await mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+});
+
+after(async () => {
+  // Close the database connection after running the tests
+  await mongoose.connection.close();
+});
+
+beforeEach(async () => {
+  // Clear the database before each test
+  await Order.deleteMany();
+});
 
 describe("Order Management System", () => {
-  beforeAll(async () => {
-    await mongoose.connect(process.env.MONGO_URI_TEST, {
+  before(async () => {
+    await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -15,7 +33,7 @@ describe("Order Management System", () => {
     await Order.deleteMany();
   });
 
-  afterAll(async () => {
+  after(async () => {
     await mongoose.connection.close();
   });
 
