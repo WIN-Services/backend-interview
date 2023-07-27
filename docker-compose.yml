@@ -1,23 +1,16 @@
 version: '3.8'
 services:
   db:
-    image: postgres:14.1-alpine
+    image: postgres:14.1
     restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=win
     ports:
-      - '5432:5432'
-    volumes: 
-      - ./data:/var/lib/postgresql/data
-  api:
-    image: node:slim
-    build: .
-    depends_on:
-      - db
-    ports: 
-      - "3000:3000"
-    command: "npm run start"
+      - '5433:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
-
-      
+volumes:
+  pgdata:
