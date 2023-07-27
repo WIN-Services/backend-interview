@@ -16,6 +16,7 @@ I have used typeorm to design DB schema, it enables us to migrate from different
 
 Trade offs: For the sake of project I havent created a centralized datastore which should have handled all db operations, so that all db operations could be handled from one place. Also in update part of code i need to add the versioning based update to handle dirty updates.
 
+For the sake of project I have not implemented a common response pattern, If i had to do this in production I would create a common response and filter response using response DTOs (currently missing in the project).
 
 ## Installation
 
