@@ -9,10 +9,10 @@ git clone https://github.com/anshulsha/backend-interview
 
 cd backend-interview
 
-Run the setup script: sh setup.sh
+sh setup.sh
 
-Run database migrations: npm run migration:run
+npm run migration:run (For seeding services in table)
 
-Run tests: npm run test (To run tests)
+npm run test (To run tests)
 
 ```
