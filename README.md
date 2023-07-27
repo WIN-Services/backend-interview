@@ -1,110 +1,34 @@
-# WIN Backend Engineering Interview
+## Description
 
-## Scenario
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+## High Level Design
 
-## Deliverables
+On High level I have created a service which handles all the basic CRUDs mentioned in the task, like GET, POST, PUT, DELETE. I have choosen for the postgres as my primary db because the data is relatable and it makes better sense to use sql when dealing with relational data as order data is related to services.
 
-There are two deliverables for this project:
+I have created custom exception filter in the code which handles errors from central message place, which is good for production. I have created three different config env for different environment like local, staging and production.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+Added one test to showcase the jest.
 
-### General
+I have use request DTOs to handle request validation.
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+I have used typeorm to design DB schema, it enables us to migrate from different DB to new DB easily. I have choosen nest.js as framework which enables us to code by following SOLID Design patterns.
 
-### Web Service
+Trade offs: For the sake of project I havent created a centralized datastore which should have handled all db operations, so that all db operations could be handled from one place. Also in update part of code i need to add the versioning based update to handle dirty updates.
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+For the sake of project I have not implemented a common response pattern, If i had to do this in production I would create a common response and filter response using response DTOs (currently missing in the project).
 
-## Sample Data
+## Installation
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+```bash
+git clone https://github.com/anshulsha/backend-interview
 
-Service Records
+cd backend-interview
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+sh setup.sh
+
+npm run migration:run (For seeding services in table)
+
+npm run test (To run tests)
+
 ```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
