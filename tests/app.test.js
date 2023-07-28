@@ -2,6 +2,7 @@ const request = require('supertest');
 const app = require('../app');
 const { expect } = require('chai');
 const mongoose = require('mongoose');
+const { responseMessage } = require('../constants');
 before(async () => {
   // Connect to the test database before running the tests
   await mongoose.connect("mongodb://localhost:27017", {
@@ -29,7 +30,7 @@ describe('Order Management System API', () => {
     const res = await request(app).post('/orders').send(newOrder);
 
     expect(res.statusCode).to.equal(201);
-    expect(res.body.id).to.equal(newOrder.id);
+    expect(res.body.data.id).to.equal(newOrder.id);
     orderId = newOrder.id;
   });
 
@@ -48,7 +49,7 @@ describe('Order Management System API', () => {
     const res = await request(app).post('/orders').send(duplicateOrder);
 
     expect(res.statusCode).to.equal(400);
-    expect(res.body.error).to.equal('Order already exists');
+    expect(res.body.error.message).to.equal(responseMessage.RECORD_EXIST);
   });
 
 
@@ -56,16 +57,13 @@ describe('Order Management System API', () => {
     const res = await request(app).delete(`/orders/${orderId}`);
 
     expect(res.statusCode).to.equal(200);
-    expect(res.body.message).to.equal('Order deleted successfully');
+    expect(res.body.message).to.equal(responseMessage.DELETE_RECORD);
   });
 
   it('should retrieve all orders', async () => {
     const res = await request(app).get('/orders');
 
     expect(res.statusCode).to.equal(200);
-    expect(res.body.currentPage).to.equal(1);
-    expect(res.body.totalPages).to.equal(0);
-    expect(res.body.totalOrders).to.equal(0);
   })
   after(async () => {
     await mongoose.connection.close();

@@ -1,31 +1,24 @@
 const { ObjectId } = require('mongodb');
 const Order= require('../models/orderModel');
 const Service = require('../models/serviceModel');
+const { errorResponse, successResponse, successResponseMsg } = require('../errorHandlers');
+const { responseMessage } = require('../constants');
 
 const orderController = {};
 
 
 orderController.fetchAllOrders = async (req, res) => {
   try {
-    const { page = 1, limit = 10 } = req.query;
-    const skip = (page - 1) * limit;
-    const totalOrders = await Order.countDocuments();
-
-    const orders = await Order.find().skip(skip).limit(limit);
+    const orders = await Order.find();
     const newOrders = await Promise.all( orders.map(async (orderItem) =>{
       let newOrderItem = orderItem.populate("services","name");
 
       return newOrderItem;
     }));
 
-    res.json({
-      data: newOrders,
-      currentPage: parseInt(page),
-      totalPages: Math.ceil(totalOrders / limit),
-      totalOrders,
-    });
+    res
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({body: errorResponse(responseMessage.SERVER)});
   }
 };
 
@@ -43,15 +36,15 @@ orderController.createOrder = async (req, res) => {
     const existingOrder = await Order.findOne({ id: newOrder.id });
 
     if (existingOrder) {
-        return res.status(400).json({ error: 'Order already exists' });
+        return res.status(400).json({body: responseMessage.RECORD_EXIST});
     }
     console.log(newOrder)
     const order = new Order(newOrder);
     await order.save();
-    res.status(201).json(order);
+    res.status(201).json({body: {success: true, data: order}});
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({body: errorResponse.SERVER});
   }
 };
 
@@ -61,10 +54,13 @@ orderController.getOrderById = async (req, res) => {
       "services",
       "name"
     );
+    if(!orderDetails) {
+      return res.status(400).json({body: errorResponse(responseMessage.NO_RECORDS)})
+    }
     console.log(orderDetails);
-    res.status(200).json(orderDetails);
+    res.status(200).json({body: successResponse(orderDetails)});
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({body: errorResponse(responseMessage.SERVER)});
   }
 };
 
@@ -82,14 +78,14 @@ orderController.updateOrder = async (req, res) => {
       const threeHoursAgo = new Date(currentTime.getTime() - 3 * 60 * 60 * 1000);
 
       if (existingOrder.datetime > threeHoursAgo) {
-        return res.status(400).json({ error: 'Cannot create order within 3 hours of a pre-existing order' });
+        return res.status(400).json({body: errorResponse(responseMessage.UPDATE_RECORD_WAIT)});
       }
     }
 
     await Order.findOneAndUpdate({ id: orderId }, updatedOrder);
-    res.status(200).json({ message: 'Order updated successfully' });
+    res.status(200).json({body: successResponseMsg(responseMessage.UPDATE_SUCCESS)});
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({body: errorResponse(responseMessage.SERVER)});
   }
 };
 
@@ -97,9 +93,9 @@ orderController.deleteOrder = async (req, res) => {
   try {
     const orderId = req.params.orderId;
     await Order.findOneAndDelete({ id: orderId });
-    res.status(200).json({ message: 'Order deleted successfully' });
+    res.status(200).json({body: successResponse(responseMessage.DELETE_RECORD)});
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({body: errorResponse(responseMessage.SERVER)});
   }
 };
 
