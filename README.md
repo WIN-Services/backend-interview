@@ -18,6 +18,26 @@ There are two deliverables for this project:
 - You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
 - You may model the data any way you'd like, including adding data beyond the samples provided.
 
+
+### Tech stacks 
+- Javascript
+- nodejs
+- expressjs
+- mongodb
+- mongoose
+
+## Packages
+- Mongoose
+- nodemon
+- supertest
+- dotenv
+
+### My thaught
+I could use the payload validator like joi or something else
+I could use router protector
+
+
+
 ### Web Service
 
 - Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
@@ -108,3 +128,5 @@ We are looking for:
 2. Solution Design
 3. Completeness
 4. Code clarity / readability
+
+
