@@ -16,9 +16,9 @@ orderController.fetchAllOrders = async (req, res) => {
       return newOrderItem;
     }));
 
-    res
+    res.status(200).json(successResponse(newOrders))
   } catch (error) {
-    res.status(500).json({body: errorResponse(responseMessage.SERVER)});
+    res.status(500).json(errorResponse(responseMessage.SERVER));
   }
 };
 
@@ -36,15 +36,15 @@ orderController.createOrder = async (req, res) => {
     const existingOrder = await Order.findOne({ id: newOrder.id });
 
     if (existingOrder) {
-        return res.status(400).json({body: responseMessage.RECORD_EXIST});
+        return res.status(400).json(errorResponse(responseMessage.RECORD_EXIST));
     }
     console.log(newOrder)
     const order = new Order(newOrder);
     await order.save();
-    res.status(201).json({body: {success: true, data: order}});
+    res.status(201).json(successResponse(order));
   } catch (error) {
     console.log(error);
-    res.status(500).json({body: errorResponse.SERVER});
+    res.status(500).json(errorResponse(responseMessage.SERVER));
   }
 };
 
@@ -78,12 +78,12 @@ orderController.updateOrder = async (req, res) => {
       const threeHoursAgo = new Date(currentTime.getTime() - 3 * 60 * 60 * 1000);
 
       if (existingOrder.datetime > threeHoursAgo) {
-        return res.status(400).json({body: errorResponse(responseMessage.UPDATE_RECORD_WAIT)});
+        return res.status(400).json(errorResponse(responseMessage.UPDATE_RECORD_WAIT));
       }
     }
 
     await Order.findOneAndUpdate({ id: orderId }, updatedOrder);
-    res.status(200).json({body: successResponseMsg(responseMessage.UPDATE_SUCCESS)});
+    res.status(200).json(successResponseMsg(responseMessage.UPDATE_SUCCESS));
   } catch (error) {
     res.status(500).json({body: errorResponse(responseMessage.SERVER)});
   }
@@ -93,9 +93,9 @@ orderController.deleteOrder = async (req, res) => {
   try {
     const orderId = req.params.orderId;
     await Order.findOneAndDelete({ id: orderId });
-    res.status(200).json({body: successResponse(responseMessage.DELETE_RECORD)});
+    res.status(200).json(successResponseMsg(responseMessage.DELETE_RECORD));
   } catch (error) {
-    res.status(500).json({body: errorResponse(responseMessage.SERVER)});
+    res.status(500).json(errorResponse(responseMessage.SERVER));
   }
 };
 

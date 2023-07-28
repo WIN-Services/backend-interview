@@ -28,9 +28,11 @@ describe('Order Management System API', () => {
     };
 
     const res = await request(app).post('/orders').send(newOrder);
-
+    console.log(res.body);
     expect(res.statusCode).to.equal(201);
-    expect(res.body.data.id).to.equal(newOrder.id);
+    data = res.body.data;
+    console.log(data);
+    expect(data.id).to.equal(newOrder.id);
     orderId = newOrder.id;
   });
 

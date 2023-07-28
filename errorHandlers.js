@@ -1,11 +1,11 @@
-module.exports.successResponse = async (data) => {
+module.exports.successResponse = (data) => {
     return {
         success: true,
         data: data,
     };
 }
 
-module.exports.successResponseMsg = async (message) => {
+module.exports.successResponseMsg = (message) => {
     return {
         success: true,
         message: message,
@@ -13,7 +13,7 @@ module.exports.successResponseMsg = async (message) => {
 }
 
 
-module.exports.errorResponse = async (message) => {
+module.exports.errorResponse = (message) => {
     return {
         success: false,
         error: {
