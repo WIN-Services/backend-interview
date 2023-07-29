@@ -95,12 +95,7 @@ Up to 2 hours.
 2.  Create Web Services and tests
 3.  Submit a Pull Request (PR)
 4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+      
 
 ## Evaluation
 We are looking for: 
@@ -108,3 +103,5 @@ We are looking for:
 2. Solution Design
 3. Completeness
 4. Code clarity / readability
+
+
