@@ -28,7 +28,7 @@ const orderController = {
       await order.addServices(services);
       return order;
     } catch (error) {
-      console.error(err);
+      console.error(error);
       throw new ServerError(errorMessage.COMMON_ERROR);
     }
   },
