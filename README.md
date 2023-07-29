@@ -1,110 +1,34 @@
-# WIN Backend Engineering Interview
 
-## Scenario
+Submission By Shashank Tyagi
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+- A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
+    - There are 2 main entities. Service and Order. Service has field 'name'. Order has field 'totalFee' along with services. One Order can have many services attached to it. You can do following operations on services and orders: Create, Update, GetAll, GetById and Delete.
+    - I have used nodeJs with expressJs framework to create APIs. Have used Postgresql as a database to manage the data of orders and services.
+    - Below are the endpoints with short description
+      - POST: /order - To create new order
+      - PUT: /order/:orderId - To update order (You will not able to update the order which is created less than 3 hours ago)
+      - GET: /order - To get all orders
+      - GET: /order/:orderId - To get order by Id
+      - DELETE: /order/:orderId - To delere order by id
 
-## Deliverables
+- What trade-offs you made
+    - As a database I have chosen relational database(Postgresql) as the order and service has fix schema and their relationship can be more managable with it.
+    Alos i have added users/admin limitation to API's access.
+    Added authentication etc.
 
-There are two deliverables for this project:
+- What you would change if you built this for production
+    - For production, I need to encrypt sensitive data such as DB configurations.
+    - I also need to change env configurations. I will create separate env files for different environments.
+    - Currently i havent taken services in consideration and only managed to create order api's
+    - Filteration and pagination can be added.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+- Brief instructions on how to setup the environment to run your project
+    - Here are the steps to setup the project
+      1. Run 'npm install'
+      2. Create '.env' file and make chnages in knexfile.js as per your db configurations.
+      3. Run command -> knex migrate:latest
+      4. Run 'node server.js'
+   
 
-### General
-
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
-
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+- What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+  - I have included almost all the requirements mentioned. It took 4 hours to implement all features of order API's excluding the testing suite.
