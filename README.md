@@ -1,5 +1,5 @@
 
-Submission By Shivangi Garambha
+Submission By Shashank Tyagi
 
 - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
     - There are 2 main entities. Service and Order. Service has field 'name'. Order has field 'totalFee' along with services. One Order can have many services attached to it. You can do following operations on services and orders: Create, Update, GetAll, GetById and Delete.
