@@ -4,57 +4,35 @@
 
 Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
 
-## Deliverables
+## Tech stack
 
-There are two deliverables for this project:
-
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+1. Node.js
+2. Express.js
+3. MongoDB
+4. Mocha, Chai
 
 ### General
 
-- Please use either **JavaScript/TypeScript or Python**.
+- Used **JavaScript**.
 - You may use any framework, such as a web framework or test framework, to help you complete the project.
 - You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
 - You may model the data any way you'd like, including adding data beyond the samples provided.
 
-### Web Service
+### Installation notes
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+- `git clone https://github.com/MadhuVaddi/order-service.git`
+- `cd order-service`
+- `npm install`
+- `npm start` to run the server
+- `npm run test` to run the test cases
 
-## Sample Data
+## API calls
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+**Order APIs**
 
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
+- `POST /orders`: This will check whether service with ID 123 is exists or not. If available then insert the order into DB else return error with Invalid service
+  ```
   {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
     "datetime": "2022-11-01T11:11:11.111Z",
     "totalfee": 100,
     "services": [
@@ -62,49 +40,81 @@ Orders
         "id": "123",
         }
     ]
-  },
-  {
-    "id": "224",
+  }
+  ```
+- `GET /orders`: To get all the orders
+  ```
+   [{
     "datetime": "2022-11-01T11:11:11.111Z",
     "totalfee": 100,
     "services": [
         {
-        "id": "789",
+        "id": "123",
         }
     ]
-  },
-  {
-    "id": "225",
+  },.... ]
+  ```
+- `GET /orders/:id`: To get the order by order ID
+  ```
+  {
     "datetime": "2022-11-01T11:11:11.111Z",
     "totalfee": 100,
     "services": [
         {
-        "id": "456",
+        "id": "123",
         }
     ]
   }
-]
-```
+  ```
+- `PUT /orders/:id`: To update the order by order ID
+  ```
+  {
+    "datetime": "2023-11-01T11:11:11.111Z",
+    "totalfee": 101,
+    "services": [
+        {
+        "id": "23",
+        }
+    ]
+  }
+  ```
 
-## Duration
+- `DELETE /orders/:id`: To delete the order by order ID. If order exist, it will delete else returns error
+  ```
+  {
+    message: "DELETE"
+  }
+  ```
+**Service records APIs**
+- `POST /servicerecords`: This will check whether same service name is exists or not. If not available then insert the service record into DB else return error with Service record already exists
+  ```
+  {
+    "name": "Inspection"
+  }
+  ```
+- `GET /servicerecords`: To get all the service records
+  ```
+   [{
+    "name": "Inspection"
+  },.... ]
+  ```
+- `GET /servicerecords/:id`: To get the service record by ID
+  ```
+  {
+    "name": "Inspection"
+  }
+  ```
+- `PUT /servicerecords/:id`: To update the service record by ID
+  ```
+  {
+    "name": "Inspection New"
+  }
+  ```
 
-Up to 2 hours.
+- `DELETE /servicerecords/:id`: To delete the service record by ID. If order exist, it will delete else returns error
+  ```
+  {
+    message: "DELETE"
+  }
+  ```
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
