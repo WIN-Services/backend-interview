@@ -4,9 +4,17 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "dotenv": "^16.3.1",
+    "mocha": "^10.2.0",
+    "mongoose-mock": "^0.4.0",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
+  }
 }
