@@ -1,8 +1,21 @@
 import { Router } from "express";
-import { getAllService } from "../controller/index.controller";
+import { createNewOrder, deleteOrder, getAllOrders, getSingleOrder, updateOrder } from "../controller/index.controller";
 
 const router = Router();
 
-router.get("/getAllService", getAllService);
+//getting all the orders
+router.get("/getAllOrders", getAllOrders);
+
+//getting a single order
+router.get('/getSingleOrder/:orderId',getSingleOrder)
+
+//creating a new order
+router.post('/createNewOrder', createNewOrder)
+
+//updating a order
+router.put('/updateOrder/:orderId',updateOrder)
+
+//delete a order
+router.delete('/deleteOrder/:orderId',deleteOrder)
 
 export default router;

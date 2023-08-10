@@ -14,14 +14,12 @@ model Service {
   id        Int       @id @default(autoincrement())
   name      String
   updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
-  Orders    Orders?   @relation(fields: [ordersId], references: [id])
-  ordersId  Int?
+  orders    Orders[]  @relation("ServiceToOrders")
 }
 
 model Orders {
   id       Int       @id @default(autoincrement())
   datetime DateTime  @default(now())
   totalfee Int
-  services Service[]
+  services Service[] @relation("ServiceToOrders")
 }
