@@ -7,7 +7,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
+app.use('/orders', orderRouter);
+app.all('*', (req, res, next) => {
+    res.status(400).json({ message: `Can't find ${req.originalUrl} on this server!`});
+});
+  
 mongoose.connect(process.env.MONGODB_URI)
 .then(() => {
     console.log('DB is connected !!');
