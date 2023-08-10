@@ -1,0 +1,56 @@
+GET http://127.0.0.1:8080/api/v1/orders/test
+
+###
+GET http://127.0.0.1:8080/api/v1/services/test
+
+###
+GET http://127.0.0.1:8080/api/v1/users/test
+
+###
+POST http://127.0.0.1:8080/api/v1/users/createUser
+Content-Type: application/json
+
+{
+    "name": "roshan",
+    "email": "roshan@gmail.com",
+    "dob": "12-12-2003"
+}
+
+###
+POST http://127.0.0.1:8080/api/v1/services/createService
+Content-Type: application/json
+
+{
+    "name": "pesticide",
+    "fee": 100
+}
+
+###
+GET http://127.0.0.1:8080/api/v1/services/getServices?limit=0&offset=0&id=4
+
+###
+POST http://127.0.0.1:8080/api/v1/orders/createOrder
+Content-Type: application/json
+
+{
+    "user_id": 1,
+    "services": [{"id": 2}, {"id": 3}]
+}
+
+###
+GET http://127.0.0.1:8080/api/v1/orders/getOrders/1?limit=5&offset=0
+
+###
+PUT http://127.0.0.1:8080/api/v1/orders/updateOrder/1/2
+Content-Type: application/json
+
+{
+    "services": [
+        { "id": 1}
+    ]
+}
+
+###
+DELETE  http://127.0.0.1:8080/api/v1/orders/deleteOrder/1/1
+
+
