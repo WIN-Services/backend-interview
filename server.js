@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
-require("dotenv").config();
+const orderRouter = require('./orders/orderRoutes');
+dotenv.config({ path: './config.env' });
 
 const app = express();
 app.use(express.json());
