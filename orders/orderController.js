@@ -78,7 +78,7 @@ exports.fetchAllOrders = async (req, res, next) => {
         const limit = req.params.limit;
         const offset = (page - 1) * limit;
     
-        const orders = await Order.find({}).skip(offset).limit(limit);
+        const orders = await Order.find({}).populate('services').skip(offset).limit(limit);
     
         res.status(200)
         .json(orders);
@@ -114,7 +114,7 @@ exports.updateOrderById = async (req, res, next) => {
 exports.fetchOrderById = async (req, res, next) => {
     try {
         const id = req.params.id;
-        const order = await Order.findById(id);
+        const order = await Order.findById(id).populate('services');
         if (!order) {
             res.status(404)
             .json({message: `Order with id - ${id} Not Found`});
