@@ -58,3 +58,23 @@ This project implements an Order Management System API using Node.js with Expres
 ### MySQL DB file
 
 Please use 'win-backend.sql' in 'db' folder for database.
+
+## Setting Up the Database Connection
+
+To connect to the MySQL database, you need to provide your MySQL username and password in the `db.js` file. Follow these steps to set up the database connection:
+
+1. Open the `db.js` file located in the `config` directory.
+
+2. Locate the following lines in the `db.js` file:
+
+ 
+   const db = mysql.createPool({
+     host: 'localhost',
+     user: 'USERNAME',
+     password: 'PASSWORD',
+     database: 'win-backend'
+   });
+
+Replace YOUR_USERNAME with your MySQL username and YOUR_PASSWORD with your MySQL password.
+
+Save the changes to the db.js file.
