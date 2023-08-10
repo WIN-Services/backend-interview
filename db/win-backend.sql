@@ -91,6 +91,8 @@ ALTER TABLE `order_services`
 ALTER TABLE `services`
     MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
+INSERT INTO `services` (`id`, `name`) VALUES ('123', 'Inspection'), ('789', 'Testing'), ('456', 'Analysis');
+
 --
 -- Constraints for dumped tables
 --
