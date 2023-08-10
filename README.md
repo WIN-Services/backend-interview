@@ -67,7 +67,7 @@ To connect to the MySQL database, you need to provide your MySQL username and pa
 
 2. Locate the following lines in the `db.js` file:
 
- 
+```javascript
    const db = mysql.createPool({
      host: 'localhost',
      user: 'USERNAME',
@@ -75,6 +75,6 @@ To connect to the MySQL database, you need to provide your MySQL username and pa
      database: 'win-backend'
    });
 
-Replace YOUR_USERNAME with your MySQL username and YOUR_PASSWORD with your MySQL password.
+Replace USERNAME with your MySQL username and PASSWORD with your MySQL password.
 
 Save the changes to the db.js file.
