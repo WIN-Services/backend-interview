@@ -1,110 +1,60 @@
 # WIN Backend Engineering Interview
 
-## Scenario
+## Order Management System
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+### Description
 
-## Deliverables
 
-There are two deliverables for this project:
+This project implements an Order Management System API using Node.js with Express framework. The system allows creating, retrieving, updating, and deleting orders, as well as managing associated services. The system also checks the rule that orders cannot be created or updated within 3 hours of an existing order.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+## Technology Stack
 
-### General
+- Language: JavaScript (Node.js)
+- Framework: Express
+- Database: MySQL
+- Testing: Jest
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
 
-### Web Service
+### How It Works
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+- The Express web service exposes various API endpoints for managing orders.
+- The MySQL database stores order and service data, with proper relationships between tables.
+- Endpoints handle HTTP requests (GET, POST, PUT, DELETE) and interact with the database using SQL queries.
+- The provided data models ensure data integrity and proper handling of time-based constraints.
 
-## Sample Data
+### Trade-Offs
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+- Simplicity over complexity: The solution prioritizes simplicity and straightforward implementation over advanced features.
+- Limited error handling: Error handling focuses on essential cases. More advanced error handling can be added for production.
 
-Service Records
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
+## Assumptions
 
-Orders
+- MySQL database is used, and the schema adheres to the provided specifications.
+- Time-based constraints are handled directly in the API endpoints.
+- Basic input validation is sufficient for the scope of the project.
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
+### Changes for Production
+- Implement more comprehensive error handling and validation.
+- Introduce authentication and authorization system.
+- Use a logging system for better monitoring.
+- Implement more test cases for edge cases.
 
-## Duration
+### Setup Environment
 
-Up to 2 hours.
+- Clone the repository.
+- Install dependencies: `npm install`
+- Set up MySQL database and configure connection in `db.js`.
+- Run the server: `npm start`
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+## Spec Completion and Challenges
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+- All API endpoints (GET, POST, PUT, DELETE) for managing orders were implemented as specified.
+- Time-based constraint was implemented successfully.
+- Test suite using Jest was created and covers scenarios for creating orders and updating orders.
+- Time spent: Approximately 3 hours.
+- Challenges faced: Ensuring code reusablity, correct MySQL queries, handling time-based constraints were key challenges.
+
+### MySQL DB file
+
+Please use 'win-backend.sql' in 'db' folder for database.
