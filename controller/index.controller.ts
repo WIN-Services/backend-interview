@@ -53,18 +53,18 @@ export const getSingleOrder = async (req: Request, res: Response) => {
 export const createNewOrder = async (req: Request, res: Response) => {
   try {
     const { totalfee, services } = req.body;
-    prisma.orders
-      .create({
-        data: {
-          totalfee,
-          services: {
-            connect: [{ id: services[0].id }],
-          },
+    const createOrder = await prisma.orders.create({
+      data: {
+        totalfee,
+        services: {
+          connect: [{ id: services[0].id }],
         },
-      })
-      .then(() => {
-        return res.status(201).json({ message: "Order Placed" });
-      });
+      },
+    });
+    if(createOrder === null){
+      return res.status(400).json({message: "Order invalid"})
+    }
+    return res.status(201).json({ message: "Order Placed" });
   } catch (error) {
     return res.status(400).json({ error });
   }
