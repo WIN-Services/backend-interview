@@ -7,7 +7,8 @@
     "test": "npx mocha --require ts-node/register --recursive --timeout 5000 ./tests/index.controller.ts",
     "start": "npm run build && node build/server.ts",
     "start:dev": "npx nodemon",
-    "build": "tsc --build "
+    "build": "tsc --build ",
+    "seed": "npx ts-node seed.ts"
   },
   "devDependencies": {
     "@types/chai": "^4.3.5",
