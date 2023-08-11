@@ -85,10 +85,7 @@ export const updateOrder = async (req: Request, res: Response) => {
 
     if (orderToUpdate  === null) {
       return res.status(404).json({ message: "Order Not found" });
-    }
-
-    console.log(orderToUpdate);
-    
+    }    
 
     await prisma.orders.update({
       where: { id: orderId },
