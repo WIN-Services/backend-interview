@@ -61,8 +61,8 @@ export const createNewOrder = async (req: Request, res: Response) => {
         },
       },
     });
-    if(createOrder === null){
-      return res.status(400).json({message: "Order invalid"})
+    if (createOrder === null) {
+      return res.status(400).json({ message: "Order invalid" });
     }
     return res.status(201).json({ message: "Order Placed" });
   } catch (error) {
@@ -83,14 +83,18 @@ export const updateOrder = async (req: Request, res: Response) => {
       },
     });
 
-    if (!orderToUpdate) {
+    if (orderToUpdate  === null) {
       return res.status(404).json({ message: "Order Not found" });
     }
+
+    console.log(orderToUpdate);
+    
 
     await prisma.orders.update({
       where: { id: orderId },
       data: {
         totalfee: totalfee,
+        datetime: new Date().toISOString(),
         services: {
           connect: { id: services[0].id },
           disconnect: { id: orderToUpdate.services[0].id },

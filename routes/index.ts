@@ -1,5 +1,17 @@
 import { Router } from "express";
-import { createNewOrder, deleteOrder, getAllOrders, getSingleOrder, updateOrder } from "../controller/index.controller";
+import {
+  createNewOrder,
+  deleteOrder,
+  getAllOrders,
+  getSingleOrder,
+  updateOrder,
+} from "../controller/index.controller";
+import {
+  validateCreateOrder,
+  validateDeleteOrder,
+  validateSingleOrder,
+  validateUpdateOrder,
+} from "../middleware/index.middleware";
 
 const router = Router();
 
@@ -7,15 +19,15 @@ const router = Router();
 router.get("/getAllOrders", getAllOrders);
 
 //getting a single order
-router.get('/getSingleOrder/:orderId',getSingleOrder)
+router.get("/getSingleOrder/:orderId", validateSingleOrder, getSingleOrder);
 
 //creating a new order
-router.post('/createNewOrder', createNewOrder)
+router.post("/createNewOrder", validateCreateOrder, createNewOrder);
 
 //updating a order
-router.put('/updateOrder/:orderId',updateOrder)
+router.put("/updateOrder/:orderId", validateUpdateOrder, updateOrder);
 
 //delete a order
-router.delete('/deleteOrder/:orderId',deleteOrder)
+router.delete("/deleteOrder/:orderId", validateDeleteOrder, deleteOrder);
 
 export default router;
