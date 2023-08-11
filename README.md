@@ -1,110 +1,51 @@
-# WIN Backend Engineering Interview
+# WIN Backen Engineering Interview
+# Description:
 
-## Scenario
+## Stack used: 
+## Time taken to complete Task: 6hours
+    - Typescript
+    - Postgresql 
+    - Express
+    - Node.js
+    - prisma
+  + Unit-testing
+  - mocha 
+  - chai
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+## Solution-details:-
+  - Firstly i choose to use typescript instead of javascript, because it helps with data type error before hand.
+  - After that i choose to structure the files in MVC format.
+  - Now i started Schema designing with the help of prisma and gave basic design for the project
+  - i started working on the project using express and storing all my envs in the .env file 
+  - created the specified route for the task one by one, i started with business logic first
+  - after the business logic was complete, i started working on the unit testing part of the project(have inclueded atlest one test for each function)
+  - Now i started working on the middlewares for the routes, here i implemented the check for the 3 hours which was mentioned in the task
+  - now completed all the tasks, i double check the whole route for any edge cases and completed the task.
 
-## Deliverables
+## Trade-offs made:-
+  - i used a secondary database for testing 
 
-There are two deliverables for this project:
+## Assumptions made:-
+  - assumed that the services will already have the correct data present 
+  - assumed that when data is send to the route correct details of services i provided.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+## Instructions on how to run :
+  + Prerequisites:
+    - nodejs
+    - typescript install globally
+    - prisma installed globally
 
-### General
+  $$ Application:-
+  1. run npm install 
+  2. add ENVS which are:-
+    i. PORT: which is the port number
+    ii. DATABASE_URL: postgresql route avalible to you
+  3. Run the command npx prisma db push
+  4. Run the command npm seed (populate the database)
+  5. Run npm start:dev 
+  6. Now the application has started and running on the specified port
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+  $$ Test:-
+  1. Change the DatabaseUrl in the envs to another test_db databaseUrl
+  2. npm run test , this will start the test.
 
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
