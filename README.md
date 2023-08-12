@@ -10,9 +10,8 @@
 
 # Project Setup
 1. Clone the repository.
-2. Checkout to manoj-assignment branch
-3. Create .env file and copy samples.env to .env
-4. Update MONGODB_URI in .env file
-5. Run npm install
-6. Run npm start to start the server
-7. Run npm test to run the testcases
+2. Create .env file and copy samples.env to .env
+3. Update MONGODB_URI in .env file
+4. Run npm install
+5. Run npm start to start the server
+6. Run npm test to run the testcases
