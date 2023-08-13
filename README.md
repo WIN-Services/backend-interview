@@ -1,110 +1,322 @@
-# WIN Backend Engineering Interview
+# Order Management Project
 
-## Scenario
+This repository contains the source code for the Order Management application, which includes both a backend API and associated database operations.
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+## Installation and Setup
 
-## Deliverables
+### Prerequisites
 
-There are two deliverables for this project:
+Make sure you have the following installed on your machine:
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+- Node.js
+- npm (Node Package Manager)
+- PostgreSQL
 
-### General
+### Clone the Repository
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+Clone this repository to your local machine:
 
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+```
+git clone https://github.com/WIN-Services/backend-interview.git
 ```
 
-Orders
+### Backend Setup
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
+1. Open a terminal window.
+
+2. Navigate to the project's root directory:
+
+3. Install the required dependencies:
+
+```
+npm install
 ```
 
-## Duration
+4. Create a `.env` file in the project's root directory and provide the necessary PostgreSQL database credentials:
 
-Up to 2 hours.
+```
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=your-database-name
+POSTGRES_DIALECT=postgres
+```
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+5. Migrate the database to create tables and associations:
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+```
+npm run migrate
+```
+
+6. Seed the database with sample data to get started:
+
+```
+npm run seed
+```
+
+7. Start the backend server:
+
+```
+npm start
+```
+
+8. To run test cases:
+
+```
+npm test
+```
+
+The backend server will be running on http://localhost:3000.
+
+### Accessing the Application
+
+The backend API provides dynamic routing under the base URL `/api/`. For order routes, add `/order/` to the base URL. For service routes, add `/service/` to the base URL.
+
+## API Routes
+
+### Order Routes
+
+- **GET /api/order/**
+  - Retrieve a list of all orders.
+  - Sample Response (Success):
+    ```json
+    {
+      "status": "success",
+      "message": "All orders fetched successfully.",
+      "data": [
+        {
+          "id": 1,
+          "date_time": "2022-08-10T08:00:00.000Z",
+          "total_fee": 100,
+          "services": [ ... ]
+        },
+        // ... more orders
+      ]
+    }
+    ```
+  - Sample Response (Error):
+    ```json
+    {
+      "status": "error",
+      "message": "Order not found.",
+      "data": []
+    }
+    ```
+
+- **GET /api/order/:orderId**
+  - Retrieve a specific order by ID.
+  - Sample Response (Success):
+    ```json
+    {
+      "status": "success",
+       "message": "Order fetched successfully.",
+      "data": {
+        "id": 1,
+        "date_time": "2022-08-10T08:00:00.000Z",
+        "total_fee": 100,
+        "services": [ ... ]
+      }
+    }
+    ```
+  - Sample Response (Error):
+    ```json
+    {
+      "status": "error",
+      "message": "Order not found",
+      "data": []
+    }
+    ```
+
+- **POST /api/order/**
+  - Create a new order.
+  - Sample Request Body:
+    ```json
+    {
+      "date_time": "2022-08-15T10:00:00.000Z",
+      "total_fee": 150,
+      "service_ids": [1, 2, 3]
+    }
+    ```
+  - Sample Response (Success):
+    ```json
+    {
+      "status": "success",
+      "message": "Order created successfully.",
+      "data": {
+        "id": 2,
+        "date_time": "2022-08-15T10:00:00.000Z",
+        "total_fee": 150,
+        "services": [ ... ]
+      }
+    }
+    ```
+  - Sample Response (Error):
+    ```json
+    {
+      "status": "error",
+      "message": "Invalid service IDs provided",
+      "data": []
+    }
+    ```
+
+- **PATCH /api/order/:orderId**
+  - Update a specific order by ID.
+  - Sample Request Body:
+    ```json
+    {
+      "date_time": "2022-08-20T12:00:00.000Z"
+    }
+    ```
+  - Sample Response (Success):
+    ```json
+    {
+      "status": "success",
+      "message": "Order updated successfully.",
+      "data": []
+    }
+    ```
+  - Sample Response (Error):
+    ```json
+    {
+      "status": "error",
+      "message": "Cannot update within 3 hours of pre-existing order",
+      "data": []
+    }
+    ```
+
+- **DELETE /api/order/:orderId**
+  - Delete a specific order by ID.
+  - Sample Response (Success):
+    ```json
+    {
+      "status": "success",
+    }
+    ```
+  - Sample Response (Error):
+    ```json
+    {
+      "status": "error",
+      "message": "Order not found",
+      "data": []
+    }
+    ```
+
+### Service Routes
+
+- **GET /api/service/**
+  - Retrieve a list of all services.
+  - Sample Response (Success):
+    ```json
+    {
+      "status": "success",
+      "message": "All services fetched successfully.",
+      "data": [
+        {
+          "id": 1,
+          "name": "Service A"
+        },
+        // ... more services
+      ]
+    }
+    ```
+  - Sample Response (Error):
+    ```json
+    {
+      "status": "error",
+      "message": "Service not found.",
+      "data": []
+    }
+    ```
+
+- **GET /api/service/:serviceId**
+  - Retrieve a specific service by ID.
+  - Sample Response (Success):
+    ```json
+    {
+      "status": "success",
+      "message": "Service fetched successfully.",
+      "data": {
+        "id": 1,
+        "name": "Service A"
+      }
+    }
+    ```
+  - Sample Response (Error):
+    ```json
+    {
+      "status": "error",
+      "message": "Service not found.",
+      "data": []
+    }
+    ```
+
+- **POST /api/service/**
+  - Create a new service.
+  - Sample Request Body:
+    ```json
+    {
+      "name": "Service D"
+    }
+    ```
+  - Sample Response (Success):
+    ```json
+    {
+      "status": "success",
+      "message": "Service created successfully.",
+      "data": {
+        "id": 4,
+        "name": "Service D"
+      }
+    }
+    ```
+  - Sample Response (Error):
+    ```json
+    {
+      "status": "error",
+      "message": "Service already exists.",
+      "data": []
+    }
+    ```
+
+- **PATCH /api/service/:serviceId**
+  - Update a specific service by ID.
+  - Sample Request Body:
+    ```json
+    {
+      "name": "Updated Service A"
+    }
+    ```
+  - Sample Response (Success):
+    ```json
+    {
+      "status": "success",
+      "message": "Service updated successfully.",
+      "data": []
+    }
+    ```
+  - Sample Response (Error):
+    ```json
+    {
+      "status": "error",
+      "message": "Requested services name already exists.",
+      "data": []
+    }
+    ```
+
+- **DELETE /api/service/:serviceId**
+  - Delete a specific service by ID.
+  - Sample Response (Success):
+    ```json
+    {
+      "status": "success"
+    }
+    ```
+  - Sample Response (Error):
+    ```json
+    {
+      "status": "error",
+      "message": "Service not found.",
+      "data": []
+    }
+    ```
