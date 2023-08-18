@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "906a18ba-00cc-4315-ab35-a1dc0e30e04b",
+		"name": "WIN BE Interview APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24532707"
+	},
+	"item": [
+		{
+			"name": "SignUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"DJ\",\r\n    \"email\": \"d@1.com\",\r\n    \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/users/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"DJ\",\r\n    \"email\": \"d@1.com\",\r\n    \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/users/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/orders/"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order By Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/orders/3"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiZEAxLmNvbSIsImlhdCI6MTY5MjM1MjM3NywiZXhwIjoxNjkyNDM4Nzc3fQ.yzpPD0_Q6hnEZjZLgzuaGAhj8vkmokbYY_cQG8oYDn8"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"services\": [\r\n        456\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/orders/"
+			},
+			"response": []
+		},
+		{
+			"name": "Update order by Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{authToken}}"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"services\": [\r\n        123, 456\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/orders/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete order by Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiZEAyLmNvbSIsImlhdCI6MTY5MjI2NTcxNiwiZXhwIjoxNjkyMzUyMTE2fQ.POixPBAqw4wCNwftaAcQAzxCbLmEZyRh1svYcp0NnW0"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "{{url}}/orders/5"
+			},
+			"response": []
+		},
+		{
+			"name": "GET All Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/users/all"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all Services",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/services/all"
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Service",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// {\r\n//     \"name\": \"Analysis\",\r\n//     \"serviceCode\": \"456\",\r\n//     \"cost\": \"150\"\r\n// }\r\n\r\n// {\r\n//     \"name\": \"Inspection\",\r\n//     \"serviceCode\": \"123\",\r\n//     \"cost\": \"100\"\r\n// }\r\n\r\n// {\r\n//     \"serviceCode\": 789,\r\n//     \"name\": \"Testing\",\r\n//     \"cost\": \"250\"\r\n// }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/services/"
+			},
+			"response": []
+		}
+	]
+}
