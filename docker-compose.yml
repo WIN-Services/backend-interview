@@ -11,6 +11,8 @@ services:
       - '5432:5432'
     volumes: 
       - node_db_data:/var/lib/postgresql/data
+    # env_file:
+    #   - ./.env
   server:
     build: .
     ports: 
@@ -26,6 +28,8 @@ services:
       - PG_PORT=5432
     depends_on:
       - node_db
+    # env_file:
+    #   - ./.env
   testing-server:
     build: .
     volumes:

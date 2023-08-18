@@ -4,6 +4,4 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, async() => {
     console.log(`Connected to port ${port} :)`)
-    // await sequelize.authenticate();
-    // console.log("Connected to Database :)")
 })
