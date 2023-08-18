@@ -1,110 +1,39 @@
-# WIN Backend Engineering Interview
+# EnverXBEAssignment
+Hi Fellow Developers, Myself **_Deepanshu Jain_**
+    I am a Full Stack Developer with about 1.5 years of experience. I love to code and tackle interesting problems along the way.
+    My technical skills encompass a diverse range of technologies, including:
 
-## Scenario
+    Tech Stack: MERN (MongoDB, Express.js, React.js, Node.js), SpringBoot, Next.js
+    Databases: DynamoDB, MySQL, MongoDB
+    Languages: JavaScript, TypeScript, HTML, CSS (including Tailwind CSS)
+    Cloud Services: AWS EC2, SES, Lambda, Cognito, Amplify, Elastic Beanstalk, API Gateway, Docker, CI/CD Pipelines
+    With hands-on experience in these technologies and more, I bring a comprehensive understanding of the development process and an ability to leverage cutting-edge tools to deliver exceptional results.
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+# How to run this project
+1. Clone the repository to your system.
+2. Checkout to the `development` branch.
+3. Enter the command `npm install` on the terminal in the project directory, to install the required packages
+4. Create a new `.env` file in the project directory and provide environment variables. You can get the list of required environment variables from the `.env.example` file in the project root directory.
+5. Now enter the command `npm run dev` to start the server locally.
 
-## Deliverables
+<!-- > Note: Using the MongoDB atlas herent , the environmevariables will require the MongoDB username, password, and database name. -->
+<!-- Todo -->
+> Note: Added Postman Collection V2 export file for API testing (file is in the project root directory).
 
-There are two deliverables for this project:
+# Features of this project
+1. Multiple User profiles, authentication, and authorization.
+2. Each User can create orders that can be seen by anyone, and updated or deleted by the creator/owner User only.
+3. Password of each user is stored in hashed form in the database.
+4. Using a logger `morgan`, to display logs on each API request on the console and a particular log file.
+5. Right now, `CORs` are set to allow everyone to access the server.
+6. The APIs in this project have proper validation for inputs using `express-validator` and proper error messages respectively.
+7. We are using `JWT tokens` for authentication and authorization.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+# Things that can be improved in this project
+<!-- 1. A CI/CD pipeline can be implemented. -->
+2. More flexibility and customization with orders can be done.
+3. Each user can have its own dashboard, which will return its relevant orders, details and stats.
+4. More detailed error messages.
+5. Different currencies can be supported based on location where service is provided.
 
-### General
-
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
-
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+I hope you like this project. In case of any queries, Please feel free to contact me via `deepanshujain088@gmail.com`

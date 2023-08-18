@@ -1,23 +1,51 @@
 version: '3.8'
 services:
-  db:
+  node_db:
     image: postgres:14.1-alpine
     restart: always
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_DB=win_node_db
     ports:
       - '5432:5432'
     volumes: 
-      - ./data:/var/lib/postgresql/data
-  api:
-    image: node:slim
+      - node_db_data:/var/lib/postgresql/data
+  server:
     build: .
-    depends_on:
-      - db
     ports: 
       - "3000:3000"
-    command: "npm run start"
-
-
-      
+    volumes:
+      - /home/workspace/node_modules
+      - .:/home/workspace/
+    environment:
+      - PG_USER=postgres
+      - PG_HOST=node_db
+      - PG_DATABASE=win_node_db
+      - PG_PASSWORD=12345678
+      - PG_PORT=5432
+    depends_on:
+      - node_db
+  testing-server:
+    build: .
+    volumes:
+      - /home/workspace/node_modules
+      - .:/home/workspace/
+    environment:
+      - PG_USER=postgres
+      - PG_HOST=node_db
+      - PG_DATABASE=win_node_db
+      - PG_PASSWORD=12345678
+      - PG_PORT=5432
+    depends_on:
+      - node_db
+    command: npm run test
+  pgadmin:
+    image: dpage/pgadmin4
+    environment: 
+        - PGADMIN_DEFAULT_EMAIL=d@1.com
+        - PGADMIN_DEFAULT_PASSWORD=1234
+    ports: 
+        - "5000:80"
+volumes:
+  node_db_data: {}      
