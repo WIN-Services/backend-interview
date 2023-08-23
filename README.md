@@ -19,6 +19,7 @@
       - Run the following commands
         - npm i
         - npm run start:dev
+      - Postman collection is also included, export it in the postman application and make requests.
 
 ## Changes for production
       - Maintain two different env files, one for production and one for development(production.env & development.env)
