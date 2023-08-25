@@ -1,0 +1,91 @@
+## _Order Managemennt Service_
+
+[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
+
+```
+├───.idea
+├───data
+└───server
+    ├───config
+    ├───constants
+    ├───models
+    ├───modules
+    ├───routes
+    │   └───panel
+    │       └───v1
+    ├───test
+    │   └───utils
+    └───utils
+```
+
+- config - Managing DB connectionn
+- constants - App constants
+- models - Schema definition for order and services
+- modules - Business logic
+- routes - Api's to interact with other system
+- test - Tests
+- utils - Helper method for project
+
+## Features
+
+- System and Team can do CRUD operations on Service and Order model
+- If a System or Team create/updated a resource then they can update if after 3 hrs of time
+- Error handling in App
+- Include testcases for Service and Order Module
+- Include to dockerfile and docker-compose file to test the App
+
+## Assumption
+
+- Order righ now is user independent if we create/update a order next create/update will be doadble after 3hrs
+
+## Improvments
+- Order should be user dependent
+- Auth service to control access who can perform CRUD resource
+
+## Tech
+
+- [Express] - fast node.js network app framework
+- [MongoDB] - database
+- [Jest] - writing testcase
+- [Docker] - for dockerize the app
+
+
+## Installation
+
+[Node.js](https://nodejs.org/) v18+ to run.
+
+Install the dependencies and devDependencies and start the server.
+
+```sh
+npm install
+mongoDB
+```
+
+# Run Server
+```
+npm start
+```
+
+# Run Testcase
+```
+npm run test
+```
+
+## Docker
+
+Use docker-compose to run server
+
+By default, the Docker will expose port 3000, so change this within the
+Dockerfile if necessary. When ready, simply use the Dockerfile to
+build the image.
+
+```sh
+docker-compose up
+```
+
+Verify the deployment by navigating to your server address in
+your preferred browser.
+
+```sh
+localhost:3000
+```

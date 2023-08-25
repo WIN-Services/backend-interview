@@ -1,23 +1,22 @@
-version: '3.8'
+version: '3'
 services:
   db:
-    image: postgres:14.1-alpine
+    container_name: mongoDB
+    image: mongo:7.0.1-rc0
     restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - '5432:5432'
     volumes: 
       - ./data:/var/lib/postgresql/data
-  api:
-    image: node:slim
+  web:
+    container_name: OrderManagementService
+    environment:
+      - MONGO_URI=mongodb://db:27017/TEST
+      - PORT=3000
     build: .
     depends_on:
       - db
     ports: 
       - "3000:3000"
-    command: "npm run start"
+    command: "npm start"
 
 
       
