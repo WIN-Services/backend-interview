@@ -46,7 +46,7 @@ const Module = {
         const baseQ = OrderModel.find();
         let hasMore = false;
 
-        const query = baseQ.byIDGT(offset).limit(count + 1).sort({createdAt: -1});
+        const query = baseQ.byIDGT(offset).limit(count + 1);
 
         const list = await (lean ? query.lean() : query);
 
