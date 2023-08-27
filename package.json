@@ -1,12 +1,29 @@
 {
-  "name": "win",
+  "name": "backend-interview",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "jest ./server/test/ --verbose",
+    "server": "nodemon index.js",
+    "start": "npm run server"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.37",
+    "mongodb-memory-server": "^8.15.1",
+    "mongoose": "^6.0.12",
+    "morgan": "^1.10.0",
+    "ulid": "^2.3.0"
+  },
+  "devDependencies": {
+    "jest": "^29.6.4",
+    "nodemon": "^3.0.1"
+  }
 }
