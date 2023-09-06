@@ -1,73 +1,112 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Order Management System
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Tech Stack Used:
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- **Nest JS :** => A progressive Node.js framework for building efficient, reliable and scalable server-side applications.
+- **MongoDB:** => MongoDB is a source-available cross-platform document-oriented database.
 
-## Description
+## Folder Structure
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- [X] src
+    - [X] **common** : Include request interceptor.
+    - [X] **config** : Manage the configuration of the service. ie: port , app name , db url , app key etc.
+    - [X] **enums**: Constant value used in project.
+    - [X] **errors**: A api for making generic error in whole project.
+    - [X] **oms** : Order Management Module
+        - [X] **dto** : Data transfer object for api
+        - [X] **entity** : Database schema.
+        - [X] **controller** : Routing
+        - [X] **provider**: Business logic for the application.
+    - [X] **role**: Role Based Access: public api , platform api, admin api
+    - [X] **utils**: Common maths.
 
-## Installation
+## Steps to start application:
+ - `nest start`: This command will spin up the server.
+ - After spinning up the server. Visit `http://localhost:3000/api/` for swagger document of an api.
+![alt text](images/win.png)
 
-```bash
-$ npm install
+## Assumption while developing
+- I believe that price of order will be dependent on services. So i have added amount field to service.
+- The summation of item price will be the order price.
+
+## API's
+
+- **POST: Create Order** `/oms/v1/order-management`
+
+```curl
+   curl --location --request POST 'http://localhost:3000/oms/v1/order-management' \
+--header 'Authorization: 1510480e-d9f2-11ed-afa1-0242ac120002' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "user_id": "Atul",
+    "services": [
+        {
+            "name": "Pencil",
+            "amount": 12
+        },
+       {
+            "name": "Pen",
+            "amount": 13
+        }
+    ]
+}'
+
 ```
 
-## Running the app
+- **PUT: Update Order** `/oms/v1/order-management`
 
-```bash
-# development
-$ npm run start
+```curl
 
-# watch mode
-$ npm run start:dev
+curl --location --request PUT 'http://localhost:3000/oms/v1/order-management' \
+--header 'Authorization: 1510480e-d9f2-11ed-afa1-0242ac120002' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "id": "db664fd7-a000-4f01-a72e-1993d4a91c06",
+    "order_items": [
+        {
+            "name": "Pen",
+            "amount": 12
+        },
+        {
+            "name": "Pencil",
+            "amount": 13
+        }
+    ]
+}'
 
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+- **Get: Get Order** `/oms/v1/order-management`
 
-```bash
-# unit tests
-$ npm run test
+```curl
+curl --location --request GET 'http://localhost:3000/oms/v1/order-management?id=115db568-a7b5-4c1d-854d-075b598d0566' \
+--header 'Authorization: 1510480e-d9f2-11ed-afa1-0242ac120002' \
+--data-raw ''
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
-## Support
+- **Get: Get All Orders** `/oms/v1/order-management/orders`
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```curl
+curl --location --request GET 'http://localhost:3000/oms/v1/order-management/orders?page=0&page_size=10' \
+--header 'Authorization: 115db568-a7b5-4c1d-854d-075b598d0566'
+```
 
-## Stay in touch
+***
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
-## License
+## How to run Test Case
+ 
+- stop the docker using command `docker-compose down`
+- Again start the docker using command `docker-compose up mongodb_container`
+- Run command `npm run test:e2e` 
+- Hurray yor test will successfully executed.
 
-Nest is [MIT licensed](LICENSE).
+###  What extra we can do in future?
+
+- Payment information in order document.
+- Currency information in order document.
+- Order Status: Started , Refunded etc
+- Country information in document.
+- Device information.(mobile , ios , web)
+- Built in cart managment service and many more.
