@@ -16,7 +16,7 @@ export class OrderEntity {
   @Prop({ required: true, type: Number })
   total_fee: number;
   @Prop({ required: true, type: [OrderServiceSchema] })
-  order_items: OrderServiceEntity[];
+  services: OrderServiceEntity[];
   @Prop({ required: true, index: true, type: Boolean })
   is_deleted?: boolean;
   @Prop({ index: true, type: Date })
