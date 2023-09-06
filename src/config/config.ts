@@ -13,10 +13,6 @@ export interface Config {
   }
   
   export const Configs = (): Config => {
-    let url = process.env.DATABASE_MONGO_URL;
-    if (url === null || url === undefined) {
-      url = 'mongodb://root:root@0.0.0.0:27017';
-    }
     return {
       name: 'oms',
       oms_secret_key: process.env.OMS_SECRET_KEY,
@@ -24,7 +20,7 @@ export interface Config {
       port: parseInt(process.env.APP_PORT) || parseInt('3000'),
       databases: {
         mongo_db: {
-          url: url,
+          url: "mongodb://root:root@0.0.0.0:27017",
         },
       },
     };
