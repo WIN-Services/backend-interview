@@ -1,12 +1,98 @@
 {
   "name": "win",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Scenario",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "build": "npm run tsc",
+    "copy-files": "copyfiles -u 1 src/**/*.json lib/esm && copyfiles -u 1 src/**/*.json lib/cjs",
+    "clean": "rimraf lib/",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "db-undo-migrate": "node lib/cjs/scripts/db-undo-migration.js",
+    "db-migrate": "node lib/cjs/scripts/db-migration.js",
+    "tsc": "npm run clean && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && npm run copy-files",
+    "start": "npm run build && npm run db-undo-migrate && npm run db-migrate && node lib/cjs/main.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WIN-Services/backend-interview.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WIN-Services/backend-interview/issues"
+  },
+  "homepage": "https://github.com/WIN-Services/backend-interview#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.3",
+    "@types/node": "^20.4.4",
+    "@types/pg": "^8.10.2",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.43.0",
+    "copyfiles": "^2.4.1",
+    "eslint": "^8.27.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "jest": "^29.6.1",
+    "jest-sonar-reporter": "^2.0.0",
+    "prettier": "^2.7.1",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@types/express-validator": "^3.0.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "joi": "^17.10.1",
+    "pg": "^8.11.3"
+  },
+  "jest": {
+    "testResultsProcessor": "jest-sonar-reporter",
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      ".module.ts",
+      ".mock.ts",
+      ".args.ts",
+      "/config/",
+      "/data/",
+      "app.ts"
+    ],
+    "coverageDirectory": "../ci_reports",
+    "coverageReporters": [
+      "html",
+      "text",
+      "lcov",
+      [
+        "clover",
+        {
+          "file": "unit_test_report.xml"
+        }
+      ]
+    ]
+  },
+  "jestSonar": {
+    "reportPath": "ci_reports",
+    "reportFile": "unit_test_report.xml",
+    "indent": 4
+  }
 }

@@ -1,23 +1,26 @@
-version: '3.8'
+version: '3'
 services:
   db:
-    image: postgres:14.1-alpine
+    image: postgres:14.2-alpine
     restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
       - '5432:5432'
-    volumes: 
-      - ./data:/var/lib/postgresql/data
   api:
-    image: node:slim
     build: .
     depends_on:
       - db
+    environment:
+      - POSTGRES_USER=postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DATABASE=postgres
     ports: 
       - "3000:3000"
-    command: "npm run start"
 
 
       
