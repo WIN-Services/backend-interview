@@ -1,110 +1,55 @@
-# WIN Backend Engineering Interview
+# WIN Backend Assessment
 
-## Scenario
+This project is an internal web service API for managing orders. It allows other systems and teams to obtain information about orders.
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+## Table of Contents
+- [Features](#features)
+- [Technologies](#technologies)
+- [API Endpoints](#api-endpoints)
+- [Commands to start server](#commands-to-start-server)
+- [Commands to test server](#commands-to-test-server)
+- [ENV Variable](#env-variable)
 
-## Deliverables
+## Features
 
-There are two deliverables for this project:
+- Create, Read, Update, and Delete (CRUD) operations for orders.
+- Get a list of all orders.
+- Prevent the creation or updating of orders within 3 hours of a pre-existing order.
+- Error handling with appropriate HTTP status codes.
+- Data stored in a MongoDB database.
+- JSON response format.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+## Technologies
 
-### General
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+## API Endpoints
 
-### Web Service
+You can explore and test the API endpoints using Postman. Click the "Run in Postman" button below:
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/12419873/2s9YC8uVTs)
 
-## Sample Data
+## Commands to start server
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+```bash
+npm i
+```
+```bash
+npm start
 ```
 
-Orders
+## Commands to test server
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
+```bash
+npm run test
 ```
 
-## Duration
+## ENV Variable
 
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+```bash
+- PORT=
+- MONGODB_URI=
+```
