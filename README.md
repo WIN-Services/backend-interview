@@ -108,3 +108,39 @@ We are looking for:
 2. Solution Design
 3. Completeness
 4. Code clarity / readability
+
+
+
+## Description
+This project is an Order Management System implemented in Node.js with Express.js and MongoDB (Mongoose). It provides an API for managing orders and services. The application allows creating, retrieving, updating, and deleting orders.
+
+
+## Trade-offs
+The application prioritizes simplicity for demonstration purposes. In a production environment add authentication and authorization.
+
+Data Storage: MongoDB was chosen for its flexibility with JSON-like documents. Depending on production requirements, a more structured relational database might be a better choice.
+
+
+## Assumptions
+The application assumes a basic understanding of Node.js, Express.js, and MongoDB.
+In a real-world scenario, security mechanisms should be a priority.
+
+## Changes for Production
+
+Implement authentication and authorization to secure the API endpoints.
+Use a production-ready database with robust scalability and backup solutions.
+
+## Environment Setup
+
+Run npm install in the CLI,install all dependencies which you can see from package.json and then you are ready to go.
+
+
+## Spec Completion
+
+Internal web service API for managing orders.
+CRUD operations for orders.
+Validation of order creation requests using express-validator.
+Prevention of order creation within 3 hours of an existing order.
+Estimated time spent: 6-7 hours approx.
+
+Challenges I faced are Setting up MongoDB and configuring Mongoose.
