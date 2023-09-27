@@ -1,5 +1,10 @@
 # WIN Backend Engineering Interview
 
+
+I have used mongoose ORM to communicate with db and Nodejs with JavaScript
+
+start the server npm run start
+
 ## Scenario
 
 Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
