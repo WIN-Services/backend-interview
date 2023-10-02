@@ -7,6 +7,7 @@ import {CreateOrderDto} from "./dto/create-order.dto";
 import {Sequelize} from "sequelize-typescript";
 import {OrderServiceRecord} from "./order-service-record.model";
 import {Op} from "sequelize";
+import {UpdateOrderDto} from "./dto/update-order.dto";
 
 @Injectable()
 export class OrderService {
@@ -18,9 +19,30 @@ export class OrderService {
     ) {
     }
 
+    async findOrderWithServiceRecordIds(serviceRecordIds) {
+        const threeHrsBefore = this.getDate3HoursBefore()
+        return this.orderServiceRecordModel.findOne({
+            where: {
+                [Op.or]: {
+                    updatedAt: {
+                        [Op.gt]: threeHrsBefore
+                    },
+                    createdAt: {
+                        [Op.gt]: threeHrsBefore
+                    },
+                },
+                serviceRecordId: {
+                    [Op.in]: serviceRecordIds
+                }
+            },
+        });
+
+        // return orderIds.map(orderId => orderId.order_id);
+    }
+
     async getAllOrders(): Promise<Order[]> {
         const allOrders = await this.orderModel.findAll({
-            attributes:{
+            attributes: {
                 exclude: ['createdAt', 'updatedAt']
             },
             include: [{
@@ -34,23 +56,43 @@ export class OrderService {
             }
             ],
         });
-        // allOrders.map(order =>{
-        //     order.services.forEach(obj => {
-        //         delete  obj.OrderServiceRecord;
-        //     })
-        // // })
-        // allOrders.map(order => {
-        //     order.services.values()
-        // })
         return allOrders;
     }
 
     async getOrderById(id: string): Promise<Order> {
-        return this.orderModel.findByPk(id, {include: [ServiceRecord]});
+        const order = await this.orderModel.findByPk(id, {
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            },
+            include: [{
+                model: this.serviceRecordModel,
+                through: {
+                    attributes: [],
+                },
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                }
+            }
+            ],
+        });
+        if (!order) {
+            throw new HttpException('Record not found!', 404);
+        }
+        return order;
+    }
+
+
+    getDate3HoursBefore() {
+        const now = new Date();
+        now.setHours(now.getHours() - 3);
+        return now;
     }
 
     async createOrder(order: CreateOrderDto): Promise<Order> {
-
+        const result = await this.findOrderWithServiceRecordIds(order.services)
+        if (result) {
+            throw new HttpException('A similar Order has been placed try after some time', 400);
+        }
         try {
             return this.sequelize.transaction(async () => {
                 const services = await this.serviceRecordModel.findAll({
@@ -76,9 +118,17 @@ export class OrderService {
 
     }
 
-    async updateOrder(id: string, order: Order): Promise<Order> {
-        await this.orderModel.update(order, {where: {id}});
-        return this.getOrderById(id);
+    async updateOrder(id: string, order: UpdateOrderDto): Promise<Order> {
+        const [affectedCount, affectedRows] = await this.orderModel.update(order, {
+            where: {id},
+            returning: true,
+        });
+        if (affectedCount == 0) {
+            throw new HttpException('The order with the id is not found', 400)
+        }
+        return affectedRows[0];
+        // return this.getOrderById(id);
+
     }
 
     async deleteOrder(id: string): Promise<void> {

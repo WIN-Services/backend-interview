@@ -8,3 +8,57 @@ accept: */*
 
 ###
 
+# curl -X 'POST'
+#  'http://localhost:3000/orders'
+#  -H 'accept: */*'
+#  -H 'Content-Type: application/json'
+#  -d '
+#{
+#"totalFee":500,
+#"services":[1,3]
+#}'
+POST http://localhost:3000/orders
+accept: */*
+Content-Type: application/json
+
+
+{
+  "totalFee": 500,
+  "services": [
+    1,
+    3
+  ]
+}
+
+###
+
+# curl -X 'PUT'
+#  'http://localhost:3000/orders/1'
+#  -H 'accept: */*'
+#  -H 'Content-Type: application/json'
+#  -d '{
+#
+#"totalFee":800
+#}'
+PUT http://localhost:3000/orders/1
+accept: */*
+Content-Type: application/json
+
+{
+  "totalFee": 900
+}
+
+###
+PUT http://localhost:3000/orders/8
+accept: */*
+Content-Type: application/json
+
+{
+  "totalFee": 800
+}
+
+###
+GET http://localhost:3000/orders/1
+accept: */*
+
+
