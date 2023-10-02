@@ -1,0 +1,10 @@
+###
+
+# curl -X 'GET'
+#  'http://localhost:3000/orders'
+#  -H 'accept: */*'
+GET http://localhost:3000/orders
+accept: */*
+
+###
+
