@@ -3,20 +3,16 @@ import {AppController} from './app.controller';
 import {AppService} from './app.service';
 import {OrderModule} from './order/order.module';
 import {SequelizeModule} from "@nestjs/sequelize";
+import {sequelizeConfig} from "./sequelize.config";
+import {ServiceRecordModule} from "./service-record/service-record.module";
 
 @Module({
     imports: [
         SequelizeModule.forRoot({
-            dialect: 'postgres',
-            host: 'localhost',
-            port: 5432,
-            username: 'tnp',
-            password: 'namit',
-            database: 'order-service',
-            autoLoadModels: true,
-            synchronize: true,
+            ...sequelizeConfig
         }),
-        OrderModule
+        OrderModule,
+        ServiceRecordModule
     ],
     controllers: [AppController],
     providers: [AppService],

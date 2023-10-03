@@ -1,11 +1,12 @@
-FROM node:12.18.1
+FROM node:latest
 
-WORKDIR /app
+WORKDIR /usr/app
+
+COPY ./ /usr/app
 
 COPY ["package.json", "./"]
 
 RUN npm install
 
-COPY . .
+CMD [ "npm", "start" ]
 
-CMD [ "node", "server.js" ]
