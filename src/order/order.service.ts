@@ -19,25 +19,32 @@ export class OrderService {
     ) {
     }
 
-    async findOrderWithServiceRecordIds(serviceRecordIds) {
+    getDate3HoursBefore() {
+        const now = new Date();
+        now.setHours(now.getHours() - 3);
+        return now;
+    }
+
+    async checkForOrderModification() {
         const threeHrsBefore = this.getDate3HoursBefore()
-        return this.orderServiceRecordModel.findOne({
+        // For the lack of clarity on requirements only querying the timestamps modification query can be changed
+        // according to the requirements
+        const orCondition = {
+            updatedAt: {
+                [Op.gt]: threeHrsBefore
+            },
+            createdAt: {
+                [Op.gt]: threeHrsBefore
+            },
+        } as any;
+        const result = await this.orderModel.findOne({
             where: {
-                [Op.or]: {
-                    updatedAt: {
-                        [Op.gt]: threeHrsBefore
-                    },
-                    createdAt: {
-                        [Op.gt]: threeHrsBefore
-                    },
-                },
-                serviceRecordId: {
-                    [Op.in]: serviceRecordIds
-                }
+                [Op.or]: orCondition
             },
         });
-
-        // return orderIds.map(orderId => orderId.order_id);
+        if (result) {
+            throw new HttpException('An order has been modified recently try after some time', 400);
+        }
     }
 
     async getAllOrders(): Promise<Order[]> {
@@ -81,18 +88,8 @@ export class OrderService {
         return order;
     }
 
-
-    getDate3HoursBefore() {
-        const now = new Date();
-        now.setHours(now.getHours() - 3);
-        return now;
-    }
-
     async createOrder(order: CreateOrderDto): Promise<Order> {
-        const result = await this.findOrderWithServiceRecordIds(order.services)
-        if (result) {
-            throw new HttpException('A similar Order has been placed try after some time', 400);
-        }
+        await this.checkForOrderModification();
         try {
             return this.sequelize.transaction(async () => {
                 const services = await this.serviceRecordModel.findAll({
@@ -100,7 +97,7 @@ export class OrderService {
                         {id: {[Op.or]: order.services}}
                 })
                 if (services.length != order.services.length) {
-                    throw new HttpException('some service are not found', 400)
+                    throw new HttpException('Some services are not found', 400)
                 }
                 const createdOrder = await this.orderModel.create({datetime: new Date(), totalFee: order.totalFee});
                 const allServiceOrderRecord = order.services.map((serviceId) => {
@@ -118,20 +115,20 @@ export class OrderService {
 
     }
 
-    async updateOrder(id: string, order: UpdateOrderDto): Promise<Order> {
+    async updateOrder(id: number, order: UpdateOrderDto): Promise<Order> {
+        await this.checkForOrderModification()
         const [affectedCount, affectedRows] = await this.orderModel.update(order, {
-            where: {id},
+            where: {id: +id},
             returning: true,
         });
+        //  nothing has been updated because the id was not found.
         if (affectedCount == 0) {
             throw new HttpException('The order with the id is not found', 400)
         }
         return affectedRows[0];
-        // return this.getOrderById(id);
-
     }
 
-    async deleteOrder(id: string): Promise<void> {
+    async deleteOrder(id: number): Promise<void> {
         await this.orderModel.destroy({where: {id}});
     }
 }

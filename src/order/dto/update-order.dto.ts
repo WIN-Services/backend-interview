@@ -1,7 +1,6 @@
-// update-order.dto.ts
-import {PartialType} from '@nestjs/mapped-types';
-import {CreateOrderDto} from './create-order.dto';
+import {IsNumber} from "class-validator";
 
 export class UpdateOrderDto {
+    @IsNumber()
     totalFee: number
 }
