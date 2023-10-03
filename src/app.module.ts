@@ -22,7 +22,6 @@ import {SequelizeModule} from "@nestjs/sequelize";
     providers: [AppService],
 })
 export class AppModule {
-
 }
 
 
