@@ -1,0 +1,49 @@
+### Get all of the orders
+GET http://localhost:3000/orders
+accept: */*
+
+### create the order with the service ids and totalFee
+POST http://localhost:3000/orders
+accept: */*
+Content-Type: application/json
+
+
+{
+  "totalFee": 500,
+  "services": [
+    1
+  ]
+}
+
+###
+PUT http://localhost:3000/orders/1
+accept: */*
+Content-Type: application/json
+
+{
+  "totalFee": 900
+}
+
+### for updating the order with id 8
+PUT http://localhost:3000/orders/8
+accept: */*
+Content-Type: application/json
+
+{
+  "totalFee": 800
+}
+
+
+### For getting the order with id 1
+GET http://localhost:3000/orders/1
+accept: */*
+
+
+###
+POST http://localhost:3000/services
+accept: */*
+Content-Type: application/json
+
+{
+  "name": "good service"
+}
