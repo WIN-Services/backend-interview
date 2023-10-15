@@ -5,7 +5,7 @@
   "description": "Order Management system for WIN Home Services",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
     "test": "mocha --timeout 5000 --exit"
   },
   "author": "",
