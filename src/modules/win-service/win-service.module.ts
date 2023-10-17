@@ -7,5 +7,6 @@ import { WinServiceDataService } from './services/win-service-data.service';
   imports: [PostgresModule],
   controllers: [WinServiceController],
   providers: [WinServiceDataService],
+  exports: [WinServiceDataService],
 })
 export class WinServiceModule {}

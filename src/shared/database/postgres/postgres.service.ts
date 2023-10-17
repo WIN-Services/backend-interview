@@ -5,10 +5,12 @@ import { Pool, QueryResultRow } from 'pg';
 export class PostgresService {
   constructor(@Inject('PG_CONNECTION') private readonly pool: Pool) {}
 
-  query<
+  async query<
     Response extends QueryResultRow = any,
     Parameters extends any[] = any[],
   >(query: string, parameters?: Parameters) {
-    return this.pool.query<Response, Parameters>(query, parameters);
+    return this.pool
+      .query<Response, Parameters>(query, parameters)
+      .then((response) => response.rows);
   }
 }

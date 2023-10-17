@@ -9,7 +9,6 @@ export enum OrderStatus {
 
 export type Order = BaseModel & {
   id: string;
-  customerId: string;
   status: OrderStatus;
 };
 
