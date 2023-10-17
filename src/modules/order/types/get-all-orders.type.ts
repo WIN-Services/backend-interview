@@ -1,10 +1,17 @@
 import { Order } from '../../../shared/database/postgres/models/order.model';
 import { Service } from '../../../shared/database/postgres/models/service.model';
 
-export type OrderResponse = Order & {
+export type OrderResponse = Omit<Order, 'dateUpdated' | 'dateCreated'> & {
+  dateCreated: string;
+  dateUpdated: string;
   totalFee: number;
   currencyCode: string;
-  services: Array<Service>;
+  services: Array<
+    Omit<Service, 'dateUpdated' | 'dateCreated'> & {
+      dateCreated: string;
+      dateUpdated: string;
+    }
+  >;
 };
 
 export type GetAllOrdersResponse = {

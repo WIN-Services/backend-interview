@@ -78,12 +78,18 @@ export class OrderDataService {
     return {
       order: {
         ...createdOrder,
+        dateCreated: new Date(createdOrder.dateCreated).toISOString(),
+        dateUpdated: new Date(createdOrder.dateCreated).toISOString(),
         totalFee: servicesPresent.reduce<number>(
           (acc, service) => acc + service.fee,
           0,
         ),
         currencyCode: servicesPresent?.[0]?.currencyCode ?? null,
-        services: servicesPresent,
+        services: servicesPresent.map((service) => ({
+          ...service,
+          dateCreated: new Date(service.dateCreated).toISOString(),
+          dateUpdated: new Date(service.dateUpdated).toISOString(),
+        })),
       },
     };
   }
@@ -161,7 +167,10 @@ export class OrderDataService {
     >(
       `
           SELECT "Order".id,
-                 SUM("Service".fee)            as "TotalFee",
+                 "Order".status,
+                 "Order"."dateCreated",
+                 "Order"."dateUpdated",
+                 SUM("Service".fee)            as "totalFee",
                  MAX("Service"."currencyCode") AS "currencyCode",
                  JSON_AGG(JSON_BUILD_OBJECT(
                          'id', "Service".id,
@@ -171,7 +180,7 @@ export class OrderDataService {
                          'currencyCode', "Service"."currencyCode",
                          'dateCreated', "Service"."dateCreated",
                          'dateUpdated', "Service"."dateUpdated"
-                     ))                        AS "Services"
+                     ))                        AS "services"
           FROM "Order"
                    JOIN "OrderService"
                         ON "OrderService"."orderId" = "Order".id
@@ -183,7 +192,18 @@ export class OrderDataService {
       queryValues,
     );
 
-    return { orders };
+    return {
+      orders: orders.map((order) => ({
+        ...order,
+        services: order.services.map((service) => ({
+          ...service,
+          dateCreated: new Date(service.dateCreated).toISOString(),
+          dateUpdated: new Date(service.dateUpdated).toISOString(),
+        })),
+        dateCreated: new Date(order.dateCreated).toISOString(),
+        dateUpdated: new Date(order.dateUpdated).toISOString(),
+      })),
+    };
   }
 
   async getOrder({ orderId }: GetOrderRequest): Promise<GetOrdersResponse> {
@@ -254,12 +274,18 @@ export class OrderDataService {
     return {
       order: {
         ...order,
+        dateCreated: new Date(order.dateCreated).toISOString(),
+        dateUpdated: new Date(order.dateUpdated).toISOString(),
         totalFee: servicesPresent.reduce<number>(
           (acc, service) => acc + service.fee,
           0,
         ),
         currencyCode: servicesPresent?.[0]?.currencyCode ?? null,
-        services: servicesPresent,
+        services: servicesPresent.map((service) => ({
+          ...service,
+          dateCreated: new Date(service.dateCreated).toISOString(),
+          dateUpdated: new Date(service.dateUpdated).toISOString(),
+        })),
       },
     };
   }
