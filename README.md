@@ -1,110 +1,84 @@
-# WIN Backend Engineering Interview
+# WIN Backend Task
 
-## Scenario
+### Stack Used
+- NestJS framework running on top of NodeJS with Typescript
+- PostgreSQL as Database
+- Jest as Testing framework
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
-
-## Deliverables
-
-There are two deliverables for this project:
-
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
-
-### General
-
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
-
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+### How to Run
+- First Create a DB and add the DB credentials to a `.env` file (create it under root directory and populate it in the following manner
 ```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
+	DB_HOST=localhost  
+	DB_PORT=5432  
+	DB_USER=postgres  
+	DB_PASSWORD=postgres  
+	DB_DBNAME=windb
 ```
+- Create the following tables in the DB using following DDL
+```
+create table "Service"
+(
+    id             character varying(18) primary key not null,
+    name           character varying(255)            not null,
+    description    text,
+    fee            double precision                  not null,
+    "currencyCode" character varying(3)              not null,
+    "dateCreated"  timestamp with time zone          not null default now(),
+    "dateUpdated"  timestamp with time zone          not null default now()
+);
 
-## Duration
+create table "Order" (
+  id character varying(16) primary key not null,
+  status character varying(10) not null,
+  "dateCreated" timestamp with time zone not null default now(),
+  "dateUpdated" timestamp with time zone not null default now()
+);
 
-Up to 2 hours.
+create table "OrderService" (
+  "orderId" character varying(16) not null,
+  "serviceId" character varying(18) not null,
+  "dateCreated" timestamp with time zone not null default now(),
+  "dateUpdated" timestamp with time zone not null default now(),
+  foreign key ("orderId") references public."Order" (id)
+  match simple on update cascade on delete cascade,
+  foreign key ("serviceId") references public."Service" (id)
+  match simple on update cascade on delete cascade
+);
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+```
+- To start the NodeJS App, run the following commands
+    - `npm install`
+    - `npm run build`
+    - `npm run start:prod`
+
+- To run the Tests, run the following command
+    - `npm install`
+    - `npm run test`
+
+- To test the APIs, you can use the following Postman Collection:
+  https://documenter.getpostman.com/view/30029103/2s9YR85E3W
+
+
+- How it works
+    - Database Schema
+        - All the Tables have dateCreated and dateUpdated column to properly manage the timestamps when a particular record was created or updated
+        - The Order Table store the data related to Order like id and status
+            - Can be extended with new Columns
+        - The Service Table store the data related to Service like id, name, description, fee, currencyCode of the fee
+            - Can be extended with new Columns
+        - The OrderService Table store the data related to Services present in an Order
+            - Can be extended with new Columns to store mapping specific data like count of services availed in a order
+    - APIs
+        - We have 5 API endpoints for Order
+            - POST /order to create a new order
+            - GET /order/all to get all orders
+            - GET /order/:orderId to get a specific order
+            - PUT /order/:orderId to update a specific order
+            - DELETE /order/:orderId to delete a specific order
+        - We have 1 more API endpoint for Services
+            - GET /service to get all services
+
+- Changes to be done before releasing to PROD
+    - I will add multiple environment configuration using NODE_ENV to get the environment and properly set the credentials according to it
+    - Discard usage of .env and instead use something like AWS SecretsManager to better safegaurd the Database Credentials
