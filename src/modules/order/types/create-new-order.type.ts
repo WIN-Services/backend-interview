@@ -1,8 +1,5 @@
-import {
-  Order,
-  OrderStatus,
-} from '../../../shared/database/postgres/models/order.model';
-import { Service } from '../../../shared/database/postgres/models/service.model';
+import { OrderStatus } from '../../../shared/database/postgres/models/order.model';
+import { OrderResponse } from './get-all-orders.type';
 
 export type CreateNewOrderRequest = {
   status?: OrderStatus;
@@ -10,9 +7,5 @@ export type CreateNewOrderRequest = {
 };
 
 export type CreateNewOrderResponse = {
-  order: Order & {
-    totalFee: number;
-    currencyCode: string;
-    services: Array<Service>;
-  };
+  order: OrderResponse;
 };

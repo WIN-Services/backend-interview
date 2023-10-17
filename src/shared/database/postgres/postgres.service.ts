@@ -13,4 +13,15 @@ export class PostgresService {
       .query<Response, Parameters>(query, parameters)
       .then((response) => response.rows);
   }
+
+  async runDeleteQuery<
+    Response extends QueryResultRow = any,
+    Parameters extends any[] = any[],
+  >(query: string, parameters?: Parameters) {
+    return this.pool
+      .query<Response, Parameters>(query, parameters)
+      .then((response) => {
+        return !!response.rowCount;
+      });
+  }
 }
