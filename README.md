@@ -22,8 +22,8 @@
 # API Constraints:
 - Service Should return error on creation/updating an order within 3 hrs of a pre-existing order.
 # Data Base Description:
- - Have used Relational Database:MySQL as a database to manage the data of orders and services.
- - Our database contains three main entities such as: 
+- Have used Relational Database:MySQL as a database to manage the data of orders and services.
+- Our database contains three main entities such as: 
 - tbl_order_masters: This table has mainly contains field 'totalFee'.
 - tbl_service_masters: This table has mainly contains field 'name'.
 - tbl_order_service_mappings: This table has  mainly contains filed 'orderId' & 'serviceId'.
