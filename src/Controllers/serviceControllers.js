@@ -20,8 +20,9 @@ const getAllServices = async (req, res) => {
         ServiceRecords: serviceLists,
       });
     }
-    return res.status(400).json({
+    return res.status(200).json({
       message: "No service records found !!",
+      ServiceRecords:[]
     });
   } catch (error) {
     return res.status(500).json({
@@ -46,8 +47,9 @@ const getServicesById = async (req, res) => {
       },
     });
     if (!isServiceExist) {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "No service records found !!",
+        ServiceRecords:[]
       });
     }
     return res.status(200).json({
