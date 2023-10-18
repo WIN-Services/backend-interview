@@ -23,7 +23,7 @@
 - Service Should return error on creation/updating an order within 3 hrs of a pre-existing order.
 # Data Base Description:
  - Have used Relational Database:MySQL as a database to manage the data of orders and services.
- -Our database contains three main entities such as: 
+ - Our database contains three main entities such as: 
 - tbl_order_masters: This table has mainly contains field 'totalFee'.
 - tbl_service_masters: This table has mainly contains field 'name'.
 - tbl_order_service_mappings: This table has  mainly contains filed 'orderId' & 'serviceId'.
@@ -80,7 +80,7 @@ Below are the HTTP Methods,API endpoints with short description:
 - I have used Ajv validators for Schema Validation thus when client sent request from
   req.body or whatever the datatype should be same as mentioned in input schema validator.
 
--otherwise it show validation error. i.e datatype sent by client should be same as schema Validator. It will avoid several security breaches.
+- Otherwise it show validation error. i.e datatype sent by client should be same as schema Validator. It will avoid several security breaches.
 
 # Changes for Production:  
 - For production,need to encrypt sensitive data such as database configurations more precisely,encrypt 'config.json' file & stored it into '.env' file.
