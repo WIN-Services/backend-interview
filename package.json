@@ -1,12 +1,24 @@
 {
-  "name": "win",
+  "name": "order-management",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "Order-Management",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon  index.js"
   },
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/himpan1998/Order-Management-System.git"
+  },
+  "author": "Himanshu Pandey",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mysql2": "^3.6.1",
+    "sequelize": "^6.33.0",
+    "sequelize-cli": "^6.6.1"
+  }
 }
