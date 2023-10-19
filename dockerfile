@@ -1,6 +1,6 @@
-FROM node:12.18.1
+FROM node:16.15.1
 
-WORKDIR /app
+WORKDIR ./
 
 COPY ["package.json", "./"]
 

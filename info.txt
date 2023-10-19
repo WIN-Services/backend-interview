@@ -1,0 +1,17 @@
+For running this project 
+
+Run command docker build -t my-node-app .
+Then run docker compose up
+By logging into db via any client at port 5433 run ddl.sql file ( making the tables and adding services )
+
+
+Features not implemented ( Due to less time )
+
+- Currently services are being added in table directly at start but services crud api file could be introduced for that
+
+- The orders are all at global level since there was no user concept required but it can be change according to user
+  where every order will belong to some user and so all queries would filter via user . User would be authenticated via jwt 
+
+- We could place a validation layer ( via express middlewares ) upfront for validating the incoming payload ( yup is the library I would prefer to use for this)
+
+- For simplicity purposes I have directly use node-pg and not used any orms . 
