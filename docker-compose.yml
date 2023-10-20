@@ -16,7 +16,7 @@ services:
     depends_on:
       - db
     ports: 
-      - "3000:3000"
+      - "8083:8083"
     command: "npm run start"
 
 
