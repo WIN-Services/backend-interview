@@ -1,0 +1,9 @@
+node_modules
+sequelize-with-postgres-tutorial-master
+
+yarn.lock
+package-lock.json
+coverage
+
+.env
+.DS_Store
