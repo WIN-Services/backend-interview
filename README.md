@@ -1,110 +1,84 @@
-# WIN Backend Engineering Interview
+## How Order Management System works (API Endpoints listed below):
 
-## Scenario
-
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
-
-## Deliverables
-
-There are two deliverables for this project:
-
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
-
-### General
-
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
-
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
+-   `GET /orders` request fetches all orders listed
+    -   Successful fetch request gets response `200` with details such as `totalNumberOfOrders` and an arrays of Orders `[Order Desc.]`.
+    -   Otherwise a `500` response code with error message.
+-   `GET /orders/{orderId}` request fetches details about the order having `id === orderId`
+    -   Successful fetch request gets response `200` with details about the order.
+    -   If Order is not found, response is `404`.
+    -   Otherwise a `500` response code with error message.
+-   `POST /orders` request places a new Order with order information from request body **IFF** no previous order with such `productId` was created or updated less than `3` hours ago.
+    -   Example of request body:
+    ```
         {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
+        "id": "223",
+        "datetime": "2022-11-01T11:11:11.111Z", // optional
+        "totalfee": 100,
+        "services": [
+            {
+            "id": "123",
+            }
+        ]
+    }
+    ```
+    -   Successful POST request gets `201` response.
+    -   Unsuccessful POST request with reason being less than 3 hours of time duration gets `400` response.
+    -   Otherwise a `500` response code with error message.
+-   `DELETE /orders/{orderId}` request deletes an pre-existing order with specific `orderId`.
+    -   Successful deletion gets response `200`.
+    -   If deletion was unsuccessful due to order being not found, response is `404`.
+    -   Otherwise a `500` response code with error message.
+-   `PATCH /orders/{orderId}` request updates an existing order with specific `orderId`.
+    -   Successful updation gets response `200`.
+    -   Unsuccessful PATCH request with reason being less than 3 hours of time duration gets `400` response.
+    -   If updation was unsuccessful due to order being not found, response is `404`.
+    -   Otherwise a `500` response code with error message.
 
-## Duration
+#### Language used: Javascript
 
-Up to 2 hours.
+#### Libraries used:
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+    - Express.js (routing)
+    - mocha (testing)
+    - chai (testing)
+    - chai-http (testing)
+    - mongoose (database interaction)
+    - body-parser (parsing request data)
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+## Setting up the Application
+
+-   **Download Project files from the repository**
+
+-   **Dependency installtions required**:
+
+    -   Open a terminal in the project directory.
+    -   Run `npm install` to install project dependencies.
+    -   Or you can manually install each dependency using following commands
+        -   install express (`npm i express`)
+        -   install MongoDB (`npm i mongodb`)
+        -   install Mongoose (`npm i mongoose`)
+        -   install chai (`npm i chai`)
+        -   install mocha (`npm i mocha`)
+        -   install chai-http (`npm i chai-http`)
+        -   install body-parser (`npm i body-parser`)
+
+-   **Database Setup**:
+    -   Update your required database name in `src/controllers/connectDB.js` with your database URI.
+
+4.  **Starting up the application**:
+
+    -   Start the server by running `npm start`.
+    -   Go to http://localhost:3333 to view JSON results
+
+5.  **Testing the application**:
+    -   Test the endpoints by running `npm run test`.
+
+## Assumptions
+
+-   **Valid Format**: The application has been written assuming that the entries to endpoints will always be in valid JSON format.
+
+## Further Requirements for Production enviroment
+
+-   Since the requirement was `to provide a service that allows other systems and teams to obtain information about orders.`, access to these API endpoints should be **authenticated and authorized** with proper credentials.
+-   **Rigorous testing** is required to test some more edge cases in certain endpoints. Also proper documentation for testing is necessary.
+-   For basic purpose, scalability was not the main focus of this application.
