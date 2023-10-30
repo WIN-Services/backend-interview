@@ -1,110 +1,55 @@
-# WIN Backend Engineering Interview
+# Order Management System
 
-## Scenario
+### Language: 
+JavaScript
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+### Framework: 
+Express
 
-## Deliverables
+## Description
 
-There are two deliverables for this project:
+This project implements an Order Management System, providing a RESTful API for managing orders and service records. The system is built using JavaScript/ES6 and the Express framework for the backend. MongoDB is used as the database to store order and service record data.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+The system offers the following features:
 
-### General
+- Creating, retrieving, updating, and deleting orders.
+- Creating, retrieving service records.
+- Validating order creation and preventing the creation of orders within 3 hours of a pre-existing order.
+- Handling edge cases and returning appropriate HTTP status codes.
+- Returning JSON results for all endpoints.
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+## Trade-offs
 
-### Web Service
+- To simplify the implementation, the system may not fully adhere to security best practices or comprehensive error handling.
+- The system currently provides a basic set of CRUD operations, and further functionalities could be added for a production-ready solution.
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+## Changes for Production
 
-## Sample Data
+For a production-ready version of this system, the following improvements should be considered:
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+- Implement user authentication and authorization to secure the API endpoints.
+- Implement comprehensive error handling and logging.
 
-Service Records
+## Getting Started
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
+1. Clone the project repository.
+2. Ensure that MongoDB is running on your local machine or update the MongoDB connection string in the project's configuration.
+3. Install the project's dependencies using `npm install`.
+4. Start the server using `npm start`.
 
-Orders
+## Completed Specification
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
+- Created a RESTful API for managing orders and service records.
+- Implemented CRUD operations for orders and service records.
+- Validated order creation and prevented orders from being created within 3 hours of a pre-existing order.
+- Handled edge cases and returned appropriate HTTP status codes.
+- All endpoints return JSON results.
+- Included basic error handling and provided appropriate error responses.
 
-## Duration
+## Time Spent
 
-Up to 2 hours.
+The project was completed within the specified time limit of 2 hours.
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+## Problems Faced
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+While developing the project, a few challenges were encountered, such as implementing error handling and ensuring that the MongoDB database was correctly configured and connected. However, these challenges were successfully addressed during the development process.
