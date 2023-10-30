@@ -4,9 +4,16 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "env RUN_SERVER=false mocha ./test/* --delay=false --exit --verbose=true",
+    "start": "env RUN_SERVER=true node server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.10",
+    "chai-http": "^4.4.0",
+    "express": "^4.18.2",
+    "mocha": "^10.2.0",
+    "mongoose": "^7.6.3"
+  }
 }

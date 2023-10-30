@@ -1,15 +1,10 @@
 version: '3.8'
 services:
   db:
-    image: postgres:14.1-alpine
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+    image: mongo:4.0.4
     ports:
-      - '5432:5432'
-    volumes: 
-      - ./data:/var/lib/postgresql/data
+      - 27019:27017
+    container_name: mongodb
   api:
     image: node:slim
     build: .
