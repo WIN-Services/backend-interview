@@ -6,6 +6,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - DB_KEY=mongodb://<DB_KEY>/order-management
     ports:
       - '5432:5432'
     volumes: 
@@ -16,8 +17,5 @@ services:
     depends_on:
       - db
     ports: 
-      - "3000:3000"
+      - "3002:3002"
     command: "npm run start"
-
-
-      
