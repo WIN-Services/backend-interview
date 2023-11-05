@@ -81,7 +81,7 @@ Collections:
   
 ## Download Postman Collection
 
-[Download file](order_service.postman_collection.json.json)
+[Download file](order_service.postman_collection.json)
 
 
 ## Trade-offs made
