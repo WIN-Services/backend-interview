@@ -51,6 +51,10 @@ npm run test
 
 npm run coverage
 
+# Seed Data 
+
+npm run seed
+
 ## API Endpoints
 
 - `GET /order` - Get all orders;
@@ -110,6 +114,7 @@ Collections:
 
 ## What parts of spec were covered
 =============================== Coverage summary ===============================
+
 Statements   : 91.17% ( 155/170 )
 Branches     : 64.86% ( 24/37 )
 Functions    : 83.33% ( 20/24 )
