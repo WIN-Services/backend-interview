@@ -1,110 +1,124 @@
 # WIN Backend Engineering Interview
 
-## Scenario
+# Order Service
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+This a simple CRUD REST Orders Management API . Tech Stack NodeJS/ Express / MonogDB
 
-## Deliverables
+## Requirements
 
-There are two deliverables for this project:
+- Node.js
+- MongoDB server or Docker and Docker compose
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+## Clone the repository and install dependencies
 
-### General
-
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
-
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+```
+//on local
+git clone https://github.com/Naman15032001/order-service
+cd order-service
+npm install
 ```
 
-Orders
+## Set up the MongoDB connection:
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
+Make sure you have MongoDB installed and running.
+Update the mongo db uri in .env For Example
+
+```
+MONGODB_URI=mongodb://localhost:27017/orders_app
 ```
 
-## Duration
+IF using docker then no need for mongodb installed and running on system.
+Update the mongo db uri in .env
 
-Up to 2 hours.
+```
+MONGODB_URI=mongodb://mongodb:27017/orders_app
+```
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+# Usage
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+```
+npm start
+// For Docker
+docker-compose build
+docker-compose up
+```
+
+## Test
+
+npm run test
+
+## Coverage
+
+npm run coverage
+
+# Seed Data 
+
+npm run seed
+
+## API Endpoints
+
+- `GET /order` - Get all orders;
+- `GET /order/:id` - Get a order details by ID.
+- `POST /order` - Create a new order.
+- `PUT /order/:id` - Update an existing order
+                     (Not Allowed  within 3 hrs of existing order)
+- `DELETE /order/:id` - Delete a order.
+
+## Database Design
+service: order-service
+Database: orderdb
+
+Many to Many relationship between Orders <-> Services
+
+Collections:
+1. Orders
+  - _id (ObjectID)
+  - order_id: String [required, unique]  (INDEXED FIELD)
+  - datetime: Date [default: current date and time]
+  - totalfee: Number
+  - services: Array of ObjectIds (references "Services" collection) 
+
+2. Service
+  - _id (ObjectID)
+  - service_id: String [required, unique]
+  - name: String [required , unique] 
+  
+## Download Postman Collection
+
+[Download file](order_service.postman_collection.json)
+
+
+## Trade-offs made
+  - Security aspect of the project 
+  - Pagination not added in get all orders in api 
+  - Instead of embedding use REF in DB design ( will save space but 
+    additional quering)
+  - For the scope of this project kept simple Schema
+
+
+## Assumptions made
+  - No authentication required
+  - No HTTPS server required
+  - No crud apis for services ( directly ingested using seeder)
+
+## Changes for production
+  - Observability and Monitoring integration (Eg Datadog)
+  - Horizontal scaling of this app (Eg HPA in kubernetes)
+  - Horizontal scaling for high avalibility of DB (Eg using replica set)
+  - Robust Error Handling and seperate data validation layer as 
+    middleware
+  - Better Configuration management for different envs 
+  - Keeping this app internal in private vpc behind load balancer/ api
+    gateway etc. and many more..
+
+
+## What parts of spec were covered
+=============================== Coverage summary ===============================
+
+- Statements   : 91.17% ( 155/170 )
+- Branches     : 64.86% ( 24/37 )
+- Functions    : 83.33% ( 20/24 )
+- Lines        : 92.21% ( 154/167 )
+
+
+## Time spent 4-5 hrs 
