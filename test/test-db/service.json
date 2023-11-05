@@ -1,0 +1,14 @@
+[
+  {
+    "service_id": 123,
+    "name": "Inspection"
+  },
+  {
+    "service_id": 789,
+    "name": "Testing"
+  },
+  {
+    "service_id": 456,
+    "name": "Analysis"
+  }
+]
