@@ -115,10 +115,10 @@ Collections:
 ## What parts of spec were covered
 =============================== Coverage summary ===============================
 
-Statements   : 91.17% ( 155/170 )
-Branches     : 64.86% ( 24/37 )
-Functions    : 83.33% ( 20/24 )
-Lines        : 92.21% ( 154/167 )
+- Statements   : 91.17% ( 155/170 )
+- Branches     : 64.86% ( 24/37 )
+- Functions    : 83.33% ( 20/24 )
+- Lines        : 92.21% ( 154/167 )
 
 
 ## Time spent 4-5 hrs 
