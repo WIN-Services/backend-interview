@@ -1,0 +1,521 @@
+{
+	"info": {
+		"_postman_id": "82f1fd00-d4f4-45fd-bdde-3afe9263396b",
+		"name": "WIN Backend Interview Assessment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13047276"
+	},
+	"item": [
+		{
+			"name": "Get all orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"order"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all orders",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"order"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "x-auth-token"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "361"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"169-I6qAZOtM9cC7n+WsIoDWLMpOiEY\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 08 Nov 2023 02:53:54 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"_id\": \"654aeed698d33664af1f1fd1\",\n        \"datetime\": \"2006-07-02T06:11:11.110Z\",\n        \"totalfee\": 200,\n        \"services\": [],\n        \"createdAt\": \"2023-11-08T02:13:42.302Z\",\n        \"updatedAt\": \"2023-11-08T02:14:36.162Z\"\n    },\n    {\n        \"_id\": \"654aef1addb3a7eb444f8ed8\",\n        \"datetime\": \"2006-07-02T10:11:11.110Z\",\n        \"totalfee\": 200,\n        \"services\": [],\n        \"createdAt\": \"2023-11-08T02:14:50.650Z\",\n        \"updatedAt\": \"2023-11-08T02:15:46.220Z\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get an order by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/order/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"order",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "654aeed698d33664af1f1fd1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get an order by id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/order/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"order",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "654aeed698d33664af1f1fd1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "x-auth-token"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "179"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"b3-CHLvUuxQbOCrJCIDaMRSbpZejbU\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 08 Nov 2023 03:20:24 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"654aeed698d33664af1f1fd1\",\n    \"datetime\": \"2006-07-02T06:11:11.110Z\",\n    \"totalfee\": 200,\n    \"services\": [],\n    \"createdAt\": \"2023-11-08T02:13:42.302Z\",\n    \"updatedAt\": \"2023-11-08T02:14:36.162Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create an order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"totalfee\": 100,\r\n    \"datetime\": \"2006-07-02T02:11:11.110Z\",\r\n    \"services\": [\r\n        \"654a698ae8acf1d369d986bb\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/order/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"order",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create an order",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"totalfee\": 100,\r\n    \"datetime\": \"2006-07-02T02:11:11.110Z\",\r\n    \"services\": [\r\n        \"654a698ae8acf1d369d986bb\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"order",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "x-auth-token"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "213"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"d5-xvmEMk9/ixJOkhI5gwEdtXAf97c\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 08 Nov 2023 02:14:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"datetime\": \"2006-07-02T02:11:11.110Z\",\n    \"totalfee\": 100,\n    \"services\": [\n        \"654a698ae8acf1d369d986bb\"\n    ],\n    \"_id\": \"654aef1addb3a7eb444f8ed8\",\n    \"createdAt\": \"2023-11-08T02:14:50.650Z\",\n    \"updatedAt\": \"2023-11-08T02:14:50.650Z\",\n    \"__v\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "Update an order by id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"totalfee\": 200,\r\n    \"datetime\": \"2006-07-02T06:11:11.110Z\",\r\n    \"services\": [\r\n        \"654a698ae8acf1d369d986bb\",\r\n        \"654a698ae8acf1d369d986bd\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/order/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"order",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "654aeed698d33664af1f1fd1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update an order by id",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"totalfee\": 200,\r\n    \"datetime\": \"2006-07-02T06:11:11.110Z\",\r\n    \"services\": [\r\n        \"654a698ae8acf1d369d986bb\",\r\n        \"654a698ae8acf1d369d986bd\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"order",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "654aeed698d33664af1f1fd1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "x-auth-token"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "240"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"f0-yZN2jW5gaOvrPZZDMWoWxSHQRZs\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 08 Nov 2023 02:16:09 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"654aeed698d33664af1f1fd1\",\n    \"datetime\": \"2006-07-02T06:11:11.110Z\",\n    \"totalfee\": 200,\n    \"services\": [\n        \"654a698ae8acf1d369d986bb\",\n        \"654a698ae8acf1d369d986bd\"\n    ],\n    \"createdAt\": \"2023-11-08T02:13:42.302Z\",\n    \"updatedAt\": \"2023-11-08T02:14:36.162Z\",\n    \"__v\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete an order by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/order/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"order",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "654aef1addb3a7eb444f8ed8"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an order by id",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/order/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"order",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "654aef1addb3a7eb444f8ed8"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "x-auth-token"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 08 Nov 2023 03:22:31 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
