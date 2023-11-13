@@ -1,23 +1,30 @@
 version: '3.8'
+
 services:
-  db:
-    image: postgres:14.1-alpine
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - '5432:5432'
-    volumes: 
-      - ./data:/var/lib/postgresql/data
-  api:
+  node-app:
     image: node:slim
     build: .
+    ports:
+      - "5000:5000"
     depends_on:
-      - db
-    ports: 
-      - "3000:3000"
+      - mongo
     command: "npm run start"
+    environment:
+      - PORT=3000
+      - MONGO_URI=${MONGO_URI}
+      - MONGO_USERNAME=${MONGO_USERNAME}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
 
+  mongo:
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data:/data/db
 
-      
+volumes:
+  data:
