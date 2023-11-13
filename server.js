@@ -9,9 +9,9 @@ app.use(express.json());
 const connectDB = require('./config/db');
 
 connectDB();
-app.use('/api/v1/services',services);
+app.use('/api/v1/service',services);
 
-app.use('/api/v1/orders',orders);
+app.use('/api/v1/order',orders);
 
 
 const port = process.env.PORT || 3000;
