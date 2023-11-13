@@ -16,13 +16,6 @@ db.once('open', () => {
   console.log('MongoDB connection ready!');
 });
 
-
-// app.use(express.json());
-
-// const orderRoutes = require('./routes/order.router');
-// app.use('/', orderRoutes);
-
-
 async function startServer() {
     await mongoose.connect(MONGODB_URI);
 
@@ -32,5 +25,3 @@ async function startServer() {
 }
 
 startServer();
-
-// module.exports = app;

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --forceExit --detectOpenHandles  --watchAll --maxWorkers=1",
     "start": "node src/server.js",
-    "watch": "nodemon src/server.js"
+    "watch": "nodemon src/server.js",
+    "seed": "node seeders/service.seed.js"
   },
   "author": "",
   "license": "ISC",

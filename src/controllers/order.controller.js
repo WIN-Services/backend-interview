@@ -1,6 +1,11 @@
 const Order = require('../models/order.model');
 const Service = require('../models/service.model');
 
+
+/**
+ * GET /orders
+ * Get all orders
+*/
 async function getAllOrders(req, res) {
   try {
     let orders = await Order.find();
@@ -10,6 +15,11 @@ async function getAllOrders(req, res) {
   }
 }
 
+
+/**
+ * GET /order/:id
+ * List Details of specific order by its ID 
+*/
 async function getOrderById(req, res) {
   try {
     let orderId = req.params.id;
@@ -24,6 +34,11 @@ async function getOrderById(req, res) {
   }
 }
 
+
+/**
+ * POST /order
+ * Create new order 
+*/
 async function createOrder(req, res) {
     try {
         let newOrderData = req.body;
@@ -60,6 +75,11 @@ async function createOrder(req, res) {
     }
 }
 
+
+/**
+ * PUT /order/:id
+ * Update order
+*/
 async function updateOrder(req, res) {
   try {
     let orderId = req.params.id;
@@ -94,6 +114,11 @@ async function updateOrder(req, res) {
   }
 }
 
+
+/**
+ * DELETE /order/:id
+ * Delete an order 
+*/
 async function deleteOrder(req, res) {
   try {
     let orderId = req.params.id;
