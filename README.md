@@ -107,7 +107,6 @@ Following status codes are used in the API:
 ## Assumptions made
   - No authentication required
   - No HTTPS server required
-  - No crud apis for services ( used seeder instead)
 
 ## Changes for production
 
