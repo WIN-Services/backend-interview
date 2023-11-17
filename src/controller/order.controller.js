@@ -6,10 +6,12 @@ const moment = require("moment");
  */
 const createOrder = async (req, res) => {
   try {
-    const {id} = req.body
-    const existingOrder = await Order.findOne({ id: id });
-    if (existingOrder)
+    const { id } = req.body
+    const threeHoursAgo = moment().subtract(3, "hours");
+    const existingOrder = await Order.findOne({ id: id, createdAt: { $gt: threeHoursAgo } });
+    if (existingOrder) {
       return res.status(400).json({ error: "Order already exists!" });
+    }
     const order = new Order(req.body);
     await order.save();
     res.status(201).json(order);
@@ -66,29 +68,30 @@ const updateOrderById = async (req, res) => {
     const existingOrder = await Order.findOne({ _id: id });
     if (!existingOrder) {
       return res
-      .status(404)
-      .json({
-        error: "Order not found ",
-      });
+        .status(404)
+        .json({
+          error: "Order not found ",
+        });
     } else {
+      const { createdAt, updatedAt } = existingOrder
       // Parse createdAt using moment
-      const createdAtMoment = moment(existingOrder.createdAt);
-
+      const createdAtTime = moment(createdAt);
+      const updatedAtTime = moment(updatedAt);
       // Calculate time for three hours ago using moment
       const threeHoursAgo = moment().subtract(3, "hours");
 
       // Check if createdAt is within the last 3 hour
-      if (createdAtMoment.isSameOrAfter(threeHoursAgo)) {
+      if (createdAtTime.isSameOrAfter(threeHoursAgo) || updatedAtTime.isSameOrAfter(threeHoursAgo)) {
         return res
           .status(400)
           .json({
             error: "Cannot update before until 3 hours from order creation",
           });
-        // Handle the case where the order exists and is within the last 3 hour
       } else {
-         const order = await Order.findByIdAndUpdate(id, req.body, {
-        new: true,
-      });
+        req.body.updatedAt = moment();
+        const order = await Order.findByIdAndUpdate(id, { $set: req.body }, {
+          new: true,
+        });
         if (!order) {
           return res.status(404).json({ error: "Order not found" });
         }
