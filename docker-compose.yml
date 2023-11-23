@@ -1,22 +1,22 @@
 version: '3.8'
 services:
   db:
-    image: postgres:14.1-alpine
+    image: mongo:latest
     restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - '5432:5432'
+     - 27017:27017
     volumes: 
-      - ./data:/var/lib/postgresql/data
+      - ./data:/data/db
   api:
     image: node:slim
     build: .
     depends_on:
       - db
     ports: 
-      - "3000:3000"
+      - "5000:5000"
     command: "npm run start"
 
 
