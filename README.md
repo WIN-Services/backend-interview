@@ -4,107 +4,48 @@
 
 Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
 
-## Deliverables
+## Working of the project
 
-There are two deliverables for this project:
+1. Services: 
+  There are 5 endpoints for services. Base url: 'localhost:port/service/
+  1. to fetch all the services present: Endpoint-> Get('/') -> fetches all the active services
+  2. to fetch details of one particular service: Endpoint-> Get('/:id') -> fetches the details of that service whose id is passed.
+  3. to delete one service: Endpoint-> Delete('/:id') -> soft deletes that particular service
+  4. to update one service: Endpoint-> Put('/:id') -> updates that particular service if present
+  5. creation of new service: Endpoint-> Post('/') -> Creates new service
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+2. Orders:
+  There are 5 endpoints for orders. Base url: 'localhost:port/order/
+  1. to fetch all the orders present: Endpoint-> Get('/') -> fetches all the active orders
+  2. to fetch details of one particular order: Endpoint-> Get('/:id') -> fetches the details of that order whose id is passed.
+  3. to delete one order: Endpoint-> Delete('/:id') -> deletes that particular order
+  4. to update one order: Endpoint-> Put('/:id') -> updates that particular order if present
+  5. creation of new order: Endpoint-> Post('/') -> Creates new order after checking if any order is not created before 3 hrs.
 
-### General
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
 
-### Web Service
+## Setting up the Application: 
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+1. Git clone the repo
+2. npm i (To install all the dependencies)
+3. Install docker if not present
+4. update the env variables as mentioned in .env.example
+5. sudo docker-compose build
+6. sudo docker-compose up -d
+7. Run the postman collection pasted here.  
+  Collection: https://api.postman.com/collections/15542555-b32335ec-2eb7-40f2-b179-b191dd0231c9?access_key=PMAT-01HG320PBZPPRFKKD8QAFX2Q6B
 
-## Sample Data
+  Just get the json from this api. And try running the collection.
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+## What parts of the spec were completed: 
+  Some of the tasks which are left, is 
+   -> adding middleware, validations.
+   -> adding interfaces.
+   -> more test cases 
 
-Service Records
+## Time Spent 
+Around 1hr 45 mins
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
+## any particular problems you ran into
+Yes, worked with docker for the first time. It was a great learning experience. And i am glad i was able to implement this successfully.
 
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
