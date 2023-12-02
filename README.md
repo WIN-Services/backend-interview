@@ -243,8 +243,8 @@
 ### instructions on how to setup the environment to run my project
 
 - 1 clone reposatory
-- 2 I haven't used git ignore so you can directly run the code
-- 3 after clone you can run command npm run dev or node server.js
+- 2 then you can go inside folder backend-interview run command npm install
+- 3 after npm install you can run command npm run dev or node server.js
 - 4 then use postman to hit the APi and as shown in above example you can send the body request
 - 5 to run the delete API and get API you have to send - parametrs in query params like
 - orderId:"656a09a02a86e5049473f6f0",
