@@ -3,21 +3,35 @@ services:
   db:
     image: postgres:14.1-alpine
     restart: always
+    hostname: postgres
+    networks:
+      - app-network-win
     environment:
+      - POSTGRES_DB=winhome
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - '5432:5432'
-    volumes: 
+      - "5432:5432"
+    volumes:
       - ./data:/var/lib/postgresql/data
   api:
-    image: node:slim
-    build: .
+    build:
+      dockerfile: ./dockerfile
+    volumes:
+      - ./node_modules:/app/orders/node_modules
+      - ./src/:/app/library/src/
+      - .env/:/app/library/.env
+    env_file:
+      - docker.env
     depends_on:
       - db
-    ports: 
+    ports:
       - "3000:3000"
-    command: "npm run start"
+    # command: "npm run start:dev"
+    networks:
+      - app-network-win
 
-
-      
+networks:
+  app-network-win:
+    name: app-network-win
+    driver: bridge

@@ -1,11 +1,13 @@
-FROM node:12.18.1
-
-WORKDIR /app
-
-COPY ["package.json", "./"]
-
-RUN npm install
-
+FROM node:20-slim AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 COPY . .
+WORKDIR .
 
-CMD [ "node", "server.js" ]
+FROM base
+RUN cat docker.env>.env
+RUN pnpm install
+RUN pnpm run build
+EXPOSE 8000
+CMD [ "pnpm", "start:dev" ]
