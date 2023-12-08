@@ -1,110 +1,72 @@
-# WIN Backend Engineering Interview
+# Order Management System
 
-## Scenario
+## Overview
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+This project implements an Order Management System with a web service API using Node.js, Express, and MongoDB. The system allows for creating, updating, deleting, and retrieving orders. The API also enforces a constraint preventing the creation or updating of an order within 3 hours of a pre-existing order for the same **service**.
 
-## Deliverables
+## Technology Stack
 
-There are two deliverables for this project:
+- Language: JavaScript (Node.js)
+- Framework: Express.js
+- Database: MongoDB with Mongoose
+- Testing: Mocha, Chai
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+## How it Works
 
-### General
+The system provides a set of endpoints for managing orders:
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+- `POST /api/orders`: Create a new order
+- `GET /api/orders`: Get all orders
+- `GET /api/orders/:id`: Get order by ID
+- `PUT /api/orders/:id`: Update order by ID
+- `DELETE /api/orders/:id`: Delete order by ID
 
-### Web Service
+The system uses a MongoDB database to store orders and service records. Mocha and Chai are employed for testing the functionality of the web service.
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+## Trade-offs
 
-## Sample Data
+1. **Data Model:** The data model uses MongoDB, a NoSQL database. This decision provides flexibility but sacrifices some relational structure.
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+2. **Testing:** The test suite covers basic functionality. In a production scenario, more comprehensive testing, including edge cases, would be necessary.
 
-Service Records
+## Assumptions
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
+1. Service records are assumed to be predefined and exist in the database.
 
-Orders
+## Changes for Production
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
+For a production environment, consider the following improvements:
 
-## Duration
+1. **Security:** Implement authentication and authorization mechanisms.
 
-Up to 2 hours.
+2. **Logging:** Enhance logging for better monitoring and debugging.
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+3. **Scalability:** Evaluate and optimize for scalability, considering factors like database sharding.
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+## Setup
+
+1. Clone the repository: `git clone <repository-url>`
+2. Install dependencies: `npm install`
+3. Start the MongoDB database.
+4. Run the application: `npm start`
+
+## Environment Configuration
+
+For testing purposes, a sample `.env` file has been provided in the root of the project. This file includes configuration variables such as `PORT` and `MONGO_URL`. However, it's important to note that:
+
+- **This `.env` file is for testing purposes only.**
+- **Do not include sensitive information or real production values in this file.**
+- **Always use secure and private configurations for production environments.**
+
+Before running the application, make sure to create your own `.env` file with the appropriate configuration for your development or testing environment. Ensure that the `.env` file is added to your project's `.gitignore` to avoid accidentally committing sensitive information to version control.
+
+
+
+## Spec Compliance and Time Spent
+
+- **Spec Compliance:** All specified endpoints are implemented, including the constraint on order creation/update.
+- **Time Spent:** Approximately 2 hour 40 minutes.
+
+## Challenges 
+- **Testing Implementation:** As a developer not entirely comfortable with testing libraries, I encountered challenges in effectively implementing the test suite using Mocha and Chai. This led to a revision of my testing concepts and a deeper exploration of these libraries to ensure the reliability and correctness of the tests.
+
