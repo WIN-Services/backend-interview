@@ -1,110 +1,77 @@
-# WIN Backend Engineering Interview
+# WIN Backend-Interview Assignment
 
-## Scenario
+## High-Level Description
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+This project is a backend service for managing orders, developed using [NestJS](https://nestjs.com/), a progressive Node.js framework, and TypeScript. It provides a RESTful API for creating, retrieving, updating, and deleting orders, as well as managing service records associated with these orders.
 
-## Deliverables
+## Key Features
 
-There are two deliverables for this project:
+- CRUD operations for orders and service records.
+- Validation to prevent order creation/updating within 3 hours of an existing order.
+- Integration with a PostgreSQL database using TypeORM.
+- Swagger documentation for easy API testing and interaction.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+## Trade-offs Made
 
-### General
+- **Simplicity vs. Complexity**: Aimed for straightforward implementations to meet the requirements within the given time frame. This means some advanced features or optimizations might be missing.
+- **Validation**: Focused primarily on critical validations (e.g., order timing conflict). Some additional input validations might be necessary for robustness.
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+## Assumptions
 
-### Web Service
+- **Data Format**: Assumed that the date and time for orders are provided in a standard ISO format.
+- **Environment**: Developed and tested in a specific version of Node.js and PostgreSQL. Different environments might require additional configuration.
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+## Changes for Production
 
-## Sample Data
+- **Security**: Implement authentication and authorization (e.g., JWT, OAuth).
+- **Error Handling**: More comprehensive error handling and logging for debugging and audit trails.
+- **Performance Optimization**: Database indexing, query optimization, and caching mechanisms for better performance.
+- **Testing**: More extensive unit and integration tests to ensure stability.
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+## Setup and Running the Project
 
-Service Records
+### Prerequisites
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+- Node.js (version 18.0 or higher)
+- PostgreSQL (version 6.0 or higher)
+- npm or yarn
+
+### Installation Steps
+
+Clone the repository:
+
+```bash
+git clone [repository-url]
 ```
 
-Orders
+Navigate to the project directory:
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
+```bash
+$ cd [project-directory]
 ```
 
-## Duration
+Install dependencies:
 
-Up to 2 hours.
+```bash
+$ npm install
+```
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+- Set up your database and update the database configuration in app.module.ts.
+- Running the app
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+```bash
+$ npm run start
+```
+
+## Setting Up Swagger
+
+Swagger is configured to run automatically when you start the application.
+
+- Access the Swagger UI at [http://localhost:3000/api](http://localhost:3000/api)
+
+## Completed Specifications
+
+- All CRUD operations for orders and service records.
+- Validation for order timing.
+- Basic Swagger documentation.
+- Basic unit tests for controllers and services.
