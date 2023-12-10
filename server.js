@@ -14,9 +14,9 @@ const {
 const {sendResponse}	= require("./utils/response")
 const { MISSING_REQUIRED_FIELDS, ERROR_STATUS_CODES } = require("./constants/error_constants")
 const port = 3000;
-
+const auth = require('./authenticate');
 // ###### Get Order by ID #####
-app.get("/api/order/:id", async  (req, res) => {
+app.get("/api/order/:id", auth,async  (req, res) => {
 	console.log('Get Order by ID:', req.params.id)
 	try{
 		if(req.params.id){
@@ -32,7 +32,7 @@ app.get("/api/order/:id", async  (req, res) => {
 
 });
 // ###### Add New Order #####
-app.post("/api/addOrder", async  (req, res) => {
+app.post("/api/addOrder",auth, async  (req, res) => {
 	console.log('Add Orders')
 	try{
 		if(req.body.services && req.body.services.length > 0){
@@ -47,7 +47,7 @@ app.post("/api/addOrder", async  (req, res) => {
 	}
 });
 // ###### Get All Orders #####
-app.get("/api/orders", async  (req, res) => {
+app.get("/api/orders",auth, async  (req, res) => {
 	console.log('Get All Orders')
 	
 	try{
@@ -61,7 +61,7 @@ app.get("/api/orders", async  (req, res) => {
 	}
 });
 // ###### Delete Order By ID #####
-app.delete("/api/order/:id", async  (req, res) => {
+app.delete("/api/order/:id", auth,async  (req, res) => {
 	console.log('Delete Order by ID:', req.params.id)
 
 	try{
@@ -78,7 +78,7 @@ app.delete("/api/order/:id", async  (req, res) => {
 	}
 });
 // ###### Update Order By ID #####
-app.patch("/api/order/:id", async  (req, res) => {
+app.patch("/api/order/:id",auth, async  (req, res) => {
 	console.log('Update Order by ID:', req.params.id)
 	
 	try{
@@ -97,7 +97,7 @@ app.patch("/api/order/:id", async  (req, res) => {
 
 
 // ###### Add New Service #####
-app.post("/api/addService", async  (req, res) => {
+app.post("/api/addService",auth, async  (req, res) => {
 	console.log('Add Service')
 	try{
 		if(req.body.name){
@@ -112,7 +112,7 @@ app.post("/api/addService", async  (req, res) => {
 	}
 });
 // ###### Get All Service #####
-app.get("/api/services", async  (req, res) => {
+app.get("/api/services",auth, async  (req, res) => {
 	console.log('Get All Services')
 	
 	try{
