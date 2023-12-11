@@ -10,10 +10,8 @@ module.exports = (req, res, next) => {
       });
   }
   const token = authHeader.split(' ')[1];
-  console.log(token)
   try {
     const jwtDetails = jwt.decode(token);
-    console.log(jwtDetails)
     if(jwtDetails.name == process.env.OWNER)
       next();
     else{

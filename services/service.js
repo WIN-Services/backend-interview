@@ -26,13 +26,12 @@ async function calculateServiceCost(serviceData){
 	let totalFees = 0;
 	serviceData.forEach((data)=>{
 		const serviceDetails = services.find(item => item._id === data.id);
-		console.log(serviceDetails);
 		if(!serviceDetails)
 			throw new Error(INVALID_SERVICE_ID)
 		if(serviceDetails.fees)
-			totalFees = totalFees + Number(serviceDetails.fees)
-		return totalFees;
+			totalFees = totalFees + Number(serviceDetails.fees);
 	})
+	return totalFees;
 }
 
 module.exports = {
