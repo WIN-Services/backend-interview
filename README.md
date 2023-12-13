@@ -1,110 +1,60 @@
-# WIN Backend Engineering Interview
+# Order Management System
 
-## Scenario
+## Description
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+This project implements an order management system with an internal web service API for managing orders. The solution is developed using JavaScript with Node.js and Express for the backend. MongoDB is used as the database, and Mongoose is employed as the ODM (Object Document Mapper).
 
-## Deliverables
+## How It Works
 
-There are two deliverables for this project:
+- **Language Used:** JavaScript (Node.js)
+- **Framework Used:** Express
+- **Database:** MongoDB with Mongoose
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+The solution comprises controllers, services, models, and utility classes. The controllers handle HTTP request/response logic, the services encapsulate the business logic and database interactions, and the models define the MongoDB schemas. The `ResponseHandler` class is a utility for consistent formatting of success and error responses.
 
-### General
+## Trade-Offs
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+- For simplicity and quick development, the project uses in-memory storage with MongoDB. In a production scenario, considerations for scalability and performance might lead to different database choices or caching strategies.
 
-### Web Service
+## Assumptions
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+- The provided sample data is used for development and testing.
+- The project assumes a single-node MongoDB instance for simplicity.
 
-## Sample Data
+## Changes for Production
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+For a production-ready system, consider the following changes:
 
-Service Records
+- Implement proper authentication and authorization mechanisms.
+- Use a more robust database setup, such as a MongoDB cluster.
+- Implement validation and error handling more comprehensively.
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
+## Environment Setup
 
-Orders
+1. Clone the repository:
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
+   ```bash
+   git clone https://github.com/yourusername/order-management-system.git
 
-## Duration
+2. Navigate to the project directory:
+    ```bash
+    cd order-management-system
+    npm install
+    npm start
 
-Up to 2 hours.
+3. Ensure a running MongoDB instance. Update the MongoDB connection details in config/database.js
+4. The server will be running at http://localhost:7000
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+## Spec Completion
+
+Web Service API: Implemented CRUD endpoints for orders and services.
+Error Handling: Handled edge cases with appropriate HTTP status codes.
+Order Creation/Update: Returns an error if creating/updating an order within 3 hours of a pre-existing order.
+Response Format: JSON results with a standardized response format.
+Testing: Included Jest and Supertest for testing. Basic test cases for orders and services are provided.
+
+
+## Time Spent
+
+Approximately 2 hours were spent on developing and testing the solution.
