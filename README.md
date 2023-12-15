@@ -1,110 +1,64 @@
-# WIN Backend Engineering Interview
 
-## Scenario
+## Description
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+The project is an order management system with web service API for managing orders. Developed using Node.js and Express also MySQL is used as the database.
 
-## Deliverables
+## Tech Stack
 
-There are two deliverables for this project:
+- **Language Used:** Javascript (Node.js)
+- **Framework Used:** Express
+- **Database:** MySQL
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+## Trade-Offs
 
-### General
+For simple and quick development of this project, several trade-offs were considered:
+1. Although we have added pagination in the get all orders API to prevent large datasets processing, we we'll need indexing in the database for production
+2. Credentials have been hardcoded in some of the places for quick development
+3. No mysql migration setup implemented, need to create tables manually (Provided the quries)
+4. No authentication implemented for APIs (Supposed to be used jwt for authorization)
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+## Assumptions
 
-### Web Service
+- The provided sample data format is slightly changed for consistency in naming the keys/data.
+- The project assumes that the Mysql installed in the system.
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+## Environment Setup
 
-## Sample Data
+1. Clone the repository, navigate to the project directory
+2. Run npm install
+3. Setup enviroment variables (in .env file in the root, refer env example)
+4. Run mysql queries provided below
+5. Run npm start
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+## MySQL queries
+1. CREATE TABLE `orders` (
+  `order_id` bigint NOT NULL AUTO_INCREMENT,
+  `total_fee` FLOAT NOT NULL,
+  `service_ids` text NOT NULL
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB
+2. CREATE TABLE `services` (
+  `service_id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`service_id`)
+) ENGINE=InnoDB
+3. INSERT INTO services (name) VALUES ("Inspection"),("Testing"),("Analysis");
 
-Service Records
+## Delivered
+- Order management APIs
+  - Create order
+  - Get order
+  - Update order
+  - Delete order
+  - Get all orders (with pagination)
+- Test Cases
+  - Order APIs
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+## Time Spent
+- Development: 2-3 Hrs for the developement, spent time in solutioning, developing application, debugging etc. 
+- Testing: 40 mins spent testing and fixing bugs
+- Documentation: 30 mins spent writing README file
