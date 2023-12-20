@@ -6,6 +6,8 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - PORT=3000
+      - DATABASE_URL=postgresql://postgres:admin@localhost:5432/mytestdb
     ports:
       - '5432:5432'
     volumes: 
@@ -13,11 +15,13 @@ services:
   api:
     image: node:slim
     build: .
+    environment:
+      - PORT=3000
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/mytestdb
     depends_on:
       - db
     ports: 
       - "3000:3000"
+    volumes:
+      - "`${pwd}`:/app"
     command: "npm run start"
-
-
-      
