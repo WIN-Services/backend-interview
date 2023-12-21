@@ -74,7 +74,40 @@ const createOrders = async (body, res) => {
 const updateOrders = async ({id,...body}, res) => {
 
     try {
-        const updatedOrder = await prisma.orders.update({
+          if(body.services){
+            let ids = body.services.map(a => a.id)
+            const existingIds = (await prisma.service_orders.findMany({
+                where: {
+                    order_id: id
+                },
+                select: {
+                    service_id: true
+                }
+            })).map(obj => obj.service_id)
+            const toBeCreated = ids.filter(a => !existingIds.includes(a))
+            const toBeDeleted = existingIds.filter(a => !ids.includes(a))
+            if(toBeDeleted.length > 0){         
+                await prisma.service_orders.deleteMany({
+                    where: {
+                        order_id: id,
+                        service_id : {
+                            in: toBeDeleted
+                        }
+                    }
+                })
+            }
+            if(toBeCreated.length > 0){
+                await prisma.service_orders.createMany({
+                    data: toBeCreated.map(sId => {
+                        return {
+                            order_id: id,
+                            service_id: sId
+                        }
+                    })
+                })
+              }
+            }
+          const updatedOrder = await prisma.orders.update({
             where: {
               id: id,
             },

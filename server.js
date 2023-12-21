@@ -5,10 +5,10 @@ const { PrismaClient } = require("@prisma/client")
 const prisma = new PrismaClient();
 
 (async () => {
-await prisma.$queryRaw`SELECT 1`.catch(err => {
-    console.error("Database Connection Failed")
-}).then(res => {
+await prisma.$queryRaw`SELECT 1`.then(res => {
     console.log("Database Connected Successfully")
+}).catch(err => {
+    console.error("Database Connection Failed")
 })}) ()
 
 const port = process.env.PORT || 3000
