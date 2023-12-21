@@ -66,15 +66,18 @@ const createOrders = async (body, res) => {
         })
         return res.json(responseMaker(order));
     } catch (error) {
-        return res.status(500).json({err: error.message, stack: error.stack})
+        return res.status(500).json({ err: error.message, stack: error.stack })
     }
 }
 
 
-const updateOrders = async ({id,...body}, res) => {
-
+const updateOrders = async ({ id, ...body }, res) => {
     try {
-          if(body.services){
+        const hasOrders = await func.hasExistingOrderWithin3Hours();
+        if (hasOrders) {
+            return res.status(400).json({ error: 'Cannot create order within 3 hours of an existing order.' });
+        }
+        if (body.services) {
             let ids = body.services.map(a => a.id)
             const existingIds = (await prisma.service_orders.findMany({
                 where: {
@@ -86,17 +89,17 @@ const updateOrders = async ({id,...body}, res) => {
             })).map(obj => obj.service_id)
             const toBeCreated = ids.filter(a => !existingIds.includes(a))
             const toBeDeleted = existingIds.filter(a => !ids.includes(a))
-            if(toBeDeleted.length > 0){         
+            if (toBeDeleted.length > 0) {
                 await prisma.service_orders.deleteMany({
                     where: {
                         order_id: id,
-                        service_id : {
+                        service_id: {
                             in: toBeDeleted
                         }
                     }
                 })
             }
-            if(toBeCreated.length > 0){
+            if (toBeCreated.length > 0) {
                 await prisma.service_orders.createMany({
                     data: toBeCreated.map(sId => {
                         return {
@@ -105,14 +108,14 @@ const updateOrders = async ({id,...body}, res) => {
                         }
                     })
                 })
-              }
             }
-          const updatedOrder = await prisma.orders.update({
+        }
+        const updatedOrder = await prisma.orders.update({
             where: {
-              id: id,
+                id: id,
             },
             data: {
-              totalfees: body.totalfees
+                totalfees: body.totalfees
             },
             select: {
                 totalfees: true,
@@ -123,11 +126,11 @@ const updateOrders = async ({id,...body}, res) => {
                     }
                 }
             }
-          });
+        });
         return res.json(responseMaker(updatedOrder));
     } catch (error) {
         console.log(error.message);
-        return res.status(500).json({err: "Server gone wild"})
+        return res.status(500).json({ err: "Server gone wild" })
     }
 }
 
@@ -146,6 +149,7 @@ const deleteOrders = async (req, res) => {
         }
         return res.json(result);
     } catch (err) {
+        console.error(err);
         throw res.status(500).send({ err: err.message, stack: err.stack });
     }
 }

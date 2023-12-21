@@ -1,110 +1,84 @@
-# WIN Backend Engineering Interview
+# Order Management System
 
-## Scenario
+Welcome to the Order Management System (OMS) application! This system is designed to manage orders and services using a PostgreSQL database and an Express.js backend using PrismaORM.
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+## Installation
 
-## Deliverables
+Follow these steps to install and set up the application:
 
-There are two deliverables for this project:
+1. **Clone the repository:**
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+   ```bash
+   git clone https://github.com/goropencho/backend-interview.git
+   ```
 
-### General
+2. **Navigate to the project directory:**
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+   ```bash
+   cd backend-interview
+   ```
 
-### Web Service
+3. **Install dependencies:**
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+   ```bash
+   npm install
+   ```
 
-## Sample Data
+4. **Configure the database:**
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+   - Create .env file containing the database url along with the password. Refer .env.example file.
 
-Service Records
+5. **Run the database migrations:**
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+   ```bash
+   npm run migrate
+   ```
+
+6. **Start the application:**
+
+   ```bash
+   npm start
+   ```
+
+   The application will be accessible at `http://localhost:3000`.
+
+## API Endpoints
+
+### Orders
+
+- **GET /orders**: Get a list of all orders.
+
+- **GET /orders/:id**: Get details of a specific order.
+
+- **POST /orders**: Create a new order. Requires a JSON payload with order details.
+
+- **PUT /orders/:id**: Update details of a specific order. Requires a JSON payload with updated order details.
+
+- **DELETE /orders/:id**: Delete a specific order.
+
+### Services
+
+- **GET /services**: Get a list of all services.
+
+## Folder Structure
+
+```
+backend-interview/
+|-- prisma/
+|   |-- migrations/
+|   |   |-- ...                # Database migration files
+|   |-- schema.prisma          # Database Schema
+|   |-- seed.js          # Seed Services
+
+|-- controllers/
+|   |-- order.js           # Order controller
+|   |-- service.js         # Service controller
+|-- routes/
+|   |-- orders.js     # Order-related routes
+|   |-- services.js   # Service-related routes
+|-- package.json
+|-- README.md
+|-- server.js              # Entry point for the application
 ```
 
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+Feel free to explore and enhance the functionality of this Order Management System as needed for your specific use case. If you have any questions or issues, please don't hesitate to reach out!
