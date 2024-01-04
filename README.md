@@ -1,110 +1,34 @@
-# WIN Backend Engineering Interview
+# Order Management System
 
-## Scenario
+## Description
+This solution is an order management system developed using **Node.js** with the **Express** framework, utilizing **PostgreSQL** for database management and **Sequelize** as the ORM. It facilitates the creation, retrieval, updating, and deletion of orders, each potentially including multiple services.
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+## Trade-offs
+- Used Sequelize for ORM, trading off some performance for quicker development.
 
-## Deliverables
+## Assumptions
+- Services are pre-defined and infrequently changed.
+- Primary interactions are centered around order operations.
 
-There are two deliverables for this project:
+## Changes for Production
+- Implement robust error handling and data validation.
+- Use environment variables for sensitive data.
+- Integrate authentication and authorization mechanisms.
+- Establish comprehensive logging and monitoring.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+## Setup Instructions
+1. **Clone the Repository**: `git clone [repository-link]`.
+2. **Install Dependencies**: Run `npm install`.
+3. **Database Setup**: Initialize a PostgreSQL database.
+4. **Environment Variables**: Configure `config/config.json` with database credentials.
+6. **Start the Server**: Use `npm start`.
 
-### General
+## Running the Test Suite
+- Run unit tests using `npm test`.
+- Ensure a test database is configured for accurate test results.
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
-
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+## Specification Completion and Time Spent
+- **CRUD Operations**: Fully implemented.
+- **Test Suite**: Completed for API endpoints.
+- **Time Spent**: Approximately 3 hours.
+- **Challenges**: Implementing Sequelize model relations and handling date-time formats.
