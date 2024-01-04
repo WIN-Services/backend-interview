@@ -30,5 +30,5 @@ This solution is an order management system developed using **Node.js** with the
 ## Specification Completion and Time Spent
 - **CRUD Operations**: Fully implemented.
 - **Test Suite**: Completed for API endpoints.
-- **Time Spent**: Approximately X hours.
+- **Time Spent**: Approximately 3 hours.
 - **Challenges**: Implementing Sequelize model relations and handling date-time formats.
