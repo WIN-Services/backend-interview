@@ -1,110 +1,68 @@
 # WIN Backend Engineering Interview
 
-## Scenario
+ Order Management System
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+This project is a simplified implementation of an Order Management System with a web service API using JavaScript/Node.js and PostgreSQL as the database.
 
-## Deliverables
+## High-Level Description
 
-There are two deliverables for this project:
+- **Language Used**: JavaScript/Node.js
+- **Framework Used**: Express.js for building the web service API
+- **Database**: PostgreSQL
+- **How it Works**: This project provides a web service API for managing orders and services. It includes endpoints to create, retrieve, update, and delete orders and services. Orders are associated with one or more services, and the system enforces a rule that prevents the creation or update of an order within 3 hours of an existing order. The data is stored in a PostgreSQL database.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+## Trade-Offs
 
-### General
+- **Simplified In-Memory Storage**: To keep the project focused on the core functionality, an in-memory data storage approach is used. In a production system, it would be replaced with a more robust and scalable database.
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+- **Basic Error Handling and Validation**: The error handling and validation in this project are minimal. In a production system, comprehensive error handling and input validation would be implemented.
 
-### Web Service
+- **Authentication and Authorization**: This project lacks authentication and authorization. In a real-world application, user authentication and authorization would be added to secure the system.
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+## Assumptions
 
-## Sample Data
+- **Data Storage**: This project assumes that data is stored in a PostgreSQL database.
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+- **In-Memory Data Storage**: In-memory data storage is used for simplicity. In production, this would be replaced with a database.
 
-Service Records
+- **Minimal Error Handling**: Basic error handling is implemented for demonstration purposes, but in a production system, more advanced error handling would be required.
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
+## Changes for Production
 
-Orders
+To make this project production-ready, the following changes are recommended:
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
+- Replace in-memory data storage with a production-ready database (e.g., PostgreSQL or a NoSQL database).
+- Implement comprehensive error handling and validation for API requests.
+- Add authentication and authorization mechanisms to secure the API.
+- Use a process manager (e.g., PM2) for application management.
+- Implement containerization with Docker for deployment.
 
-## Duration
+## Setup Instructions
 
-Up to 2 hours.
+1. **Prerequisites**:
+   - Node.js installed.
+   - PostgreSQL database set up.
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+2. **Database Configuration**:
+   - Create a PostgreSQL database.
+   - Update the database connection details in `src/utils/dbConnect.js` with your actual database credentials.
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+3. **Install Dependencies**:
+   - Open a terminal in the project directory.
+   - Run `npm install` to install project dependencies.
+
+4. **Run the Application**:
+   - Start the server by running `npm start`.
+   - The application will run on http://localhost:5000 by default.
+
+## Spec Compliance
+
+- The project implements the required API endpoints for creating, retrieving, updating, and deleting orders and services.
+- The project enforces the rule that prevents creating or updating an order within 3 hours of an existing order.
+- Unit tests are included in the `test/` directory.
+
+## Time Spent and Challenges
+
+- Time Spent: Approximately 3 hours to create the core project structure, implement the API, write tests, and prepare the README.
+- Challenges: The primary challenge was ensuring the correct implementation of the in-memory data storage, creating the database schema, and handling order creation/updation time checks.
+ 22 changes: 15 additions & 7 deletions22 
