@@ -21,7 +21,7 @@ This project is a simplified implementation of an Order Management System with a
 
 ## Assumptions
 
-- **Data Storage**: This project assumes that data is stored in a PostgreSQL database.
+- **Data Storage**: This project assumes that data is stored in a PostgreSQL database. Dump file is also added.
 
 - **In-Memory Data Storage**: In-memory data storage is used for simplicity. In production, this would be replaced with a database.
 
@@ -46,6 +46,7 @@ To make this project production-ready, the following changes are recommended:
 2. **Database Configuration**:
    - Create a PostgreSQL database.
    - Update the database connection details in `src/utils/dbConnect.js` with your actual database credentials.
+   -dump file is add after creating db restore the backup
 
 3. **Install Dependencies**:
    - Open a terminal in the project directory.
@@ -65,4 +66,3 @@ To make this project production-ready, the following changes are recommended:
 
 - Time Spent: Approximately 3 hours to create the core project structure, implement the API, write tests, and prepare the README.
 - Challenges: The primary challenge was ensuring the correct implementation of the in-memory data storage, creating the database schema, and handling order creation/updation time checks.
- 22 changes: 15 additions & 7 deletions22 
