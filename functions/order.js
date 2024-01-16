@@ -1,32 +1,5 @@
 import connection from "../utils/dbConnect.js"
 
-// const checkthreehours = async()=>{
-//     try {
-//         const query = `select datetime from orders where datetime`;
-//         const result = await connection.query(query);
-
-//         const currentDate = new Date();
-//         const pastDateString = result.rows[0].datetime;
-//         const pastDate = new Date(pastDateString);
-//         // Calculate the time difference in milliseconds
-//         const timeDifferenceInMillis = currentDate - pastDate;
-
-//         // Convert milliseconds to seconds
-//         const timeDifferenceInSeconds = timeDifferenceInMillis / 1000;
-
-//         // Convert seconds to hours
-//         const timeDifferenceInHours = timeDifferenceInSeconds / 3600;
-
-//         if (timeDifferenceInHours > 3) {
-//             return true
-//             } else {
-//                 return false
-//             }
-
-//     } catch (error) {
-//         return error
-//     }
-// }
 
 const getAllOrders = async (req, res) => {
     try {
