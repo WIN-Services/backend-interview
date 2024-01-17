@@ -1,110 +1,152 @@
-# WIN Backend Engineering Interview
+**Backend assessment – Order management system**
 
-## Scenario
+**Description**
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+Developed order management system using **Nodejs** with **express** framework. Used **mongoDb** for database and **jest** for writing tests.
 
-## Deliverables
+**Assumptions**
 
-There are two deliverables for this project:
+- Endpoints to update, delete, get, get all, services is implemented, so that only valid service's id can be used while placing order.
+- First add services then add these services ids in payload of order apis.
+- Apart from this, no assumption made, just be sure to first add some services and then only hit order apis. Service ids in the payload has to be valid, that is, service table should contain the id that will be sent in payload of order apis. (please refer to demo endpoint below)
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+**Changes for production**
 
-### General
+- Implementing user authentication and authorization.
+- Error handling
+- Using cloud to store environment variable (aws secret manager)
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+**Setup Instructions**
 
-### Web Service
+- Clone repo
+- Switch to node version 16.8.0
+- Run npm install
+- Rename .env.example to .env for db url, or attach your own mongodb connection string.
+- npm start
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+**Running Test**
 
-## Sample Data
+Run npm test
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+**Specs and time spent**
 
-Service Records
+- All CRUD operations and 3 hours barrier for order update/create
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
+implemented.
 
-Orders
+- Additionally, service endpoints are also implemented, for dynamic service ids
+- Check for valid services also implement, that is, add valid service ids in payload of order apis.
+- Time spent: 5 hours (Approx)
+- Challenges while writing test.
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
+**DEMO Endpoints**
 
-## Duration
+**Create Service**
 
-Up to 2 hours.
+**POST** /service/create
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+**Payload**
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+{
+
+"name":"demo service"
+
+}
+
+**Get all services**
+
+**GET** /service/getall
+
+**Update services**
+
+**PUT** /service/update
+
+**Payload**
+
+{
+
+"name":"demo service 1", "id": "65a78e468c985775c68957da"
+
+}
+
+**Delete service**
+
+**DELETE** /service/delete
+
+{
+
+"id": "65a78e468c985775c68957da"
+
+}
+
+**GET service by id**
+
+**GET** /service/get
+
+**Payload**
+
+{
+
+"id": "65a78e468c985775c68957da"
+
+}
+
+**Create Order**
+
+**POST** /order/create
+
+**Payload**
+
+{ "totalfee": 100,
+
+"services": [
+
+{ "id": "65a79383711b17d3e5811dc6" }
+
+] }
+
+**NOTE: id in services array has to be valid**
+
+**Get all orders**
+
+**GET** /order/getall
+
+**Update orders**
+
+**PUT** /order/update
+
+**Payload**
+
+{
+
+"id": "65a7accf9da9fdafd10b29b4",
+
+"totalfee": 101,
+
+"services": [
+
+{ "id": "65a79383711b17d3e5811dc1" }
+
+] }
+
+**Delete orders**
+
+**DELETE** /order/delete
+
+{
+
+"id": "65a78e468c985775c68957da"
+
+}
+
+**GET service by id**
+
+**GET** /order/get
+
+**Payload**
+
+{
+
+"id": "65a78e468c985775c68957da"
+
+}
