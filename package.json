@@ -1,12 +1,34 @@
 {
   "name": "win",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "jest --detectOpenHandles",
+    "start": "node main.js",
+    "dev": "nodemon main.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WIN-Services/backend-interview.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WIN-Services/backend-interview/issues"
+  },
+  "homepage": "https://github.com/WIN-Services/backend-interview#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "moment": "^2.30.1",
+    "mongoose": "^8.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.3",
+    "supertest": "^6.3.4"
+  }
 }
