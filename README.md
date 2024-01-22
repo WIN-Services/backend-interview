@@ -102,9 +102,3 @@ Up to 2 hours.
       - Brief instructions on how to setup the environment to run your project
       - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
