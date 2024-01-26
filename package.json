@@ -4,9 +4,24 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js",
+    "inspect": "nodemon --inspect server.js",
+    "lint": "eslint . --ext .js",
+    "test": "jest test/ --verbose"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Paridhi Jain",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.18.1",
+    "moment": "^2.29.1",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.6.4",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^2.0.8"
+  }
 }

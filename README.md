@@ -1,110 +1,83 @@
-# WIN Backend Engineering Interview
+# Order Management for Win Homes Inspection - NodeJs+PostgreSQL
 
-## Scenario
+Application exposes CRUD API endpoints for Service and Order model. 
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+## Features
+- Any one can perform CRUD operations on Service and Order tables
+- Application uses SQL database - PostgreSQL to create service and order tables
+- Have Dockerfile to test application using docker
+- Service with unique names can be created
+- Anyone can place Order for each service with the contraint they can update if after 3 hrs of time
+- Includes test cases for Service and Order.
+- Include to dockerfile test the App 
 
-## Deliverables
+## Environment
+- NodeJs [v18+](https://nodejs.org/en/download/)
+## Packages used
+- Express [v4.18.2](https://www.npmjs.com/package/express) - FLEXIBLE Node.js WEB APPLICATION FRAMEWORK
+- Sequelize [v6.6.4](https://www.npmjs.com/package/sequelize) - ORM
+- PostgreSQL [v8.6.0](https://www.npmjs.com/package/pg) -> SQL DATABASE
+- Jest [29.7.0](https://www.npmjs.com/package/jest) - TEST FRAMEWORK
 
-There are two deliverables for this project:
+## Installation
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+Use the package manager [npm](https://www.npmjs.com/) to install dependancies. In the root folder run below command.
 
-### General
-
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
-
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+```bash
+npm install
 ```
 
-Orders
+## Usage
+To run server run
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
+```bash
+npm start
 ```
 
-## Duration
+Else 
+- To start your server, run `node server.js`.  Open up your favorite browser and navigate to http://localhost:4000/ and you should see "Hello World!".
 
-Up to 2 hours.
+Fix eslint of javascript files
+```bash
+npm run lint:fix
+```
+## Run with Docker
+Build the docker image
+```bash
+docker build -t order-management-wh .
+```
+Run the docker image 
+```bash
+docker run -d -p 4000:4000 order-management-wh
+```
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+## Folder Structure
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+```
+  ├───config
+  ├───controller
+  ├───middlewares
+  ├───models
+  ├───routes
+  ├───test
+  └───constants.js
+```
+
+- config - Managing DB connection
+- controller - Business logic for order and services
+- models - Schema definition for order and services
+- routes - API path exposed in the network
+- test - Specs of Order and Service Module
+- middlewares - Middlewares to check request and response
+- constants - App constants
+
+
+## Assumptions
+1. There is no authentication in the APIs.
+2. Application uses postgresql
+3. One order belongs to one service only
+4. Since order and services are less, there is not pagination and all orders/services will be fetched at once
+
+## Future/Production Scope
+
+Add authentication and authorisation layer in the application. Pagination to be included in all the fetch APIs.
