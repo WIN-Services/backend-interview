@@ -1,0 +1,8 @@
+{
+  "username": "root",
+  "password": null,
+  "database": "order_management",
+  "host": "127.0.0.1",
+  "dialect": "sqlite",
+  "port": 8191
+}
