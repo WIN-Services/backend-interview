@@ -1,11 +1,15 @@
-FROM node:12.18.1
+FROM node:20-alpine
+
+ENV NODE_ENV=dev
 
 WORKDIR /app
 
-COPY ["package.json", "./"]
+COPY . /app
 
 RUN npm install
 
-COPY . .
+EXPOSE 4000
 
-CMD [ "node", "server.js" ]
+USER node
+
+CMD ["npm", "start"]
