@@ -1,6 +1,4 @@
 const orderService = require('../services/orderService');
-const Order = require('../models/orderModel'); 
-const Service = require('../models/serviceModel')
 
 const orderController = {
   getAllOrders: async (req, res, next) => {
@@ -30,7 +28,6 @@ const orderController = {
   createOrder: async (req, res, next) => {
     try {
       const { totalfee, services } = req.body;
-      
       const datetime = new Date();
       const newOrder = await orderService.createOrder(datetime, totalfee, services);
       res.status(201).json(newOrder);
@@ -54,11 +51,12 @@ const orderController = {
       res.status(400).json({ error: 'Cannot update order within 3 hours of an existing order' });
     }
   },
+
   deleteOrder: async (req, res, next) => {
     try {
       const orderId = req.params.id;
       await orderService.deleteOrder(orderId);
-      res.status(204).json({msg:"deletd sucessfully"});
+      res.status(204).json({ msg: 'Deleted successfully' });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Something went wrong!' });

@@ -1,18 +1,18 @@
 const { Sequelize } = require('sequelize');
-const Order  = require('../models/orderModel');
-const  Service  = require('../models/serviceModel');
+const Order = require('../models/orderModel');
+const Service = require('../models/serviceModel');
 
 const orderService = {
-    getAllOrders: async () => {
-        try {
-          const orders = await Order.findAll({
-            include: Service, 
-          });
-          return orders;
-        } catch (error) {
-          throw new Error('Error fetching orders');
-        }
-      },
+  getAllOrders: async () => {
+    try {
+      const orders = await Order.findAll({
+        include: Service,
+      });
+      return orders;
+    } catch (error) {
+      throw new Error('Error fetching orders');
+    }
+  },
 
   getOrderById: async (orderId) => {
     try {
@@ -25,25 +25,26 @@ const orderService = {
 
   createOrder: async (datetime, totalfee, services) => {
     try {
+      const threeHoursAgo = new Date(new Date() - 3 * 60 * 60 * 1000);
+  
       const existingOrders = await Order.findAll({
         where: {
-          datetime: { [Sequelize.Op.gt]: new Date(new Date() - 3 * 60 * 60 * 1000) }
-        }
+          datetime: { [Sequelize.Op.gt]: threeHoursAgo },
+        },
       });
-
+  
       if (existingOrders.length > 0) {
         throw new Error('Cannot create order within 3 hours of an existing order');
       }
-
+  
       const newOrder = await Order.create({ datetime, totalfee });
-      await newOrder.setServices(services); 
+      await newOrder.setServices(services);
       return await Order.findByPk(newOrder.id, { include: Service });
     } catch (error) {
       console.error('Error creating order:', error);
       throw error;
     }
   },
-
   updateOrder: async (orderId, datetime, totalfee, services) => {
     try {
       const existingOrder = await Order.findByPk(orderId);
@@ -51,11 +52,13 @@ const orderService = {
         throw new Error('Order not found');
       }
   
+      const threeHoursAgo = new Date(new Date() - 3 * 60 * 60 * 1000);
+  
       const existingOrders = await Order.findAll({
         where: {
           id: { [Sequelize.Op.not]: orderId },
-          datetime: { [Sequelize.Op.gt]: new Date(new Date() - 3 * 60 * 60 * 1000) }
-        }
+          datetime: { [Sequelize.Op.gt]: threeHoursAgo },
+        },
       });
   
       if (existingOrders.length > 0) {
@@ -65,7 +68,7 @@ const orderService = {
       // Update the existing order fields
       existingOrder.datetime = datetime;
       existingOrder.totalfee = totalfee;
-      await existingOrder.setServices(services); 
+      await existingOrder.setServices(services);
       await existingOrder.save();
   
       return await Order.findByPk(orderId, { include: Service });
@@ -74,19 +77,19 @@ const orderService = {
       throw error;
     }
   },
-  
+
   deleteOrder: async (orderId) => {
     try {
       const existingOrder = await Order.findByPk(orderId);
-      if (!existingOrder) {
+            if (!existingOrder) {
         throw new Error('Order not found');
       }
-      await existingOrder.destroy();
+      await existingOrder.destroy(); 
     } catch (error) {
       console.error('Error deleting order:', error);
       throw error;
     }
-  }
+  },
 };
 
 module.exports = orderService;
