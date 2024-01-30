@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const orderRoutes = require('./src/routes/orderRoutes');
+const errorHandler = require('./src/middlewares/errorHandler');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -12,10 +13,7 @@ app.use(bodyParser.json());
 app.use('/api/v1/orders', orderRoutes);
 
 // Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Something went wrong!' });
-});
+app.use(errorHandler);
 
 // Start server
 app.listen(PORT, () => {

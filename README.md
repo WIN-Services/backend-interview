@@ -2,7 +2,7 @@
 Language Used: JavaScript (Node.js)
 Framework Used: Express.js , Jest
 Database: PostgreSQL with Sequelize ORM
-Functionality: The system provides RESTful APIs for managing orders, one can perform addition,deletion,updation,and retrieval of orders and also restriction of duplication by pre-existing order placed within 3 hours.
+Functionality: The system provides RESTful APIs for managing orders, one can perform addition,deletion,updation,and retrieval of orders and also restriction of duplication by pre-existing order placed within 3 hours. I have created two tables for orders and services with order table association to service table.
 
 ## Trade-offs Made
 1. Simplicity vs. Complexity: Prioritized simplicity in API design and code structure to enhance maintainability.
@@ -29,6 +29,7 @@ To setup Database locally
 Set Up Database: Create a PostgreSQL database and update the database configuration in .env file.
 Run Migrations: npm run migrate to run database migrations.
 Start Server: npm start to start the server.
+To get the values of service table we can use seeder node seesServiceTable.js
 
 Run through docker
  docker build -t order-management .
