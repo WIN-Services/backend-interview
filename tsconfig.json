@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "baseUrl": "src",
+    "removeComments": true,
+    "skipLibCheck": true,
+    "typeRoots": ["src/@types", "node_modules/@types"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.js"],
+  "exclude": ["node_modules", "build"]
+}
