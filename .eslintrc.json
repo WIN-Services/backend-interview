@@ -1,0 +1,41 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "extends": "eslint:recommended",
+  "globals": {
+    "global": "readonly",
+    "Buffer": "readonly",
+    "__dirname": "readonly",
+    "module": "readonly",
+    "require": "readonly",
+    "process": "readonly",
+    "ROOT_DIR": "readonly",
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "rules": {
+    "semi": [
+      1,
+      "always"
+    ],
+    "quotes": [
+      1,
+      "double"
+    ],
+    "indent": [
+      "warn",
+      4
+    ],
+    "keyword-spacing": 1,
+    "space-unary-ops": 2,
+    "space-before-blocks": 1,
+    "no-async-promise-executor": "off",
+    "no-useless-escape": "off"
+  }
+}
