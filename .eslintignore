@@ -1,0 +1,9 @@
+node_modules/
+test/
+binaries/
+logs/
+docs/
+deviceDataSyncToS3/
+js_docs/
+jsDocs/
+public/
