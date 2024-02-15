@@ -8,16 +8,13 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - '5432:5432'
-    volumes: 
+    volumes:
       - ./data:/var/lib/postgresql/data
   api:
     image: node:slim
     build: .
     depends_on:
       - db
-    ports: 
+    ports:
       - "3000:3000"
     command: "npm run start"
-
-
-      
