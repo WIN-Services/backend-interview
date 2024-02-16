@@ -1,110 +1,100 @@
-# WIN Backend Engineering Interview
+# Order Management System
 
-## Scenario
+## Description
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+The Order Management System is a web service built using Node.js, Express.js, Prisma, TypeScript, and MySQL. It provides endpoints for managing orders, including creation, retrieval, updating, and deletion.
 
-## Deliverables
+The system follows a RESTful architecture, with each endpoint corresponding to a specific CRUD operation on orders. Prisma is used as the ORM (Object-Relational Mapping) tool to interact with the MySQL database, facilitating database operations and data modeling.
 
-There are two deliverables for this project:
+## Trade-offs
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+1. **Simplicity vs. Complexity**: One trade-off made in this solution is prioritizing simplicity over complexity. The system is designed to be straightforward and easy to understand, which may sacrifice some advanced features or optimizations.
 
-### General
+2. **Performance vs. Scalability**: Another trade-off is balancing performance and scalability. While the system is optimized for performance in its current state, further optimizations may be necessary for handling larger volumes of data or higher traffic loads.
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+## Assumptions
 
-### Web Service
+1. **Single Database Instance**: The solution assumes a single MySQL database instance for storing order and service record data. If deploying to a production environment with multiple database instances or sharded databases, additional configurations may be necessary.
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+2. **Authentication and Authorization**: Authentication and authorization mechanisms are not implemented in this solution. Assume that all endpoints are publicly accessible. In a production environment, proper authentication and authorization should be implemented to secure the system.
 
-## Sample Data
+3. **Created Endpoints for orders only**: The solution includes APIs specifically for managing order records. However, APIs for managing service records have not been implemented. Instead, the provided service records have been added to the database using seeding scripts during the setup process. This assumption simplifies the scope of the project and focuses on the primary functionality of managing orders.
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+## Changes for Production
 
-Service Records
+If building this system for production, the following changes and improvements could be considered:
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
+1. **Security Enhancements**: Implement robust authentication and authorization mechanisms to secure the endpoints and protect sensitive data.
 
-Orders
+2. **Error Handling and Logging**: Enhance error handling and logging to provide meaningful error messages and capture logs for monitoring and debugging purposes.
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
+3. **Performance Optimization**: Conduct performance testing and optimization to ensure the system can handle a large number of requests and data volumes efficiently.
 
-## Duration
+## Environment Setup
 
-Up to 2 hours.
+To set up the environment and run the project locally, follow these steps:
 
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
+1. Clone the repository to your local machine:
 
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+   ```
+   git clone https://github.com/WIN-Services/backend-interview.git
+   ```
+
+2. Install dependencies:
+
+   ```
+   npm install
+   ```
+
+3. Set up the MySQL database and update the database connection configuration in the `.env` file with the appropriate credentials and connection details. [.env.local,.env.development,.env.production], please refer .env.example:
+
+4. Run the migration to create the necessary database schema, and then seed the data:
+
+   ```
+   stage = local | dev | prod
+
+   npm run db:migrate:[stage]
+
+   ex: npm run db:migrate:local
+
+
+   // To seed data
+
+   npm run db:seed:[stage]
+
+   ex: npm run db:seed:local
+   ```
+
+5. Start the dev server:
+
+   ```
+   npm run start:[stage]
+
+   ex: npm run start:local
+   ```
+
+6. Test app using the command:
+
+   ```
+   npm run test:local
+   ```
+
+7. Build app using the command:
+
+   ```
+   npm run build
+   ```
+
+8. Finaly, to start the build server run:
+
+   ```
+   npm run start:server:[stage]
+
+   ex: npm run start:server:local
+   ```
+
+## Spec Completion and Time Spent
+
+- **Spec Completion**: All specified endpoints for managing orders and service records have been implemented.
+- **Time Spent**: Approximately 2 hours were spent on designing, developing, and testing the solution.
+- **Problems Encountered**: No significant problems were encountered during the development process.
