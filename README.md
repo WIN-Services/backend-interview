@@ -4,27 +4,27 @@
 
 ## Folder Structure
 
-- [X] src
-    - [X] **common** : Having the global response interceptor.
-    - [X] **config** : Contains configuration and required secret for the service.
-    - [X] **errors**: To handle the error and throw customized error response.
-    - [X] **health**: Health Check Module to return the running status of the service.
-    - [X] **jwt**: JWT Module to generate the token for the authenticated user.
-    - [X] **orders** : Orders Management Module
-        - [X] **dto** : Data transfer object for api
-        - [X] **entities** : Database schema and document.
-        - [X] **repository** : Database Model Implementation.
-        - [X] **controller** : Routing the request.
-        - [X] **provider**: Business logic for each api to manage orders.
-    - [X] **product-service** : Product service Module to manage all the products
-        - [X] **dto** : Data transfer object for api
-        - [X] **entities** : Database schema and document.
-        - [X] **repository** : Database Model Implementation.
-        - [X] **controller** : Routing the request.
-        - [X] **provider**: Business logic for each api to manage product and services.
-    - [X] **role**: Role Based Authentication: PUBLIC, CUSTOMER, ADMIN
-    - [X] **App** : App Module to manages the implementation of all the internal modules.
-    - [X] **main**: Act as main module that have implementation app server and running it to a port.
+-  src
+    -  **common** : Having the global response interceptor.
+    -  **config** : Contains configuration and required secret for the service.
+    -  **errors**: To handle the error and throw customized error response.
+    -  **health**: Health Check Module to return the running status of the service.
+    -  **jwt**: JWT Module to generate the token for the authenticated user.
+    -  **orders** : Orders Management Module
+        -  **dto** : Data transfer object for api
+        -  **entities** : Database schema and document.
+        -  **repository** : Database Model Implementation.
+        -  **controller** : Routing the request.
+        -  **provider**: Business logic for each api to manage orders.
+    -  **product-service** : Product service Module to manage all the products
+        -  **dto** : Data transfer object for api
+        -  **entities** : Database schema and document.
+        -  **repository** : Database Model Implementation.
+        -  **controller** : Routing the request.
+        -  **provider**: Business logic for each api to manage product and services.
+    -  **role**: Role Based Authentication: PUBLIC, CUSTOMER, ADMIN
+    -  **App** : App Module to manages the implementation of all the internal modules.
+    -  **main**: Act as main module that have implementation app server and running it to a port.
 
 ## Steps to start application:
  - `docker-compose up` : This command will start the server on any machine docker container.
@@ -35,19 +35,19 @@
 
 
 ## Modification needed while deploying to prod.
-  - [X] Health Check 
-  - [X] Request validation
-  - [X] Cors Whitelisting
-  - [X] Logger.
-  - [ ] Add Authentication and Authorization
-  - [ ] Perform load testing and creating benchmarking.
-  - [X] Rate Limiting/Throttling : 100000 request per min is current limit.
-  - [ ] Request Size Limit : Before moving to prod we need to add request size limit.
-  - [X] Linter
-  - [ ] Open Tracing and Telemetry: before moving to prod we need to add tracing and telemetry.
-  - [ ] Test Covergae > 95 : Before moving to prod we need to reach maximum of coverage
-  - [X] Code Refactoring
-  - [ ] Multi Core Deployment :  Before moving to prod we can deploy our code to multicore system so that it can accept maximum amount of request.
+  -  Health Check 
+  -  Request validation
+  -  Cors Whitelisting
+  -  Logger.
+  -  Add Authentication and Authorization
+  -  Perform load testing and creating benchmarking.
+  -  Rate Limiting/Throttling : 100000 request per min is current limit.
+  -  Request Size Limit : Before moving to prod we need to add request size limit.
+  -  Linter
+  -  Open Tracing and Telemetry: before moving to prod we need to add tracing and telemetry.
+  -  Test Covergae > 95 : Before moving to prod we need to reach maximum of coverage
+  -  Code Refactoring
+  -  Multi Core Deployment :  Before moving to prod we can deploy our code to multicore system so that it can accept maximum amount of request.
 
 ###  Features that can be integrated in this service:
   - User management system
