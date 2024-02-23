@@ -1,110 +1,57 @@
-# WIN Backend Engineering Interview
+# Order Management System
 
-## Scenario
+- A simple implementation of order management system using "Nest.JS" for backend server and "MongoDB" for database. also added "Dockerfile" to run it independently on any platform.
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+## Folder Structure
 
-## Deliverables
+-  src
+    -  **common** : Having the global response interceptor.
+    -  **config** : Contains configuration and required secret for the service.
+    -  **errors**: To handle the error and throw customized error response.
+    -  **health**: Health Check Module to return the running status of the service.
+    -  **jwt**: JWT Module to generate the token for the authenticated user.
+    -  **orders** : Orders Management Module
+        -  **dto** : Data transfer object for api
+        -  **entities** : Database schema and document.
+        -  **repository** : Database Model Implementation.
+        -  **controller** : Routing the request.
+        -  **provider**: Business logic for each api to manage orders.
+    -  **product-service** : Product service Module to manage all the products
+        -  **dto** : Data transfer object for api
+        -  **entities** : Database schema and document.
+        -  **repository** : Database Model Implementation.
+        -  **controller** : Routing the request.
+        -  **provider**: Business logic for each api to manage product and services.
+    -  **role**: Role Based Authentication: PUBLIC, CUSTOMER, ADMIN
+    -  **App** : App Module to manages the implementation of all the internal modules.
+    -  **main**: Act as main module that have implementation app server and running it to a port.
 
-There are two deliverables for this project:
+## Steps to start application:
+ - `docker-compose up` : This command will start the server on any machine docker container.
+ - Visit Swagger Document for the APIs :`http://localhost:3000/orders-management-system/api` .
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+ ## Assumption behind the Order Management System:
+  - the logic for placing an order. It takes information about the products or services to be included in the order, fetches details about these items, calculates the total price, and then creates an order with the specified customer ID. If any issues occur during this process, it logs an error and communicates that something went wrong using an HTTP error response. The ultimate result is the creation of an order, which is then returned.
 
-### General
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+## Modification needed while deploying to prod.
+  -  Health Check 
+  -  Request validation
+  -  Cors Whitelisting
+  -  Logger.
+  -  Add Authentication and Authorization
+  -  Perform load testing and creating benchmarking.
+  -  Rate Limiting/Throttling : 100000 request per min is current limit.
+  -  Request Size Limit : Before moving to prod we need to add request size limit.
+  -  Linter
+  -  Open Tracing and Telemetry: before moving to prod we need to add tracing and telemetry.
+  -  Test Covergae > 95 : Before moving to prod we need to reach maximum of coverage
+  -  Code Refactoring
+  -  Multi Core Deployment :  Before moving to prod we can deploy our code to multicore system so that it can accept maximum amount of request.
 
-### Web Service
-
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
-
-## Sample Data
-
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
-
-Service Records
-
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
-
-Orders
-
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+###  Features that can be integrated in this service:
+  - User management system
+  - Authentication system
+  - Payment Controller or Third Party Payment Integration.
+  - Built in cart managment service and many more.
+  - If Traffic Grows, we can subtitute the service in microservices.
