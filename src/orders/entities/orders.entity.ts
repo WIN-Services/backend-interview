@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
-import { ProductService, productServiceSchema } from 'src/product_service/entities/product-service.entity';
+import { ProductService, productServiceSchema } from 'src/product-service/entities/product-service.entity';
 import { v4 as uuidv4 } from 'uuid';
 
 

@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
-import { ProductServiceRepository } from 'src/product_service/product-service.repository';
+import { ProductServiceRepository } from 'src/product-service/product-service.repository';
 import { OrdersRepository } from './order.repository';
 import { HttpError } from 'src/errors/custom.errors';
 

@@ -8,7 +8,7 @@ import { RolesGuard } from './role/role-guard';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtFactory } from './jwt/auth.jwt';
 import { OrdersModule } from './orders/orders.module';
-import { ProductServiceModule } from './product_service/product-service.module';
+import { ProductServiceModule } from './product-service/product-service.module';
 
 
 @Module({

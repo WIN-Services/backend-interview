@@ -4,9 +4,8 @@ import { OrdersController } from './orders.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Orders, ordersSchema } from './entities/orders.entity';
 import { OrdersRepository } from './order.repository';
-import { ProductServiceRepository } from 'src/product_service/product-service.repository';
-import { ProductServiceModule } from 'src/product_service/product-service.module';
-import { ProductService, productServiceSchema } from 'src/product_service/entities/product-service.entity';
+import { ProductServiceRepository } from 'src/product-service/product-service.repository';
+import { ProductService, productServiceSchema } from 'src/product-service/entities/product-service.entity';
 
 @Module({
   imports: [
