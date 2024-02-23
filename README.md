@@ -1,110 +1,156 @@
-# WIN Backend Engineering Interview
+# Order Management System
 
-## Scenario
+## Description
+This project entails an order management system featuring an internal web service API for order management. Developed using JavaScript with Node.js and Express, it utilizes MongoDB as the database, with Mongoose serving as the Object Document Mapper (ODM).
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+## How it works?
+The code structure folows MVC architecture with certain modularization and abstraction  techniques applied where necessary. The application is divided into three main components: `model`, `controllers`, `services`.
 
-## Deliverables
+It provides endpoints for managing orders, including creation, retrieval, updating, and deletion. The system adheres to a RESTful architecture, where each endpoint corresponds to a specific CRUD operation on orders.
 
-There are two deliverables for this project:
+This project has two types of API endpoints - Order and Services.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+- **Language Used:** NodeJS, JavaScript
+- **Framework Used:** Express, JEST
+- **Database:** MongoDB with Mongoose ORM
 
-### General
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+## Environment Setup
 
-### Web Service
+To set up the environment and run the project locally, follow these steps:
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+1. Clone the repository to your local machine:
 
-## Sample Data
+   ```
+   git clone https://github.com/WIN-Services/backend-interview.git
+   ```
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+2. Set up the MongoDB database and update the database connection configuration in the `.env` file with the appropriate connection details. [`.env.production`, `.env.development`, `.env.production`]
 
+3. Navigate to the project directory:
+    ```bash
+    cd order-management-system
+    npm install
+
+4. The server by default will be running at http://localhost:3000  in your browser or postman. You can use this URL to interact with the API. To change the port, we need to change it in repective .env file.
+
+5. Start the dev server:
+
+   ```
+   npm run start:[stage]
+   ex: npm run start:dev
+   ```
+
+6. Test app using the command:
+
+   ```
+   npm test
+   ```
+
+## Trade Offs
+- The current solution was rapidly developed with simplicity in mind, but optimizations will be necessary to accommodate high volumes of production traffic.
+- Security considerations were not addressed, as there is no implementation of authentication, authorization, or API keys.
+
+## Assumtions
+
+- **Database:** MongoDB database is used with single Node instance running on 27017 default port.
+- **Authentication:** There is no authentication or authorization implemented.
+- **Pagination:** No scope for pagination due to less number of records.
+- **Sample Data:** The application data modelling is developed following sample data provided.
+
+
+## Changes for the production
+
+- **Authentication:** There should be authentication to enhance API security using JWT, Bearer Token, etc.
+- **Pagination:** Pagination should be used to limit large data withing the single API response to enhance response time.
+- **Database:** Use a more robust database setup, such as a MongoDB cluster.
+- **Logging:** Implement proper logging mechanism like Winston or Bunyan to log all requests and responses in JSON format.
+- **API Gateway:** It works as entry point that manages, routes, and secures incoming and outgoing API traffic between clients and multiple backend services.
+- **Caching:** To reduce the response time for the endpoints we can use caching tools like Redis or Memcached.
+
+
+## Spec Completion and Time Spent
+
+**Spec Completion**: 
+
+- Implemented CRUD endpoints for orders and services in the Web Service API.
+- Handled edge cases with appropriate HTTP status codes for error scenarios.
+- Implemented error handling to prevent creating or updating an order within 3 hours of a pre-existing order.
+- Ensured JSON results with a standardized response format using responseHandler.
+- Used Jest and Supertest for testing, providing test cases for orders and services.
+
+**Time Spent**: Approximately 2 hours were spent on designing, developing, and testing the solution.
+
+**Challenges Encountered**: The development process proceeded smoothly without encountering any significant issues.
+
+
+## Responses for list Orders and Services
 Service Records
 
 ```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
+{
+    "success": true,
+    "message": "Services fetched successfully",
+    "data": [
+        {
+            "_id": "65d8d222bce817cb0f5fff1c",
+            "name": "Testing",
+            "createdAt": "2024-02-23T17:09:50.340Z",
+            "__v": 0
+        },
+        {
+            "_id": "65d8db95f833a7f6a1ba93eb",
+            "name": "Inspection",
+            "createdAt": "2024-02-23T17:49:56.355Z",
+            "__v": 0
+        },
+        {
+            "_id": "65d8dbaaf833a7f6a1ba93ee",
+            "name": "Analysis",
+            "createdAt": "2024-02-23T17:49:56.355Z",
+            "__v": 0
+        }
+    ],
+    "statusCode": 200
+}
 ```
 
 Orders
 
 ```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
+{
+    "success": true,
+    "message": "Orders fetched successfully",
+    "data": [
         {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
+            "_id": "65d8dadaf833a7f6a1ba93e1",
+            "datetime": "2023-02-23T01:01:01.001Z",
+            "totalfee": 200,
+            "services": [
+                {
+                    "_id": "65d8d222bce817cb0f5fff1c",
+                    "name": "Testing",
+                    "createdAt": "2024-02-23T17:09:50.340Z",
+                    "__v": 0
+                }
+            ],
+            "__v": 0
+        },
         {
-        "id": "789",
+            "_id": "65d8dae7f833a7f6a1ba93e4",
+            "datetime": "2023-02-22T01:01:01.001Z",
+            "totalfee": 200,
+            "services": [
+                {
+                    "_id": "65d8d222bce817cb0f5fff1c",
+                    "name": "Testing",
+                    "createdAt": "2024-02-23T17:09:50.340Z",
+                    "__v": 0
+                }
+            ],
+            "__v": 0
         }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
+    ],
+    "statusCode": 200
+}
 ```
-
-## Duration
-
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
