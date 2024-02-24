@@ -1,110 +1,49 @@
 # WIN Backend Engineering Interview
 
-## Scenario
+## Description
 
-Your mission is to build a portion of an order management system. You need to provide a service that allows other systems and teams to obtain information about orders.
+This project involves an order management system featuring an internal web service API for order management. It is developed using Node.js, Typescript, and Express, utilizing MySQL as the database and Prisma as the ORM.
 
-## Deliverables
+## How it works?
 
-There are two deliverables for this project:
+The entire application is housed inside the `src` folder, consisting of subfolders such as controllers, routes, services, schemas, validations, and tests. The code begins with `index.ts` inside the `src` folder, leading to the root router. From there, it identifies the specific route to which the request must go. Afterward, it proceeds to the controller through the route where the exact logic is written for the intended operation. Validations are performed here, and a service method is called, interacting with the database to produce the desired output, which is then returned from the controller.
 
-1. An internal web service API for managing orders
-2. A test suite to validate the web service and library work as expected
+## Assumptions
 
-### General
+I assumed that there will always be three services present in the database. Although more services can be created, I assumed that three would be present by default.
 
-- Please use either **JavaScript/TypeScript or Python**.
-- You may use any framework, such as a web framework or test framework, to help you complete the project.
-- You may store the data for this system in any database you choose, however we've included a Docker image loaded with Postgres in this repo.
-- You may model the data any way you'd like, including adding data beyond the samples provided.
+## Changes for Production
 
-### Web Service
+The following changes will be made for production:
 
-- Your service should implement several endpoints that accept POST, GET, PUT and DELETE requests. Also 1 endpoint that accepts GET all orders.
-- Your service should handle edge cases appropriately and return appropriate HTTP status codes.
-- Your service should return an error on creation/updating an order within 3 hrs of a pre-existing order.
-- Your service should return JSON results.
-- Your service should have at least one test.
+- Write better tests
+- Implement a more robust way of handling errors
+- Incorporate authentication
+- Introduce pagination (if the number of orders becomes too high)
+- Utilize optimization techniques such as indexing in the database, caching, etc.
 
-## Sample Data
+## How to set up
 
-Below is some sample data you can use to populate your database. Feel free to extend or modify this data for your project:
+- Clone the repository
+- Run `npm install`
+- Copy `.env.example` to `.env`
+- Paste the `PORT` value and `DATABASE URL`
+- Run the server with the command: `npm run start`
+- Test the API using Postman
+- To run tests, use the command: `npm run test`
 
-Service Records
+## Completed Tasks
 
-```json
-[
-  {
-    "id": 123,
-    "name": "Inspection"
-  },
-  {
-    "id": 789,
-    "name": "Testing"
-  },
-  {
-    "id": 456,
-    "name": "Analysis"
-  }
-]
-```
+- &#9745; Implement several endpoints that accept POST, GET, PUT, and DELETE requests.
+- &#9745; Handle edge cases appropriately and return appropriate HTTP status codes.
+- &#9745; Return an error on the creation/updating of an order within 3 hours of a pre-existing order.
+- &#9745; Return results in JSON format.
+- &#9745; Include at least one test.
 
-Orders
+## Time spent
 
-```json
-[
-  {
-    "id": "223",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "123",
-        }
-    ]
-  },
-  {
-    "id": "224",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "789",
-        }
-    ]
-  },
-  {
-    "id": "225",
-    "datetime": "2022-11-01T11:11:11.111Z",
-    "totalfee": 100,
-    "services": [
-        {
-        "id": "456",
-        }
-    ]
-  }
-]
-```
+Around 3 to 4 hours.
 
-## Duration
+## Problems Encountered
 
-Up to 2 hours.
-
-## Submission
-1.  Clone this repo
-2.  Create Web Services and tests
-3.  Submit a Pull Request (PR)
-4.  In the PR, include a README that includes the following:
-      - A description of your solution at a high-level, including language used, framework used, roughly how it works, etc.
-      - What trade-offs you made
-      - Any assumptions you made that affected your solution
-      - What you would change if you built this for production
-      - Brief instructions on how to setup the environment to run your project
-      - What parts of the spec were completed, how much time you spent, and any particular problems you ran into
-
-## Evaluation
-We are looking for: 
-1. Communication
-2. Solution Design
-3. Completeness
-4. Code clarity / readability
+No issues.
